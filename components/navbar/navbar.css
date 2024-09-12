@@ -6,8 +6,9 @@
 }
 
 body {
-    background: rgb(248, 248, 245);
+    background: rgb(230, 230, 224);
     background-size: cover;
+   
     height: 100vh;
     background-position: center;
 }
@@ -18,7 +19,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position:relative;
     z-index: 1000;
     background-image: url(photo_2.jpg);
     background-size: cover;

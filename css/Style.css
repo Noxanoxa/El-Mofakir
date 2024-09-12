@@ -1,41 +1,47 @@
-body {
+html ,body {
     height: 100%;
     margin: 0;
-}
-.wrapper{
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-/* Main Content Area */
-#content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    margin-left: 0px; /* Align to the left of the available space */
-    margin-right: 650px; /* Adjust this value to create space between content and sidebar */
-    padding-top: 20px; /* Add padding to the top */
-    width: 70%; /* Adjust width as necessary */
+    background-color: #eee;
 }
 
-/* Container for Post */
-#post {
-    width: 100%; /* Post takes up full width of content container */
-    padding: 20px; /* Optional: add some padding */
-}
 
-/* Other components */
-#right-sidebar {
+.wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Align items to the right */
-    position: absolute;
-    right: 0;
-    top: 100px; /* Adjust this value based on your layout */
-    width: 300px; /* Adjust this width as needed */
-    margin-right: 150px;
    
 }
+#navbar {
+    min-height: 10vh;
+    align-items: center;
+}
+.main-content {
+    display: flex;
+    flex: 1;
+    margin-left: 0;
+    background-color: #eee;
+}
+
+/* Main Content Area */
+#content {
+    flex: 1;
+    padding-top: 20px;
+    width: 70%;
+    margin-right: 50px; /* Adjust space between content and sidebar */
+}
+
+#post {
+    width: 100%;
+    padding: 20px;
+}
+
+#right-sidebar {
+    width: 300px;
+    margin-right: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 
 /* Search Box Styles */
 #search-box {
@@ -53,27 +59,53 @@ body {
 
 #archives {
     width: 100%;
+    margin-bottom: 30px;
 }
 
 
 
 /* Responsive Layout */
 @media screen and (max-width: 1024px) {
-    /* For screens smaller than 1024px, stack content and sidebar vertically */
+    .main-content {
+        flex-direction: column;
+        align-items: center; /* Center content */
+    }
+
     #content {
-        width: 90%; /* Expand content to take up more width */
-        margin-right: auto; /* Reset right margin */
-        margin-left: auto; /* Center content horizontally */
-        padding-bottom: 20px; /* Add some space at the bottom */
+        width: 90%; /* Make the content take up most of the screen */
+        margin: 0 auto; /* Center the content */
     }
 
     #right-sidebar {
-        position: relative; /* Make sidebar flow with content */
-        right: auto; /* Reset right position */
-        top: auto; /* Reset top position */
-        width: 100%; /* Make sidebar take full width */
-        align-items: flex-start; /* Align items to the left */
-        margin-left: auto; /* Center horizontally */
-        margin-top: 20px; /* Add space between content and sidebar */
+        width: 100%;
+        margin: 20px auto 0 auto; /* Center the sidebar */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the sidebar content */
+    }
+}
+
+
+@media (max-width: 768px) {
+    #right-sidebar {
+        width: 100%; /* Full width for tablets and smaller screens */
+        max-width: 400px; /* Limit max width on medium screens */
+    }
+
+    #content {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    #right-sidebar {
+        width: 100%; /* Full width on mobile */
+        max-width: 100%; /* No limit on mobile screens */
+        padding: 10px; /* Reduce padding for mobile */
+    }
+
+    #content {
+        width: 100%; /* Full width on mobile */
+        max-width: 100%; /* No limit on mobile */
     }
 }
