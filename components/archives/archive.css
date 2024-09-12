@@ -1,0 +1,19 @@
+.archives {
+    width: 400px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+
+.archives ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.archives li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}

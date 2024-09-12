@@ -1,0 +1,153 @@
+/* General styles */
+.post {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Display cards in a column */
+    gap: 20px; /* Space between cards */
+    justify-content: center; /* Optional: Center the cards vertically */
+    align-items: center; /* Center the cards horizontally */
+}
+
+/* Card style */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 850px; /* Keep the width as needed */
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    position: relative;
+}
+
+.card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-text {
+    padding-left: 10px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    height: 40px; 
+    /* Multiline truncation */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show up to 2 lines of text */
+    -webkit-box-orient: vertical;
+}
+
+.card-link {
+    display: inline-block;
+    margin: 10px 10px 0;
+    font-size: 14px;
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card-link:hover {
+    color: #2980b9;
+}
+.card-date {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: gray;
+}
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #2980b9;
+}
+
+.current-page {
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .card {
+        width: 100%; /* Full width for tablets and smaller screens */
+        max-width: 600px; /* Limit max width on medium screens */
+    }
+
+    .card-title {
+        font-size: 18px; /* Adjust font size */
+    }
+
+    .card-text {
+        font-size: 13px; /* Adjust font size for better readability */
+    }
+
+    .card-link {
+        font-size: 13px;
+    }
+
+    .card-date {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px; /* Reduce padding for mobile */
+    }
+
+    .card {
+        padding: 15px;
+        width: 100%; /* Full width on mobile */
+    }
+
+    .card-title {
+        font-size: 16px; /* Smaller title for mobile */
+    }
+
+    .card-text {
+        font-size: 12px; /* Adjust font size */
+        -webkit-line-clamp: 3; /* Show more lines on smaller screens */
+    }
+
+    .card-link {
+        font-size: 12px; /* Adjust link font size */
+    }
+
+    .card-date {
+        font-size: 10px;
+    }
+}
