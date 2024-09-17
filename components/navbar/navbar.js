@@ -17,4 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // تأكد من عدم التمرير لقيمة سالبة
     });
+
 });
+
+loadComponent('contact-section','components/secend-page/contact.html');
