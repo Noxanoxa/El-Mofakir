@@ -19,5 +19,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
-
-loadComponent('contact-section','components/secend-page/contact.html');
