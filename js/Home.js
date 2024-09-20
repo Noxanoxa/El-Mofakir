@@ -8,7 +8,7 @@ function loadComponent(id, file) {
 }
 
 // تحميل Navbar و Recent Posts
-loadComponent('navbar','components/navbar/navbar.html');
+//loadComponent('navbar','components/navbar/navbar.html');
 // loadComponent('recent-posts','components/recent_articles/recent_a.html');
 // loadComponent('search-bar','components/research-bar/research_b.html');
 // loadComponent('pub-auth','components/publishing-authority/pub_auth.html');

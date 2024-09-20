@@ -1,21 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const navbar = document.querySelector('.navbar');  // الحصول على عنصر الـ navbar
-    let lastScrollTop = 0;
+// document.querySelectorAll('nav a').forEach(link => {
+//     link.addEventListener('click', function(event) {
+//         event.preventDefault();
 
-    window.addEventListener('scroll', function() {
-        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+//         const page = this.getAttribute('href');
 
-        if (currentScroll > lastScrollTop) {
-            // المستخدم يمرر للأسفل
-            navbar.classList.add('hide');  // اختفاء الـ navbar عند التمرير للأسفل
-            navbar.classList.remove('shrink');
-        } else {
-            // المستخدم يمرر للأعلى
-            navbar.classList.remove('hide');
-            navbar.classList.add('shrink');  // تقليص الـ navbar عند التمرير للأعلى
-        }
+//         // Load contact page only when 'Contact' is clicked
+//         if (page === '../secend-page/contact.html') {
+//             loadContactPage();
+//         } else {
+//             loadPage(page);
+//         }
+//     });
+// });
 
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // تأكد من عدم التمرير لقيمة سالبة
-    });
+// function loadPage(page) {
+//     fetch(page)
+//         .then(response => response.text())
+//         .then(data => {
+//             document.getElementById('content').innerHTML = data;
+//         });
+// }
 
-});
+// function loadContactPage() {
+//     fetch('../secend-page/contact.html')
+//         .then(response => response.text())
+//         .then(data => {
+//             document.getElementById('content').innerHTML = data;
+//             // Optionally handle the contact form submission
+//             handleContactForm();
+//         });
+// }
+
+// function handleContactForm() {
+//     const contactForm = document.getElementById('contactForm');
+
+//     contactForm.addEventListener('submit', function(event) {
+//         event.preventDefault();
+
+//         const formData = new FormData(contactForm);
+
+//         const name = formData.get('name');
+//         const email = formData.get('email');
+//         const message = formData.get('message');
+
+//         console.log('Name:', name);
+//         console.log('Email:', email);
+//         console.log('Message:', message);
+//     });
+// }

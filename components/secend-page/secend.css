@@ -63,7 +63,8 @@ p {
 .prgrph i{
     margin-right: 10px;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 48px;
+    color: #000;
 }
 /*
 input[type="text"], input[type="email"], textarea {

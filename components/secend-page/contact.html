@@ -2,18 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>El Mufakkir</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="secend.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-   
+  <link rel="stylesheet" href="/components/navbar/navbar.css">
+  
+  <link rel="stylesheet" href="/css/Style.css">
+  <link rel="stylesheet" href="/components/footer/footer.css">
 </head>
 <body>
 
-<main id="contact-section">
-   
-      <div class="container">
+    <header id="navbar">
+
+        <input type="checkbox" name="" id="chk1">
+            
+            <div class="logo"><h1>El Mufakkir</h1></div>
+            <div class="navbar" id="navbar">
+            <ul>
+                <li>
+                    <a href="/index.html">Home</a>
+                </li>
+                <li>
+                    <a href="contact.html">About Us</a>
+                </li>
+                <li>
+                    <a href="contact.html">Annonce</a>
+                </li>
+                <li>
+                    <a  href="contact.html">Contact</a>
+                    
+                </li>
+            </ul></div>
+            <!-- <div class="search-box">
+                <form action="">
+                    <input type="text" name="search" id="srch" placeholder="Search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div> -->
+            <div class="menu">
+                <label for="chk1"><i class="fa fa-bars"></i></label>
+            </div>
         
+    
+       </header>
+
+
+<main id="contact-section">
+      <div class="container">
           <!-- Contact Form Section -->
           <div class="col-lg-8 col-12">
             <h2>Get in touch</h2>
@@ -56,6 +92,22 @@
             </div>
           </div>
       </div>
+      <footer id="footer"></footer>
   </main>
+
+  <script src="../components/footer/footer.js"></script>
+  <script >
+
+function loadComponent(id, file) {
+    const element = document.getElementById(id);
+    fetch(file)
+        .then(response => response.text())
+        .then(data => {
+            element.innerHTML = data;
+        });
+}
+loadComponent('footer','../footer/footer.html');
+  </script>
 </body>
 </html>
+
