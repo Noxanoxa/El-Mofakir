@@ -19,4 +19,3 @@ loadComponent('search-bar','components/sidebar-/research_b.html');
 loadComponent('pub-auth','components/sidebar-/pub_auth.html');
 loadComponent('archives','components/sidebar-/archive.html');
 loadComponent('footer','components/footer/footer.html');
-loadComponent('contact-section','components/secend-page/contact.html');
