@@ -8,7 +8,6 @@
 body {
     background: rgb(230, 230, 224);
     background-size: cover;
-   
     height: 100vh;
     background-position: center;
 }
@@ -19,7 +18,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position:relative;
+    position: relative;
     z-index: 1000;
     background-image: url(photo_2.jpg);
     background-size: cover;
@@ -28,7 +27,7 @@ header {
 }
 
 #chk1 {
-    display: none;
+    display: none; /* Hidden checkbox */
 }
 
 i {
@@ -45,16 +44,12 @@ header .logo {
 
 header .logo h1 {
     font-family: cursive, Helvetica, sans-serif;
-
-}
-h1 .plogo {
-    font-style: aliceblue;
 }
 
 header .navbar {
     flex: 1;
     display: flex;
-    justify-content: center; /* محاذاة القائمة في الوسط */
+    justify-content: center;
 }
 
 header ul {
@@ -80,6 +75,7 @@ header ul li a:hover {
     border-bottom: 2px solid cadetblue;
 }
 
+/* Menu icon styling */
 header .menu {
     font-size: 2.5em;
     display: none;
@@ -87,10 +83,10 @@ header .menu {
 
 .language-switcher {
     margin-bottom: 20px;
-  }
-  
-  .lang-btn {
-    background:none;
+}
+
+.lang-btn1 {
+    background: none;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -99,18 +95,17 @@ header .menu {
     font-size: 16px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
-  
-  .lang-btn:hover {
-    background-color: #28a745;
-  }
-  
-  .lang-btn.active {
-    background-color: none;
-  }
-  
+}
 
-@media(max-width:1000px) {
+.lang-btn1:hover {
+    background-color: #28a745;
+}
+
+.lang-btn1.active {
+    background-color: none;
+}
+
+@media(max-width: 1000px) {
     header ul {
         position: fixed;
         top: 100px;
@@ -121,20 +116,27 @@ header .menu {
         flex-direction: column;
         align-items: center;
         transition: right 0.5s linear;
+        padding-top: 20px; /* Add padding at the top */
+    }
+
+    header ul li {
+        margin-bottom: 110px; /* Add space between each menu item */
+        width: 100%; /* Ensure items take full width in the column */
+        text-align: center; /* Center align the text in each item */
     }
 
     header .menu {
-        display: block;
+        display: block; /* Show the menu icon */
         width: 100px;
         text-align: center;
     }
 
-    #chk1:checked ~ ul {
+    #chk1:checked ~ .navbar ul {
         right: 0;
     }
 }
 
-@media(max-width:600px) {
+@media(max-width: 600px) {
     header .logo {
         font-size: 10px;
         margin-left: 8px;
@@ -142,5 +144,9 @@ header .menu {
 
     header ul {
         width: 100%;
+    }
+
+    header ul li {
+        margin-bottom: 15px; /* Add space between items on smaller screens */
     }
 }

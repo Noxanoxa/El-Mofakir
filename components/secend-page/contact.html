@@ -24,16 +24,18 @@
                     <a href="/index.html">Home</a>
                 </li>
                 <li>
-                    <a href="contact.html">About Us</a>
-                </li>
-                <li>
-                    <a href="contact.html">Annonce</a>
-                </li>
-                <li>
-                    <a  href="contact.html">Contact</a>
-                    
-                </li>
+                  <a href="#about-section">About Us</a>
+              </li>
+              <li>
+                  <a href="#announcements-section">Annonce</a>
+              </li>
+              <li>
+                  <a  href="#contact-section">Contact</a>
+                  
+              </li>
             </ul></div>
+            <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+    <button id="es-btn" class="lang-btn1" onclick="switchLanguage('es')">Arcabic</button>
             <!-- <div class="search-box">
                 <form action="">
                     <input type="text" name="search" id="srch" placeholder="Search">
@@ -47,8 +49,7 @@
     
        </header>
 
-
-       <div class="about-container">
+       <div class="about-container" id="about-container">
       <h2>About Us</h2>
       <div class="content">
         <div class="description-section">
@@ -90,7 +91,7 @@
         </div>
       </div>
       <!-- Announcements Section -->
-      <div class="announcements-section">
+      <div class="announcements-section" id="announcements-section">
         <h2>Announcements</h2>
         <div class="cards-slider">
           <div class="cards-container">
@@ -133,7 +134,6 @@
       </div>
    
 
-
 <main id="contact-section">
   <h2> Contact</h2>
       <div class="container">
@@ -142,17 +142,17 @@
           <div class="col-lg-8 col-12">
             <h2><span> in touch</span></h2>
             <p>Feel free to reach out to us for any inquiries or feedback.</p>
-            <form method="POST" action="http://localhost:8000/contact-us" id="contact-form">
+            <form method="POST" action="http://bloggi.test/api/contact-us" id="contact-form">
               <input name="_token" type="hidden" value="W7aN6Q1WsfwYv6OGHX3XGiCMjVeW20gaLyrosGbs">
               <div>
-                <input placeholder="Name" name="name" type="text" required>
-                <input placeholder="Email" name="email" type="email" required>
-                <input placeholder="Mobile" name="mobile" type="text">
+                <input placeholder="Name" id="name" type="text" required>
+                <input placeholder="Email" id="email" type="email" required>
+                <input placeholder="Mobile" id="mobile" type="text">
             </div>
               <input placeholder="Subject" name="title" type="text"> 
               <textarea placeholder="Type your message here.." name="message" rows="4"></textarea>
            
-              <button type="submit">Send Message</button>
+              <button type="submit" class="btnsend">Send Message</button>
             </form>
           </div>
           
@@ -182,7 +182,6 @@
       </div>
     </div>
 
-
       <footer id="footer"></footer>
   </main>
 
@@ -196,9 +195,48 @@ function loadComponent(id, file) {
         .then(data => {
             element.innerHTML = data;
         });
-}
-loadComponent('footer','../footer/footer.html');
+      }
+
+        document.addEventListener('DOMContentLoaded', function () {
+    loadComponent('footer', '../footer/footer.html');
+
+    document.querySelector('#contact-form').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent the default form submission
+
+      // Get form data
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var mobile = document.getElementById('mobile').value;
+
+      console.log(name);
+      console.log(email);
+      console.log(mobile);
+      // Create a payload to send to the backend
+      const formData = {
+        name: name,
+        email: email,
+        mobile: mobile
+      };
+
+      // Send the data to the backend using Axios
+      axios.post('http://bloggi.test/api/contact-us', formData)
+        .then(response => {
+          // Handle success (display success message or perform other actions)
+          console.log('Message sent successfully:', response);
+          alert('Your message has been sent successfully!'); // Alert or display success message
+          // Optionally, reset the form
+          document.getElementById('contact-form').reset();
+        })
+        .catch(error => {
+          // Handle error (display error message or perform other actions)
+          console.error('Error sending message:', error);
+          alert('There was an error sending your message. Please try again later.');
+        });
+    });
+});
+
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
 

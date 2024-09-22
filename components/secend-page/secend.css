@@ -1,10 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-}
-
 
 * {
     margin: 0;
@@ -158,10 +151,11 @@ h2 {
 
 
 
-/* الحاوية العامة */
+
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
+   
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -172,7 +166,7 @@ form {
     flex-direction: column;
 }
 
-/* تنسيق قسم الاتصال */
+
 #contact-form {
     gap: 40px;
     border-radius: 200px;
@@ -189,13 +183,18 @@ input ,textarea {
 }
 
 
-button {
+.btnsend {
     width: 25%;
     height: 40px;
     border: 2px solid #000 ;
     font-weight: bold;
+
    
 }
+.btnsend:hover {
+    background-color: #28a745;
+}
+
 /* تنسيق إضافي لتحسين الظهور */
 h2 span{
     color: #837e7e;
@@ -230,3 +229,40 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: #5cb85c;
     outline: none;
 }*/
+
+
+
+/* Media Queries for Responsive Design */
+
+/* For tablets and smaller desktops */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    button {
+        width: 50%; /* Reduce button width for medium screens */
+    }
+
+    #contact-form {
+        padding: 0 20px; /* Add padding for smaller screens */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    input, textarea {
+        font-size: 16px; /* Adjust input font size */
+    
+    }
+
+    button {
+        width: 100%; /* Make button full width on small screens */
+        font-size: 16px; /* Adjust font size */
+    }
+}
