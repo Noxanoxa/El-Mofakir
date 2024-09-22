@@ -54,14 +54,41 @@ h2 {
 
 /*////////////////////////////////////////////////////////////////////////////////////////////// recent-posts.css */
 .recent-posts {
-    width: 400px; /* ضبط العرض حسب الحاجة */
+    width: 400px; /* Adjust width as needed */
+    height: 400px; /* Adjust height as needed */
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
-    /*margin-right: 100px;*/
   
+}
+
+#posts-list {
+    max-height: 300px; /* Set max height for the posts list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 0;
+    margin: 0;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: green #ccc; /* Scrollbar color for Firefox */  
+}
+
+/* Scrollbar for WebKit (Chrome, Safari, etc.) */
+#posts-list::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#posts-list::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Background color of the scrollbar track */
+}
+
+#posts-list::-webkit-scrollbar-thumb {
+    background-color: green; /* Color of the scrollbar thumb */
+    border-radius: 5px;
+}
+
+#posts-list::-webkit-scrollbar-thumb:hover {
+    background-color: green; /* Color of the scrollbar thumb on hover */
 }
 
 .recent-posts h2 {
@@ -70,12 +97,10 @@ h2 {
 }
 
 .recent-posts ul {
-    display:block;
+    display: block;
     list-style: none;
     padding: 0;
-    justify-content: space-between;
     margin-bottom: 20px;
-    
 }
 
 .recent-posts li {
@@ -85,20 +110,21 @@ h2 {
 
 .recent-posts a {
     text-decoration: none;
-    color: #007bff;
+    color: green;
     font-weight: bold;
-    margin-bottom: 40px;
 }
 
 .recent-posts a:hover {
     text-decoration: underline;
 }
+
 /*/////////////////////////////////////////////////////////////////////////////////////////////*/
 
 
 /* auth.css */
 .pub-auth {
     width: 400px;
+    height: 400px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     padding: 15px;
@@ -118,6 +144,33 @@ h2 {
     margin-bottom: 20px;
 }
 
+#auth-list {
+    max-height: 300px; /* Set max height for the posts list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 0;
+    margin: 0;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: green #ccc; /* Scrollbar color for Firefox */  
+}
+
+/* Scrollbar for WebKit (Chrome, Safari, etc.) */
+#auth-list::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#auth-list::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Background color of the scrollbar track */
+}
+
+#auth-list::-webkit-scrollbar-thumb {
+    background-color: green; /* Color of the scrollbar thumb */
+    border-radius: 5px;
+}
+
+#auth-list::-webkit-scrollbar-thumb:hover {
+    background-color: green; /* Color of the scrollbar thumb on hover */
+}
+
 .auth-img {
     width: 50px;
     height: 50px;
@@ -132,7 +185,7 @@ h2 {
 
 .name-auth {
     text-decoration: none;
-    color: #007bff;
+    color: green;
     font-weight: bold;
 }
 
@@ -147,6 +200,7 @@ h2 {
 /*/*/
 .archives {
     width: 400px;
+    height: 400px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     padding: 15px;
@@ -164,3 +218,35 @@ h2 {
     align-items: center;
     margin-bottom: 20px;
 }
+.archives li a {
+    color: green;
+    text-decoration: none;
+}
+
+#list-archives {
+    max-height: 300px; /* Set max height for the posts list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 0;
+    margin: 0;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: green #ccc; /* Scrollbar color for Firefox */  
+}
+
+/* Scrollbar for WebKit (Chrome, Safari, etc.) */
+#list-archives::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#list-archives::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Background color of the scrollbar track */
+}
+
+#list-archives::-webkit-scrollbar-thumb {
+    background-color: green; /* Color of the scrollbar thumb */
+    border-radius: 5px;
+}
+
+#list-archives::-webkit-scrollbar-thumb:hover {
+    background-color: green; /* Color of the scrollbar thumb on hover */
+}
+

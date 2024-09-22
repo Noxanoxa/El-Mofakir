@@ -15,7 +15,7 @@ function loadComponent(id, file) {
 // loadComponent('archives','components/archives/archive.html');
 loadComponent('post','components/post/post.html');
 loadComponent('recent-posts','components/sidebar-/recent_a.html');
-loadComponent('search-bar','components/sidebar-/research_b.html');
+loadComponent('search-box','components/sidebar-/research_b.html');
 loadComponent('pub-auth','components/sidebar-/pub_auth.html');
 loadComponent('archives','components/sidebar-/archive.html');
 loadComponent('footer','components/footer/footer.html');

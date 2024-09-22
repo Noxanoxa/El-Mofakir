@@ -1,20 +1,20 @@
 <div class="search-box">
-    <h2>Search</h2>
-    <h2>________</h2>
-    <form action="">
-      <input type="text" name="search" id="srch" placeholder="Search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+  <h2>Search</h2>
+  <h2>____________________________________</h2>
+      <form action="">
+          <input type="text" name="search" id="srch" placeholder="Search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
   </div>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // تحميل محتوى ملف HTML داخل العنصر
-      fetch('components/sidebar-/research_b.html')
+    // تحميل محتوى ملف HTML داخل العنصر
+    fetch('components/sidebar-/research_b.html')
         .then(response => response.text())
         .then(data => {
-          document.getElementById('search-box').innerHTML = data;
+            document.getElementById('search-box').innerHTML = data;
         })
         .catch(error => console.error('Error loading search box:', error));
-    });
+});
   </script>

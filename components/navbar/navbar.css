@@ -85,6 +85,31 @@ header .menu {
     display: none;
 }
 
+.language-switcher {
+    margin-bottom: 20px;
+  }
+  
+  .lang-btn {
+    background:none;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .lang-btn:hover {
+    background-color: #28a745;
+  }
+  
+  .lang-btn.active {
+    background-color: none;
+  }
+  
+
 @media(max-width:1000px) {
     header ul {
         position: fixed;
