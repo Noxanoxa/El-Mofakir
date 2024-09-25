@@ -149,8 +149,8 @@
                 <input placeholder="Email" id="email" type="email" required>
                 <input placeholder="Mobile" id="mobile" type="text">
             </div>
-              <input placeholder="Subject" name="title" type="text"> 
-              <textarea placeholder="Type your message here.." name="message" rows="4"></textarea>
+              <input placeholder="Subject" name="title" id="title" type="text"> 
+              <textarea placeholder="Type your message here.." name="message" id="message" rows="4"></textarea>
            
               <button type="submit" class="btnsend">Send Message</button>
             </form>
@@ -180,8 +180,6 @@
             </div>
           </div>
       </div>
-    </div>
-
       <footer id="footer"></footer>
   </main>
 
@@ -207,6 +205,9 @@ function loadComponent(id, file) {
       var name = document.getElementById('name').value;
       var email = document.getElementById('email').value;
       var mobile = document.getElementById('mobile').value;
+      var title = document.getElementById('title').value;
+      var message = document.getElementById('message').value;
+
 
       console.log(name);
       console.log(email);
@@ -215,7 +216,9 @@ function loadComponent(id, file) {
       const formData = {
         name: name,
         email: email,
-        mobile: mobile
+        mobile: mobile,
+        title: title,
+        message: message,
       };
 
       // Send the data to the backend using Axios

@@ -1,5 +1,15 @@
 {
+  "private": true,
   "dependencies": {
     "axios": "^1.7.7"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "development": "webpack --mode development",
+    "watch": "webpack --watch",
+    "hot": "webpack serve --hot",
+    "prod": "npm run production",
+    "production": "webpack --mode production"
   }
 }
