@@ -41,7 +41,16 @@ html ,body {
     flex-direction: column;
     align-items: flex-end;
 }
+[dir="rtl"] #content {
+    padding-top: 0px;
+    margin-right: 10px;
+    margin-left: -80px;
+}
 
+[dir="rtl"] #right-sidebar {
+    width: 300px;
+    margin-left: 130px; 
+}
 
 /* Search Box Styles */
 #search-box {

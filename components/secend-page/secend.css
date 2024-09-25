@@ -217,10 +217,11 @@ p {
     margin-bottom: 48px;
     color: #000;
 }
+
+/*
 h1 .plogo{
     font-style: #ddd;
 }
-/*
 input[type="text"], input[type="email"], textarea {
     border: 1px solid #ddd;
 }

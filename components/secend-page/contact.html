@@ -17,7 +17,7 @@
 
         <input type="checkbox" name="" id="chk1">
             
-            <div class="logo"><h1>El Mufakkir</h1></div>
+            <div class="logo"><h1 class="plogo">El Mufakkir</h1></div>
             <div class="navbar" id="navbar">
             <ul>
                 <li>
@@ -35,7 +35,7 @@
               </li>
             </ul></div>
             <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
-    <button id="es-btn" class="lang-btn1" onclick="switchLanguage('es')">Arcabic</button>
+    <button id="es-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button>
             <!-- <div class="search-box">
                 <form action="">
                     <input type="text" name="search" id="srch" placeholder="Search">
@@ -234,6 +234,35 @@ function loadComponent(id, file) {
         });
     });
 });
+
+
+function switchLanguage(lang1) {
+    const langFile1 = `../locales/${lang1}.json`;
+
+    // جلب ملف الترجمة المناسب
+    fetch(langFile1)
+        .then(response => response.json())
+        .then(data => {
+            // تغيير النصوص في الـnavbar
+            document.querySelector('a[href="/index.html"]').textContent = data.home;
+            document.querySelector('a[href="#about-section"]').textContent = data.about_us;
+            document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
+            document.querySelector('a[href="#contact-section"]').textContent = data.contact;
+            document.querySelector('.plogo').textContent = data.logo;
+           
+
+            // تغيير اتجاه النص بناءً على اللغة
+            if (lang1 === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+        })
+        .catch(error => console.error('Error loading language file:', error));
+}
+
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -40,9 +40,7 @@ h2 {
     border-radius: 50%;
     border: none;
   
-    /* 
-      margin-right: 50px;
-    
+    /*  margin-right: 50px;
     transform: scale(0.9);*/
     background: green;
     cursor: pointer;
@@ -51,6 +49,11 @@ h2 {
     justify-content: center;
    
 }
+
+.search-box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
 
 /*////////////////////////////////////////////////////////////////////////////////////////////// recent-posts.css */
 .recent-posts {
@@ -62,6 +65,10 @@ h2 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
   
+}
+
+.recent-posts:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 #posts-list {
@@ -130,6 +137,11 @@ h2 {
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
+}
+
+
+.pub-auth:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .pub-auth ul {
@@ -206,6 +218,10 @@ h2 {
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
+}
+
+.archives:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .archives ul {

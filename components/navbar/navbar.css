@@ -135,6 +135,28 @@ header .menu {
         right: 0;
     }
 }
+/* RTL Support   tbdl fi halat kant lng arabic*/
+[dir="rtl"] .navbar {
+    text-align: right;
+   
+}
+
+[dir="rtl"] ul {
+    direction: rtl;
+}
+
+[dir="rtl"] ul li a {
+    font-size: 20px;
+}
+
+[dir="rtl"] .menu label {
+    float: left; /* يعكس الموضع */
+}
+
+[dir="rtl"] .logo {
+    font-size: 30px;
+    margin-right: 40px;
+}
 
 @media(max-width: 600px) {
     header .logo {
