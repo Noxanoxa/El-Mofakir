@@ -50,3 +50,95 @@ loadComponent('search-box','components/sidebar/research_b.html');
 loadComponent('pub-auth','components/sidebar/pub_auth.html');
 loadComponent('archives','components/sidebar/archive.html');
 loadComponent('footer','components/footer/footer.html');
+
+function fetchPosts() {
+    axios.get('https://bloggi.test/api/all_posts')
+      .then(response => {
+        const posts = response.data.data; // Access the data property
+        console.log('Posts:', posts);
+  
+        // Check if posts is an array
+        if (Array.isArray(posts)) {
+          const postContainer = document.querySelector('#post-container');
+          postContainer.innerHTML = ''; // Clear existing posts
+  
+          posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('card');
+            postElement.innerHTML = `
+              <h2 class="card-title">${post.title}</h2>
+              <p class="card-text">${post.description}</p>
+              <a href="${post.url}" class="card-link">Read More</a>
+              <div class="card-date">${post.created_date}</div>
+            `;
+            postContainer.appendChild(postElement);
+          });
+        } else {
+          console.error('Error: Expected an array of posts');
+        }
+      })
+      .catch(error => console.error('Error fetching posts:', error));
+  }
+  
+  // Function to fetch search results
+  function fetchsearch(search) {
+    axios.get(`https://bloggi.test/api/search?keyword=${search}`)
+      .then(response => {
+        const posts = response.data.posts;
+        console.log('search Posts:', posts);
+
+        if (Array.isArray(posts)) {
+          const postContainer = document.querySelector('#post-container');
+          postContainer.innerHTML = '';
+
+          posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('card');
+            postElement.innerHTML = `
+              <h2 class="card-title">${post.title}</h2>
+              <p class="card-text">${post.description}</p>
+              <a href="${post.url}" class="card-link">Read More</a>
+              <div class="card-date">${post.created_date}</div>
+            `;
+            postContainer.appendChild(postElement);
+          });
+        } else {
+          console.error('Error: Expected an array of posts');
+        }
+      })
+      .catch(error => console.error('Error fetching posts:', error));
+  }
+
+
+//   document.addEventListener('DOMContentLoaded', function() {
+//     // Add event listener to the search form
+//     const searchForm = document.getElementById('search-form');
+//     if (searchForm) {
+//       searchForm.addEventListener('submit', function(event) {
+//         event.preventDefault(); // Prevent the form from submitting the default way
+//         const search = document.getElementById('srch').value;
+//         fetchsearch(search); // Trigger the search function with the input value
+//       });
+//     }
+
+//     // Optionally load some default posts when the page loads
+//     fetchsearch(''); // Modify this to load initial data if needed
+//   });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const search = urlParams.get('search1');
+    console.log('search keyword:',search);
+    
+    if (!search || search.trim() === '') {
+        // If search is null, undefined, or empty, call fetchPosts
+        fetchPosts();  
+         
+    } else {
+        // If search has a value, call fetchsearch with the search term
+        fetchsearch(search);
+        
+    }
+});
