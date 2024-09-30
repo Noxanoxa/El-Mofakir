@@ -1,0 +1,120 @@
+html ,body {
+    height: 100%;
+    margin: 0;
+    background-color: #eee;
+}
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+   
+}
+#navbar {
+    min-height: 10vh;
+    align-items: center;
+}
+.main-content {
+    display: flex;
+    flex: 1;
+    margin-left: 0;
+    background-color: #eee;
+}
+
+/* Main Content Area */
+#content {
+    flex: 1;
+    padding-top: 20px;
+    width: 70%;
+    margin-right: 50px; /* Adjust space between content and sidebar */
+}
+
+#post {
+    width: 100%;
+    padding: 20px;
+}
+
+#right-sidebar {
+    width: 300px;
+    margin-right: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+[dir="rtl"] #content {
+    padding-top: 0px;
+    margin-right: 10px;
+    margin-left: -80px;
+}
+
+[dir="rtl"] #right-sidebar {
+    width: 300px;
+    margin-left: 130px; 
+}
+
+/* Search Box Styles */
+#search-box {
+    width: 100%;
+}
+
+/* Recent Posts Styles */
+#recent-posts {
+    width: 100%;
+}
+
+#pub-auth {
+    width: 100%;
+}
+
+#archives {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+
+/* Responsive Layout */
+@media screen and (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+        align-items: center; /* Center content */
+    }
+
+    #content {
+        width: 90%; /* Make the content take up most of the screen */
+        margin: 0 auto; /* Center the content */
+    }
+
+    #right-sidebar {
+        width: 100%;
+        margin: 20px auto 0 auto; /* Center the sidebar */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the sidebar content */
+    }
+}
+
+
+@media (max-width: 768px) {
+    #right-sidebar {
+        width: 100%; /* Full width for tablets and smaller screens */
+        max-width: 400px; /* Limit max width on medium screens */
+    }
+
+    #content {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    #right-sidebar {
+        width: 100%; /* Full width on mobile */
+        max-width: 100%; /* No limit on mobile screens */
+        padding: 10px; /* Reduce padding for mobile */
+    }
+
+    #content {
+        width: 100%; /* Full width on mobile */
+        max-width: 100%; /* No limit on mobile */
+    }
+}

@@ -1,0 +1,71 @@
+<div class="pub-auth">
+  <h2 class="publi">Publishing Authority</h2>
+  <h2>_____________________________________</h2>
+  <ul id="auth-list">
+    <!-- سيتم ملء المشاركات هنا عبر JavaScript -->
+  </ul>
+</div>
+
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const authList = document.getElementById("auth-list");
+    const authPosts = [
+      {
+        title: "Post Title 1",
+        link: "#post1",
+        date: "January 1, 2024",
+        image: "person1.jpg",
+      },
+      {
+        title: "Post Title 2",
+        link: "#post2",
+        date: "January 2, 2024",
+        image: "person2.jpg",
+      },
+      {
+        title: "Post Title 3",
+        link: "#post3",
+        date: "January 3, 2024",
+        image: "person1.jpg",
+      },
+      {
+        title: "Post Title 4",
+        link: "#post4",
+        date: "January 4, 2024",
+        image: "person2.jpg",
+      },
+      {
+        title: "Post Title 5",
+        link: "#post5",
+        date: "January 5, 2024",
+        image: "#",
+      },
+    ];
+
+    authPosts.forEach((post) => {
+      const listItem = document.createElement("li");
+      const img = document.createElement("img");
+      img.src = post.image;
+      img.alt = "Author image";
+      img.className = "auth-img";
+
+      const authInfo = document.createElement("div");
+      authInfo.className = "auth-info";
+
+      const link = document.createElement("a");
+      link.href = post.link;
+      link.className = "name-auth";
+      link.textContent = post.title;
+
+      const date = document.createElement("p");
+      date.className = "post-date";
+      date.textContent = post.date;
+
+      authInfo.appendChild(link);
+      authInfo.appendChild(date);
+      listItem.appendChild(img);
+      listItem.appendChild(authInfo);
+      authList.appendChild(listItem);
+    });
+  });
+</script> -->

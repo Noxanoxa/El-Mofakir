@@ -1,0 +1,281 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 1rem;
+}
+
+.info-section, .description-section {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.description-section {
+    margin-right: 0;
+}
+
+.journal-info {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.journal-info div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.journal-info div:last-child {
+    border-bottom: none;
+}
+
+.journal-info span {
+    font-weight: bold;
+    color: #555;
+}
+
+.description-section p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+/* Announcements Section */
+.announcements-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Slider container */
+.cards-slider {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Continuous movement of cards */
+.cards-container {
+    display: flex;
+    animation: moveCards 40s linear infinite;
+    align-items: stretch; /* Ensure all cards have the same height */
+}
+
+@keyframes moveCards {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    /* Allow width to grow based on content */
+    flex-grow: 1;        /* Card grows based on content */
+    flex-shrink: 0;      /* Prevent cards from shrinking too much */
+    flex-basis: auto;    /* Width based on content */
+    
+    /* Set consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure consistent height for all cards */
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.card .date {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #888;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .info-section, .description-section {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .cards-container {
+        flex-direction: row;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+}
+
+
+
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+   
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.conth2 {
+    margin-top: 30px;
+}
+#contact-form {
+    gap: 40px;
+    border-radius: 200px;
+    border: none;
+    
+}
+
+input ,textarea {
+   border: none;
+   border-bottom: 2px solid #000;
+   outline: none;
+   background: none;
+   
+}
+
+
+.btnsend {
+    width: 25%;
+    height: 40px;
+    border: 2px solid #000 ;
+    font-weight: bold;
+
+   
+}
+.btnsend:hover {
+    background-color: #28a745;
+}
+
+/* تنسيق إضافي لتحسين الظهور */
+h2 span{
+    color: #837e7e;
+}
+
+p {
+    color: #555;
+    margin-bottom: 40px;
+}
+.prgrph {
+  
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+   
+}
+.prgrph i{
+    margin-right: 10px;
+    font-size: 20px;
+    margin-bottom: 48px;
+    color: #000;
+}
+
+/*
+h1 .plogo{
+    font-style: #ddd;
+}
+input[type="text"], input[type="email"], textarea {
+    border: 1px solid #ddd;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-color: #5cb85c;
+    outline: none;
+}*/
+
+
+
+/* Media Queries for Responsive Design */
+
+/* For tablets and smaller desktops */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    button {
+        width: 50%; /* Reduce button width for medium screens */
+    }
+
+    #contact-form {
+        padding: 0 20px; /* Add padding for smaller screens */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    input, textarea {
+        font-size: 16px; /* Adjust input font size */
+    
+    }
+
+    button {
+        width: 100%; /* Make button full width on small screens */
+        font-size: 16px; /* Adjust font size */
+    }
+}

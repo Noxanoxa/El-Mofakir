@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>El Mufakkir</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="secend.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/components/navbar/navbar.css">
+  
+  <link rel="stylesheet" href="/css/Style.css">
+  <link rel="stylesheet" href="/components/footer/footer.css">
+</head>
+<body>
+
+    <header id="navbar">
+
+        <input type="checkbox" name="" id="chk1">
+            
+            <div class="logo"><h1 class="plogo">El Mufakkir</h1></div>
+            <div class="navbar" id="navbar">
+            <ul>
+                <li>
+                    <a href="/index.html">Home</a>
+                </li>
+                <li>
+                  <a href="#about-section">About Us</a>
+              </li>
+              <li>
+                  <a href="#announcements-section">Annonce</a>
+              </li>
+              <li>
+                  <a  href="#contact-section">Contact</a>
+                  
+              </li>
+            </ul></div>
+            <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+    <button id="es-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button>
+            <!-- <div class="search-box">
+                <form action="">
+                    <input type="text" name="search" id="srch" placeholder="Search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div> -->
+            <div class="menu">
+                <label for="chk1"><i class="fa fa-bars"></i></label>
+            </div>
+        
+    
+       </header>
+
+       <div class="about-container" id="about-container">
+      <h2>About Us</h2>
+      <div class="content">
+        <div class="description-section">
+          <h2>Description</h2>
+          <p>
+            "El-Mofaker" is an international refereed review published
+            semi-annually (June-December) by the Faculty of Law and Political
+            Science at the University of Mohamed Khider Biskra, Algeria. It
+            specializes in the fields of law and political science, including
+            public and private law in all its branches, political science in all
+            its branches, as well as Sharia law, and public administration.
+          </p>
+          <p>
+            The review primarily aims to offer free publication—on paper and
+            electronically—of original works, studies, and innovative research
+            in three languages: Arabic, English, and French, for professors and
+            researchers worldwide. It contributes to enriching scientific
+            knowledge and developing specialized studies in the aforementioned
+            fields.
+          </p>
+        </div>
+        <div class="info-section">
+          <h2>Journal Information</h2>
+          <div class="journal-info">
+            <div><span>EISSN:</span> 2600-6081</div>
+            <div><span>Frequency:</span> Biannual</div>
+            <div><span>Acceptance Rate:</span> 91%</div>
+            <div><span>Average Response Time:</span> 290 Days</div>
+            <div>
+              <span>Average Publication Time After Acceptance:</span> 66 Days
+            </div>
+            <div><span>Year of Creation:</span> 2006</div>
+            <div><span>Country:</span> Algeria</div>
+            <div>
+              <span>Institution:</span> University of Mohamed Khider Biskra
+            </div>
+            <div><span>Impact Factor (ASJP):</span> 0.6455</div>
+          </div>
+        </div>
+      </div>
+      <!-- Announcements Section -->
+      <div class="announcements-section">
+        <h2>Announcements</h2>
+        <div class="cards-slider">
+          <div class="cards-container" id="announcements-section">
+            <!-- Card 1 -->
+            <div class="card">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+<main id="contact-section">
+  <h2 class="conth2"> Contact</h2>
+      <div class="container">
+          <!-- Contact Form Section -->
+          
+          <div class="col-lg-8 col-12">
+            <h2><span> in touch</span></h2>
+            <p>Feel free to reach out to us for any inquiries or feedback.</p>
+            <form method="POST" action="http://bloggi.test/api/contact-us" id="contact-form">
+              <input name="_token" type="hidden" value="W7aN6Q1WsfwYv6OGHX3XGiCMjVeW20gaLyrosGbs">
+              <div>
+                <input placeholder="Name" id="name" type="text" required>
+                <input placeholder="Email" id="email" type="email" required>
+                <input placeholder="Mobile" id="mobile" type="text">
+            </div>
+              <input placeholder="Subject" name="title" id="title" type="text"> 
+              <textarea placeholder="Type your message here.." name="message" id="message" rows="4"></textarea>
+           
+              <button type="submit" class="btnsend">Send Message</button>
+            </form>
+          </div>
+          
+          <!-- Office Info Section -->
+          <div class="col-lg-4 col-12">
+            <h2>Get office info.</h2>
+            <p>Visit our office or contact us through the provided details.</p>
+            <div >
+              <div class="prgrph">
+                <i class="fas fa-map-marker-alt"></i>
+                <p><strong>Address:</strong> University mohammed khaider ,Biskra Algerian </p>
+              </div>
+              <div class="prgrph">
+                <i class="fas fa-phone-alt"></i>
+                <p><strong>Phone:</strong> 05123456789</p>
+              </div>
+              <div class="prgrph">
+                <i class="fas fa-envelope"></i>
+                <p><strong>Email:</strong> admin@bloggi.test</p>
+              </div>
+              <div class="prgrph">
+                <i class="fas fa-globe"></i>
+                <p><strong>Website:</strong> El-Muffaker</p>
+              </div>
+            </div>
+          </div>
+      </div>
+      <footer id="footer"></footer>
+  </main>
+
+  <script src="../footer/footer.js"></script>
+  <script >
+
+function loadComponent(id, file) {
+    const element = document.getElementById(id);
+    fetch(file)
+        .then(response => response.text())
+        .then(data => {
+            element.innerHTML = data;
+        });
+      }
+
+        document.addEventListener('DOMContentLoaded', function () {
+    loadComponent('footer', '../footer/footer.html');
+
+    document.querySelector('#contact-form').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent the default form submission
+
+      // Get form data
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var mobile = document.getElementById('mobile').value;
+      var title = document.getElementById('title').value;
+      var message = document.getElementById('message').value;
+
+
+      console.log(name);
+      console.log(email);
+      console.log(mobile);
+      // Create a payload to send to the backend
+      const formData = {
+        name: name,
+        email: email,
+        mobile: mobile,
+        title: title,
+        message: message,
+      };
+
+      // Send the data to the backend using Axios
+      axios.post('http://bloggi.test/api/contact-us', formData)
+        .then(response => {
+          // Handle success (display success message or perform other actions)
+          console.log('Message sent successfully:', response);
+          alert('Your message has been sent successfully!'); // Alert or display success message
+          // Optionally, reset the form
+          document.getElementById('contact-form').reset();
+        })
+        .catch(error => {
+          // Handle error (display error message or perform other actions)
+          console.error('Error sending message:', error);
+          alert('There was an error sending your message. Please try again later.');
+        });
+    });
+});
+
+
+function switchLanguage(lang1) {
+    const langFile1 = `../locales/${lang1}.json`;
+
+    // جلب ملف الترجمة المناسب
+    fetch(langFile1)
+        .then(response => response.json())
+        .then(data => {
+            // تغيير النصوص في الـnavbar
+            document.querySelector('a[href="/index.html"]').textContent = data.home;
+            document.querySelector('a[href="#about-section"]').textContent = data.about_us;
+            document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
+            document.querySelector('a[href="#contact-section"]').textContent = data.contact;
+            document.querySelector('.plogo').textContent = data.logo;
+           
+
+            // تغيير اتجاه النص بناءً على اللغة
+            if (lang1 === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+        })
+        .catch(error => console.error('Error loading language file:', error));
+}
+
+
+  </script>
+  <script>
+    function Announcements() {
+    console.log('announcement');
+    axios.get('https://bloggi.test/api/all_announcements')
+      .then(response => {
+        const announcements = response.data.announcements;
+        console.log('announcements:', announcements);
+  
+        if (Array.isArray(announcements)) {
+          const announceContainer = document.querySelector('#announcements-section');
+          announceContainer.innerHTML = '';
+  
+          announcements.forEach(announce => {
+            const announceElement = document.createElement('div');
+            announceElement.innerHTML = `
+              <div class="card">
+              <h3>${announce.title}</h3>
+              <p>${announce.description}</p>
+              <p class="date">${announce.created_date}</p>
+              </div>
+            `;
+            announceContainer.appendChild(announceElement);
+          });
+        } else {
+          console.error('Error: Expected an array of announcements');
+        }
+      })
+      .catch(error => console.error('Error fetching announcements:', error));
+  }
+  
+  // Fetch announcements when the page loads
+  document.addEventListener('DOMContentLoaded', Announcements);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>
+
