@@ -2,81 +2,65 @@
     <h2 class="publi">Publishing Authority</h2>
     <h2>_____________________________________</h2>
     <ul id="auth-list">
-        <!-- سيتم ملء المشاركات هنا عبر JavaScript -->
-        <li>
-            <img src="person1.jpg" aly="Author image" class="auth-img">
-            <div class="auth-info">
-            <a href="#post1" class="name-auth">Post Title 1</a>
-            <p class="post-date">January 1, 2024</p>
-        </div>
-        </li>
-        <li>
-            <img src="person2.jpg" alte="Author image" class="auth-img">
-            <div class="auth-info">
-            <a href="#post2" class="name-auth">Post Title 2</a>
-            <p class="post-date">January 2, 2024</p>
-        </div>
-        </li>
-        <li>
-            <img src="person1.jpg" alte="Author image" class="auth-img">
-            <div class="auth-info">
-            <a href="#post3" class="name-auth">Post Title 3</a>
-            <p class="post-date">January 3, 2024</p>
-        </div>
-        </li>
-        <li>
-            <img src="person2.jpg" alte="Author image" class="auth-img">
-            <div class="auth-info">
-            <a href="#post4" class="name-auth">Post Title 4</a>
-            <p class="post-date">January 4, 2024</p>
-        </div>
-        </li>
-        <li>
-            <img src="#" alte="Author image" class="auth-img">
-            <div class="auth-info">
-            <a href="#post5" class="name-auth">Post Title 5</a>
-            <p class="post-date">January 5, 2024</p>
-        </div>
-        </li>
+      <!-- سيتم ملء المشاركات هنا عبر JavaScript -->
     </ul>
-</div>
-   
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const authList = document.getElementById('auth-list');
+  </div>
+  
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const authList = document.getElementById("auth-list");
       const authPosts = [
-          { title: 'Post Title 1', link: '#post1', date: 'January 1, 2024', image: 'person1.jpg' },
-          { title: 'Post Title 2', link: '#post2', date: 'January 2, 2024', image: 'person2.jpg' },
-          { title: 'Post Title 3', link: '#post3', date: 'January 3, 2024', image: 'person1.jpg' },
-          { title: 'Post Title 4', link: '#post4', date: 'January 4, 2024', image: 'person2.jpg' },
-          { title: 'Post Title 5', link: '#post5', date: 'January 5, 2024', image: '#' }
+        {
+          title: "Post Title 1",
+          link: "#post1",
+          date: "January 1, 2024",
+          image: "person1.jpg",
+        },
+        {
+          title: "Post Title 2",
+          link: "#post2",
+          date: "January 2, 2024",
+          image: "person2.jpg",
+        },
+        {
+          title: "Post Title 3",
+          link: "#post3",
+          date: "January 3, 2024",
+          image: "person1.jpg",
+        },
+        {
+          title: "Post Title 4",
+          link: "#post4",
+          date: "January 4, 2024",
+          image: "person2.jpg",
+        },
+        {
+          title: "Post Title 5",
+          link: "#post5",
+          date: "January 5, 2024",
+          image: "#",
+        },
       ];
-  
-      authPosts.forEach(post => {
-          const listItem = document.createElement('li');
-          const img = document.createElement('img');
-          img.src = post.image;
-          img.alt = 'Author image';
-          img.className = 'auth-img';
-  
-          const authInfo = document.createElement('div');
-          authInfo.className = 'auth-info';
-  
-          const link = document.createElement('a');
-          link.href = post.link;
-          link.className = 'name-auth';
-          link.textContent = post.title;
-  
-          const date = document.createElement('p');
-          date.className = 'post-date';
-          date.textContent = post.date;
-  
-          authInfo.appendChild(link);
-          authInfo.appendChild(date);
-          listItem.appendChild(img);
-          listItem.appendChild(authInfo);
-          authList.appendChild(listItem);
+      authPosts.forEach((post) => {
+        const listItem = document.createElement("li");
+        const img = document.createElement("img");
+        img.src = post.image;
+        img.alt = "Author image";
+        img.className = "auth-img";
+        const authInfo = document.createElement("div");
+        authInfo.className = "auth-info";
+        const link = document.createElement("a");
+        link.href = post.link;
+        link.className = "name-auth";
+        link.textContent = post.title;
+        const date = document.createElement("p");
+        date.className = "post-date";
+        date.textContent = post.date;
+        authInfo.appendChild(link);
+        authInfo.appendChild(date);
+        listItem.appendChild(img);
+        listItem.appendChild(authInfo);
+        authList.appendChild(listItem);
       });
     });
-  </script>
+  </script> -->

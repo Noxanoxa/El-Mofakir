@@ -90,48 +90,20 @@
           </div>
         </div>
       </div>
+      
       <!-- Announcements Section -->
       <div class="announcements-section" id="announcements-section">
         <h2>Announcements</h2>
         <div class="cards-slider">
-          <div class="cards-container">
+          <div class="cards-container" id="announcements-section">
             <!-- Card 1 -->
             <div class="card">
-              <h3>First Issue - June</h3>
-              <p>The maximum date for receiving articles is April 10th.</p>
-              <strong></strong>
-              <p class="date">Date: 10-04-2023</p>
-            </div>
 
-            <!-- Card 2 -->
-            <div class="card">
-              <h3>Second Issue - December</h3>
-              <p>The maximum date for receiving articles is October 10th.</p>
-              <strong></strong>
-              <p class="date">Date: 10-10-2023</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-              <h3>Important Notice</h3>
-              <p>Articles written in English are excluded from deadlines.</p>
-              <strong></strong>
-              <p class="date">Date: 30-01-2023</p>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="card">
-              <h3>Editor’s Note</h3>
-              <p>
-                We thank everyone for their understanding.
-                <br />
-                <strong>Editor-in-Chief: PR BARI ABDELATIF</strong>
-              </p>
-              <p class="date">Date: 30-01-2023</p>
             </div>
           </div>
         </div>
       </div>
+
    
 
 <main class="contact-section" id="contact-section">
@@ -321,29 +293,40 @@ function switchLanguage(lang) {
         .catch(error => console.error('Error loading language file:', error));
       }
 
+</script>
+<script>
+    function Announcements() {
+    console.log('announcement');
+    axios.get('https://bloggi.test/api/all_announcements')
+      .then(response => {
+        const announcements = response.data.announcements;
+        console.log('announcements:', announcements);
 
+        if (Array.isArray(announcements)) {
+          const announceContainer = document.querySelector('#announcements-section');
+          announceContainer.innerHTML = '';
 
+          announcements.forEach(announce => {
+            const announceElement = document.createElement('div');
+            announceElement.innerHTML = `
+              <div class="card">
+              <h3>${announce.title}</h3>
+              <p>${announce.description}</p>
+              <p class="date">${announce.created_date}</p>
+              </div>
+            `;
+            announceContainer.appendChild(announceElement);
+          });
+        } else {
+          console.error('Error: Expected an array of announcements');
+        }
+      })
+      .catch(error => console.error('Error fetching announcements:', error));
+  }
 
-//       // تغيير اللغة وتخزينها
-// function changeLanguage(language) {
-//     localStorage.setItem('selectedLanguage', language);
-//     applyLanguage(language); // تطبيق اللغة على الصفحة الحالية
-// }
-
-// // تطبيق اللغة على الصفحة
-// function applyLanguage(language) {
-//     if (language === 'ar') {
-//         document.documentElement.setAttribute('lang', 'ar');
-//         // تحديث النصوص إلى اللغة العربية
-//     } else {
-//         document.documentElement.setAttribute('lang', 'en');
-//         // تحديث النصوص إلى اللغة الإنجليزية
-//     }
-// }
-
-
+  // Fetch announcements when the page loads
+  document.addEventListener('DOMContentLoaded', Announcements);
   </script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
-

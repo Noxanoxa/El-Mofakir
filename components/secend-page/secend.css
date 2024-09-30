@@ -75,7 +75,6 @@ h2 {
     margin-bottom: 15px;
     line-height: 1.8;
 }
-
 /* Announcements Section */
 .announcements-section {
     margin-top: 40px;
@@ -92,6 +91,7 @@ h2 {
 .cards-container {
     display: flex;
     animation: moveCards 40s linear infinite;
+    align-items: stretch; /* Ensure all cards have the same height */
 }
 
 @keyframes moveCards {
@@ -104,13 +104,22 @@ h2 {
 }
 
 .card {
-    flex: 1 0 45%;
     background-color: #f0f0f0;
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 45%;
+
+    /* Allow width to grow based on content */
+    flex-grow: 1;        /* Card grows based on content */
+    flex-shrink: 0;      /* Prevent cards from shrinking too much */
+    flex-basis: auto;    /* Width based on content */
+
+    /* Set consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure consistent height for all cards */
 }
 
 .card h3 {
