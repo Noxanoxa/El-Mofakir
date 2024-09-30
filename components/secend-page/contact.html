@@ -34,8 +34,8 @@
                   
               </li>
             </ul></div>
-            <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
-    <button id="es-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button>
+    <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+    <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button>
             <!-- <div class="search-box">
                 <form action="">
                     <input type="text" name="search" id="srch" placeholder="Search">
@@ -74,19 +74,19 @@
         <div class="info-section">
           <h2>Journal Information</h2>
           <div class="journal-info">
-            <div><span>EISSN:</span> 2600-6081</div>
-            <div><span>Frequency:</span> Biannual</div>
-            <div><span>Acceptance Rate:</span> 91%</div>
-            <div><span>Average Response Time:</span> 290 Days</div>
+            <div ><span class="EISSN">EISSN:</span> 2600-6081</div>
+            <div ><span class="Frequency">Frequency:</span> Biannual</div>
+            <div><span class="Acceptance">Acceptance Rate:</span> 91%</div>
+            <div><span class="Response_t">Average Response Time:</span> 290 Days</div>
             <div>
-              <span>Average Publication Time After Acceptance:</span> 66 Days
+              <span class="Publication_t"> Average Publication Time After Acceptance:</span> 66 Days
             </div>
-            <div><span>Year of Creation:</span> 2006</div>
-            <div><span>Country:</span> Algeria</div>
+            <div><span class="Year_c">Year of Creation:</span> 2006</div>
+            <div><span class="Country">Country:</span> Algeria</div>
             <div>
-              <span>Institution:</span> University of Mohamed Khider Biskra
+              <span class="Institution">Institution:</span> University of Mohamed Khider Biskra
             </div>
-            <div><span>Impact Factor (ASJP):</span> 0.6455</div>
+            <div><span class="Impact_f">Impact Factor (ASJP):</span> 0.6455</div>
           </div>
         </div>
       </div>
@@ -134,14 +134,14 @@
       </div>
    
 
-<main id="contact-section">
+<main class="contact-section" id="contact-section">
   <h2> Contact</h2>
       <div class="container">
           <!-- Contact Form Section -->
           
           <div class="col-lg-8 col-12">
             <h2><span> in touch</span></h2>
-            <p>Feel free to reach out to us for any inquiries or feedback.</p>
+            <p class="p1">Feel free to reach out to us for any inquiries or feedback.</p>
             <form method="POST" action="http://bloggi.test/api/contact-us" id="contact-form">
               <input name="_token" type="hidden" value="W7aN6Q1WsfwYv6OGHX3XGiCMjVeW20gaLyrosGbs">
               <div>
@@ -158,32 +158,36 @@
           
           <!-- Office Info Section -->
           <div class="col-lg-4 col-12">
-            <h2>Get office info.</h2>
-            <p>Visit our office or contact us through the provided details.</p>
+            <h2><span>Get office info</span></h2>
+            <p class="p2">Visit our office or contact us through the provided details.</p>
             <div >
               <div class="prgrph">
                 <i class="fas fa-map-marker-alt"></i>
-                <p><strong>Address:</strong> University mohammed khaider ,Biskra Algerian </p>
+                <p><strong class="s1">Address:</strong> University mohammed khaider ,Biskra Algerian </p>
               </div>
               <div class="prgrph">
                 <i class="fas fa-phone-alt"></i>
-                <p><strong>Phone:</strong> 05123456789</p>
+                <p><strong class="s2">Phone:</strong> 033-50-12-19</p>
               </div>
               <div class="prgrph">
                 <i class="fas fa-envelope"></i>
-                <p><strong>Email:</strong> admin@bloggi.test</p>
+                <p><strong class="s3">Email:</strong> fdsp.univ-biskra.dz</p>
               </div>
               <div class="prgrph">
                 <i class="fas fa-globe"></i>
-                <p><strong>Website:</strong> El-Muffaker</p>
+                <p><strong class="s4">Website:</strong> El-Muffaker</p>
               </div>
             </div>
           </div>
       </div>
-      <footer id="footer"></footer>
+     
   </main>
+  </div>
+  <div id="backToTop"></div>
+  <footer id="footer"></footer>
 
   <script src="../components/footer/footer.js"></script>
+  
   <script >
 
 function loadComponent(id, file) {
@@ -197,7 +201,7 @@ function loadComponent(id, file) {
 
         document.addEventListener('DOMContentLoaded', function () {
     loadComponent('footer', '../footer/footer.html');
-
+    loadComponent('backToTop','../scroll-button/scrollB.html');
     document.querySelector('#contact-form').addEventListener('submit', function (e) {
       e.preventDefault(); // prevent the default form submission
 
@@ -239,32 +243,103 @@ function loadComponent(id, file) {
 });
 
 
-function switchLanguage(lang1) {
-    const langFile1 = `../locales/${lang1}.json`;
-
-    // جلب ملف الترجمة المناسب
-    fetch(langFile1)
+function switchLanguage(lang) {
+    const langFile = `/locales/${lang}.json`;
+    
+  
+    fetch(langFile)
+    
         .then(response => response.json())
         .then(data => {
-            // تغيير النصوص في الـnavbar
+          console.log(data);
+            // Update navbar
             document.querySelector('a[href="/index.html"]').textContent = data.home;
             document.querySelector('a[href="#about-section"]').textContent = data.about_us;
             document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
             document.querySelector('a[href="#contact-section"]').textContent = data.contact;
             document.querySelector('.plogo').textContent = data.logo;
-           
 
-            // تغيير اتجاه النص بناءً على اللغة
-            if (lang1 === 'ar') {
+            // Update About Us section
+            document.querySelector('.about-container h2').textContent = data.about_us;
+            document.querySelector('.description-section h2').textContent = data.description;
+             ////////journal_information
+             document.querySelector('.info-section h2').textContent = data.journal_information;
+           document.querySelector('.EISSN').textContent = data.eissn;
+           document.querySelector('.Frequency').textContent = data.frequency;
+           document.querySelector('.Acceptance').textContent = data.acceptance;
+           document.querySelector('.Response_t').textContent = data.response_t;
+           document.querySelector('.Publication_t').textContent = data.publication_t;
+           document.querySelector('.Year_c').textContent = data.year_c;
+           document.querySelector('.Country').textContent = data.country;
+           document.querySelector('.Institution').textContent = data.institution;
+           document.querySelector('.Impact_f').textContent = data.impact_f;
+            ////announce
+            document.querySelector('.announcements-section h2').textContent = data.announcements;
+            document.querySelector('.contact-section h2').textContent = data.contact;
+            /////////in_touch
+            document.querySelector('.col-lg-8 h2').textContent = data.in_touch;
+            document.querySelector('.p1').textContent = data.feel_free;
+            document.getElementById('name').setAttribute('placeholder', data.name);
+        document.getElementById('email').setAttribute('placeholder', data.email);
+        document.getElementById('mobile').setAttribute('placeholder', data.mobile);
+        document.getElementById('title').setAttribute('placeholder', data.subject);
+        document.getElementById('message').setAttribute('placeholder', data.message);
+        document.querySelector('.btnsend').textContent = data.send_message;
+
+///////////////////get_office_info
+        document.querySelector('.col-lg-4 h2').textContent = data.get_office_info;
+        document.querySelector('.p2').textContent = data.visit_office;
+        document.querySelector('.s1').textContent = data.address;
+           document.querySelector('.s2').textContent = data.phone;
+           document.querySelector('.s3').textContent = data.email;
+           document.querySelector('.s4').textContent = data.website;
+           
+           document.querySelector('#en-btn').innerHTML = data.english;
+           document.querySelector('#ar-btn').innerHTML = data.arabic;
+          
+          // document.querySelector('.prgrph:nth-child(1) p').innerHTML = <strong>${data.addressValue}</strong> 
+        //document.querySelector('.prgrph:nth-child(2) p').innerHTML = <strong>${data.phone}</strong> 
+        //document.querySelector('.prgrph:nth-child(3) p').innerHTML = <strong>${data.email}</strong> ${data.emailValue};
+        //document.querySelector('.prgrph:nth-child(4) p').innerHTML = <strong>${data.website}</strong> 
+
+        
+          // document.querySelector('#en-btn').textContent = data.en;
+          // document.querySelector('#ar-btn').textContent = data.ar;
+            // Update Announcements
+          //  document.querySelectorAll('.card h3').forEach((el, i) => el.textContent = data[announcement_${i + 1}]);
+            
+            // Adjust text direction
+            if (lang === 'ar') {
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.documentElement.setAttribute('lang', 'ar');
             } else {
                 document.documentElement.setAttribute('dir', 'ltr');
                 document.documentElement.setAttribute('lang', 'en');
+               
             }
         })
         .catch(error => console.error('Error loading language file:', error));
-}
+      }
+
+
+
+
+//       // تغيير اللغة وتخزينها
+// function changeLanguage(language) {
+//     localStorage.setItem('selectedLanguage', language);
+//     applyLanguage(language); // تطبيق اللغة على الصفحة الحالية
+// }
+
+// // تطبيق اللغة على الصفحة
+// function applyLanguage(language) {
+//     if (language === 'ar') {
+//         document.documentElement.setAttribute('lang', 'ar');
+//         // تحديث النصوص إلى اللغة العربية
+//     } else {
+//         document.documentElement.setAttribute('lang', 'en');
+//         // تحديث النصوص إلى اللغة الإنجليزية
+//     }
+// }
 
 
   </script>

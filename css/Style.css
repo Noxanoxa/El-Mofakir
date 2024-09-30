@@ -93,28 +93,72 @@ html ,body {
         align-items: center; /* Center the sidebar content */
     }
 }
-
-
-@media (max-width: 768px) {
+@media (max-width: 980px) {
+    .main-content {
+        padding: 0 10px;
+    }
     #right-sidebar {
         width: 100%; /* Full width for tablets and smaller screens */
         max-width: 400px; /* Limit max width on medium screens */
     }
 
     #content {
+        width: 100%;
         max-width: 500px;
+        margin: 0 auto;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0 10px;
+    }
+    #right-sidebar {
+        width: 100%; /* Full width for tablets and smaller screens */
+        max-width: 400px; /* Limit max width on medium screens */
+    }
+
+    #content {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+
     }
 }
 
 @media (max-width: 480px) {
+    .main-content {
+        padding: 0 5px;
+    }
     #right-sidebar {
         width: 100%; /* Full width on mobile */
         max-width: 100%; /* No limit on mobile screens */
         padding: 10px; /* Reduce padding for mobile */
+        margin: 0;
     }
 
     #content {
         width: 100%; /* Full width on mobile */
         max-width: 100%; /* No limit on mobile */
+        margin: 0 auto;
     }
 }
+
+.back-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color:transparent;
+    color: rgb(4, 4, 4);
+    padding: 10px 15px;
+    border-radius: 50%;
+    text-align: center;
+   /*  display: none; نبدأ بإخفائه */
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .back-top:hover {
+    background-color: #555;
+  }

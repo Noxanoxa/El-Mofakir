@@ -11,6 +11,8 @@
     "search": "Search",
     "read_more": "Read More",
     "thinker": "Thinker",
+    "english": "English",
+      "arabic": "Arabic",
     "months": {
       "january": "January",
       "february": "February",
@@ -23,9 +25,8 @@
       "september": "September",
       "october": "October",
       "november": "November",
-      "december": "December",
-      "en": "English",
-      "ar": "Arabic"
+      "december": "December"
+      
     },
     "about_us": "About Us",
     "description": "Description",
@@ -37,11 +38,22 @@
     "email": "Email",
     "mobile": "Mobile",
     "subject": "Subject",
-    "type_your_message": "Type your message here...",
+    "message": "Type your message here...",
     "send_message": "Send Message",
     "get_office_info": "Get Office Info",
     "visit_office": "Visit our office or contact us through the provided details",
     "address": "Address",
     "phone": "Phone",
-    "website": "Website"
+    "website": "Website",
+   
+      "eissn": "EISSN",
+      "frequency": "Frequency",
+      "acceptance": "Acceptance Rate",
+      "response_t": "Average Response Time",
+      "publication_t": "Average Publication Time After Acceptance",
+      "year_c": "Year of Creation",
+      "country": "Country",
+      "institution": "Institution",
+      "impact_f": "Impact Factor (ASJP)"
+    
   }

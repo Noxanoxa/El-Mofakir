@@ -21,13 +21,20 @@ function switchLanguage(lang) {
             document.querySelector('a[href="components/secend-page/contact.html#contact-section"]').textContent = data.contact;
             document.querySelector('.plogo').textContent = data.logo;
             document.querySelector('.search1').textContent = data.search;
+            document.getElementById('srch').setAttribute('placeholder', data.search);
+
             document.querySelector('.recent').textContent = data.recent_posts;
             document.querySelector('.publi').textContent = data.publishing_authority;
             document.querySelector('.archive').textContent = data.archives;
-            document.querySelector('.card-link').textContent = data.read_more;
-        
-            // تغيير اتجاه النص بناءً على اللغة
+          //  document.getElementById('.card-link').textContent = data.read_more;
+          document.querySelectorAll('.read-more').forEach(button => {
+            button.textContent = data.readMore;
+        });
+        document.querySelector('#en-btn').innerHTML = data.english;
+           document.querySelector('#ar-btn').innerHTML = data.arabic;
+            
             if (lang === 'ar') {
+               
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.documentElement.setAttribute('lang', 'ar');
             } else {
@@ -36,7 +43,33 @@ function switchLanguage(lang) {
             }
         })
         .catch(error => console.error('Error loading language file:', error));
-}
+      }
+      
+
+
+//       // تغيير اللغة وتخزينها
+// function changeLanguage(language) {
+//     localStorage.setItem('selectedLanguage', language);
+//     applyLanguage(language); // تطبيق اللغة على الصفحة الحالية
+// }
+
+// // تطبيق اللغة على الصفحة
+// function applyLanguage(language) {
+//     if (language === 'ar') {
+//         document.documentElement.setAttribute('lang', 'ar');
+//         // تحديث النصوص إلى اللغة العربية
+//     } else {
+//         document.documentElement.setAttribute('lang', 'en');
+//         // تحديث النصوص إلى اللغة الإنجليزية
+//     }
+// }
+
+// // عند تحميل الصفحة، استعادة اللغة المختارة
+// window.onload = function() {
+//     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // افتراضي الإنجليزية
+//     applyLanguage(savedLanguage);
+// };
+
 
 // تحميل Navbar و Recent Posts
 //loadComponent('navbar','components/navbar/navbar.html');
@@ -50,3 +83,4 @@ loadComponent('search-box','components/sidebar/research_b.html');
 loadComponent('pub-auth','components/sidebar/pub_auth.html');
 loadComponent('archives','components/sidebar/archive.html');
 loadComponent('footer','components/footer/footer.html');
+loadComponent('backToTop','components/scroll-button/scrollB.html');

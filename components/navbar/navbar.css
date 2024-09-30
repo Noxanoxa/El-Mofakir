@@ -24,6 +24,7 @@ header {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    
 }
 
 #chk1 {
@@ -108,7 +109,7 @@ header .menu {
 @media(max-width: 1000px) {
     header ul {
         position: fixed;
-        top: 100px;
+        top: 70px;
         right: -100%;
         background: rgba(0, 0, 0, 0.5);
         height: calc(100vh - 100px);
@@ -160,7 +161,7 @@ header .menu {
 
 @media(max-width: 600px) {
     header .logo {
-        font-size: 10px;
+        font-size: 15px;
         margin-left: 8px;
     }
 

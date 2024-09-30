@@ -1,0 +1,17 @@
+<a href="#" class="back-top" id="backToTop">&#8679</a>
+<script>
+    window.onscroll = function() {
+  const backToTop = document.getElementById("backToTop");
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
+};
+
+// عند النقر على السهم، يعيدك إلى الأعلى
+document.getElementById("backToTop").addEventListener("click", function(e) {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>

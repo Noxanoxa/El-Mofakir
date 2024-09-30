@@ -11,6 +11,8 @@
     "search": "بحث",
     "read_more": "اقرأ المزيد",
     "thinker": "المفكر",
+     "english": "الانجليزية",
+      "arabic": "العربية",
     "months": {
       "january": "يناير",
       "february": "فبراير",
@@ -23,9 +25,8 @@
       "september": "سبتمبر",
       "october": "أكتوبر",
       "november": "نوفمبر",
-      "december": "ديسمبر",
-      "en": "الانجليزية",
-      "ar": "العربية"
+      "december": "ديسمبر"
+     
     },
     "about_us": "من نحن",
     "description": "الوصف",
@@ -37,11 +38,22 @@
     "email": "البريد الإلكتروني",
     "mobile": "الجوال",
     "subject": "الموضوع",
-    "type_your_message": "اكتب رسالتك هنا...",
+    "message": "اكتب رسالتك هنا...",
     "send_message": "إرسال الرسالة",
     "get_office_info": "احصل على معلومات المكتب",
     "visit_office": "زر مكتبنا أو تواصل معنا من خلال التفاصيل المقدمة",
     "address": "العنوان",
     "phone": "الهاتف",
-    "website": "الموقع الإلكتروني"
+    "website": "الموقع الإلكتروني",
+
+    "eissn": "ايسن",
+      "frequency": "الدورية",
+      "acceptance": "نسبة القبول",
+      "response_t": "متوسط وقت الاستجابة",
+      "publication_t": "متوسط وقت النشر بعد القبول",
+      "year_c": "سنة الانشاء",
+      "country": "الدولة",
+      "institution": "المؤسسة",
+      "impact_f": "عامل التاثير (ASJP)"
+    
   }

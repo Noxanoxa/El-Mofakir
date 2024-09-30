@@ -1,18 +1,31 @@
 footer {
     font-family: 'Segoe UI';
-    padding: 40px 0;
+    padding: 20px 0; /* قلل padding إذا كان هناك مساحة كبيرة */
     background-color: teal;
-    text-align: center;
+    text-align: center; /* اجعل النص في المنتصف */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* توزيع العناصر بشكل متساوي */
+    align-items: center; /* محاذاة العناصر عمودياً */
+    max-width: 1200px; /* عرض أقصى للـ footer */
+    margin: 0 auto; /* مركز الـ footer */
+    padding: 0 20px; /* إضافة padding جانبي */
 }
 
 footer ul {
     padding: 0;
     list-style: none;
-    font-size: 18px;
+    font-size: 12px;
+    color: #fff;
     line-height: 1.6;
     margin: 0;
 }
-
+.info-footer
+{
+    color: #fff;
+}
 footer ul a {
     color: inherit;
     text-decoration: none;

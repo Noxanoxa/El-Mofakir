@@ -39,4 +39,3 @@ function checkAxios() {
     console.log('Axios is not included.');
   }
 }
-
