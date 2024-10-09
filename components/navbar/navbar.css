@@ -106,6 +106,7 @@ header .menu {
     background-color: none;
 }
 
+
 @media(max-width: 1000px) {
     header ul {
         position: fixed;

@@ -34,8 +34,12 @@
                   
               </li>
             </ul></div>
-    <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
-    <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button>
+    <!-- <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+    <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button> -->
+    <div class="language-buttons">
+      <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+      <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arabic</button>
+  </div>
             <!-- <div class="search-box">
                 <form action="">
                     <input type="text" name="search" id="srch" placeholder="Search">
@@ -49,50 +53,30 @@
     
        </header>
 
-       <div class="about-container" id="about-container">
-      <h2>About Us</h2>
-      <div class="content">
-        <div class="description-section">
-          <h2>Description</h2>
-          <p>
-            "El-Mofaker" is an international refereed review published
-            semi-annually (June-December) by the Faculty of Law and Political
-            Science at the University of Mohamed Khider Biskra, Algeria. It
-            specializes in the fields of law and political science, including
-            public and private law in all its branches, political science in all
-            its branches, as well as Sharia law, and public administration.
-          </p>
-          <p>
-            The review primarily aims to offer free publication—on paper and
-            electronically—of original works, studies, and innovative research
-            in three languages: Arabic, English, and French, for professors and
-            researchers worldwide. It contributes to enriching scientific
-            knowledge and developing specialized studies in the aforementioned
-            fields.
-          </p>
-        </div>
-        <div class="info-section">
-          <h2>Journal Information</h2>
-          <div class="journal-info">
-            <div ><span class="EISSN">EISSN:</span> 2600-6081</div>
-            <div ><span class="Frequency">Frequency:</span> Biannual</div>
-            <div><span class="Acceptance">Acceptance Rate:</span> 91%</div>
-            <div><span class="Response_t">Average Response Time:</span> 290 Days</div>
-            <div>
-              <span class="Publication_t"> Average Publication Time After Acceptance:</span> 66 Days
+       <div class="about-container" >
+        <h2>About Us</h2>
+        <div class="content">
+            <div class="description-section" >
+                <div id="about-container"></div>
             </div>
-            <div><span class="Year_c">Year of Creation:</span> 2006</div>
-            <div><span class="Country">Country:</span> Algeria</div>
-            <div>
-              <span class="Institution">Institution:</span> University of Mohamed Khider Biskra
+            <div class="info-section">
+                <h2>Journal Information</h2>
+                <div class="journal-info">
+                    <div><span class="EISSN">EISSN:</span> 2600-6081</div>
+                    <div><span class="Frequency">Frequency:</span> Biannual</div>
+                    <div><span class="Acceptance">Acceptance Rate:</span> 91%</div>
+                    <div><span class="Response_t">Average Response Time:</span> 290 Days</div>
+                    <div><span class="Publication_t">Publication Time After Acceptance:</span> 66 Days</div>
+                    <div><span class="Year_c">Year of Creation:</span> 2006</div>
+                    <div><span class="Country">Country:</span> Algeria</div>
+                    <div><span class="Institution">Institution:</span> University of Mohamed Khider Biskra</div>
+                    <div><span class="Impact_f">Impact Factor (ASJP):</span> 0.6455</div>
+                </div>
             </div>
-            <div><span class="Impact_f">Impact Factor (ASJP):</span> 0.6455</div>
-          </div>
         </div>
-      </div>
       
       <!-- Announcements Section -->
-      <div class="announcements-section" id="announcements-section">
+      <div class="announcements-section" >
         <h2>Announcements</h2>
         <div class="cards-slider">
           <div class="cards-container" id="announcements-section">
@@ -107,7 +91,7 @@
    
 
 <main class="contact-section" id="contact-section">
-  <h2> Contact</h2>
+  <h2 class="h2contact"> Contact</h2>
       <div class="container">
           <!-- Contact Form Section -->
           
@@ -159,8 +143,22 @@
   <footer id="footer"></footer>
 
   <script src="../components/footer/footer.js"></script>
-  
+  <script src="contact.js"></script>
   <script >
+document.addEventListener('DOMContentLoaded', function () {
+  // احصل على اللغة المخزنة في localStorage أو الافتراضية
+  const savedLang = localStorage.getItem('lang') || 'en';
+  switchLanguage(savedLang);
+
+  // أضف class active حسب اللغة المحفوظة
+  if (savedLang === 'en') {
+      document.getElementById('en-btn').classList.add('active');
+      document.getElementById('ar-btn').classList.remove('active');
+  } else {
+      document.getElementById('ar-btn').classList.add('active');
+      document.getElementById('en-btn').classList.remove('active');
+  }
+});
 
 function loadComponent(id, file) {
     const element = document.getElementById(id);
@@ -168,8 +166,10 @@ function loadComponent(id, file) {
         .then(response => response.text())
         .then(data => {
             element.innerHTML = data;
+           
         });
       }
+
 
         document.addEventListener('DOMContentLoaded', function () {
     loadComponent('footer', '../footer/footer.html');
@@ -214,98 +214,135 @@ function loadComponent(id, file) {
     });
 });
 
+// // Function to fetch and display the About Us content based on the selected language
+// function AboutUs(lang) {
+//     axios.get('https://bloggi.test/api/page/about-us')
+//         .then(response => {
+//             const aboutUs = response.data.page;
+//             console.log('about us:', aboutUs);
+//             console.log('Current language:', lang); // Debugging log
 
-function switchLanguage(lang) {
-    const langFile = `/locales/${lang}.json`;
-    
-  
-    fetch(langFile)
-    
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-            // Update navbar
-            document.querySelector('a[href="/index.html"]').textContent = data.home;
-            document.querySelector('a[href="#about-section"]').textContent = data.about_us;
-            document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
-            document.querySelector('a[href="#contact-section"]').textContent = data.contact;
-            document.querySelector('.plogo').textContent = data.logo;
+//             if (aboutUs) {
+//                 const aboutUsContainer = document.querySelector('#about-container');
+//                 aboutUsContainer.innerHTML = `
+//                     <h2>${lang === 'ar' ? aboutUs.title : aboutUs.title_en}</h2>
+//                     <div class="content">
+//                         <div class="description-section">
+//                         ${lang === 'ar' ? aboutUs.description : aboutUs.description_en}
+//                         </div>
+//                     </div>
+//                 `;
+//             } else {
+//                 console.error('Error: Expected an object for about us');
+//             }
+//         })
+//         .catch(error => console.error('Error fetching about us:', error));
+// }
 
-            // Update About Us section
-            document.querySelector('.about-container h2').textContent = data.about_us;
-            document.querySelector('.description-section h2').textContent = data.description;
-             ////////journal_information
-             document.querySelector('.info-section h2').textContent = data.journal_information;
-           document.querySelector('.EISSN').textContent = data.eissn;
-           document.querySelector('.Frequency').textContent = data.frequency;
-           document.querySelector('.Acceptance').textContent = data.acceptance;
-           document.querySelector('.Response_t').textContent = data.response_t;
-           document.querySelector('.Publication_t').textContent = data.publication_t;
-           document.querySelector('.Year_c').textContent = data.year_c;
-           document.querySelector('.Country').textContent = data.country;
-           document.querySelector('.Institution').textContent = data.institution;
-           document.querySelector('.Impact_f').textContent = data.impact_f;
-            ////announce
-            document.querySelector('.announcements-section h2').textContent = data.announcements;
-            document.querySelector('.contact-section h2').textContent = data.contact;
-            /////////in_touch
-            document.querySelector('.col-lg-8 h2').textContent = data.in_touch;
-            document.querySelector('.p1').textContent = data.feel_free;
-            document.getElementById('name').setAttribute('placeholder', data.name);
-        document.getElementById('email').setAttribute('placeholder', data.email);
-        document.getElementById('mobile').setAttribute('placeholder', data.mobile);
-        document.getElementById('title').setAttribute('placeholder', data.subject);
-        document.getElementById('message').setAttribute('placeholder', data.message);
-        document.querySelector('.btnsend').textContent = data.send_message;
+// // Function to switch language and update the page
+// function switchLanguage(lang) {
+//     const langFile = `/locales/${lang}.json`;
 
-///////////////////get_office_info
-        document.querySelector('.col-lg-4 h2').textContent = data.get_office_info;
-        document.querySelector('.p2').textContent = data.visit_office;
-        document.querySelector('.s1').textContent = data.address;
-           document.querySelector('.s2').textContent = data.phone;
-           document.querySelector('.s3').textContent = data.email;
-           document.querySelector('.s4').textContent = data.website;
+//     // Save the selected language to localStorage
+//     localStorage.setItem('lang', lang);
+
+//     // Fetch language file for updating other text elements
+//     fetch(langFile)
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data);
+
+//             // Update navbar and other sections
+//            // Update navbar
+//            document.querySelector('a[href="/index.html"]').textContent = data.home;
+//             document.querySelector('a[href="#about-section"]').textContent = data.about_us;
+//             document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
+//             document.querySelector('a[href="#contact-section"]').textContent = data.contact;
+//             document.querySelector('.plogo').textContent = data.logo;
+
+//             // Update About Us section
+//             document.querySelector('.about-container h2').textContent = data.about_us;
+//            // document.querySelector('.description-section h2').textContent = data.description;
+//              ////////journal_information
+//              document.querySelector('.info-section h2').textContent = data.journal_information;
+//            document.querySelector('.EISSN').textContent = data.eissn;
+//            document.querySelector('.Frequency').textContent = data.frequency;
+//            document.querySelector('.Acceptance').textContent = data.acceptance;
+//            document.querySelector('.Response_t').textContent = data.response_t;
+//            document.querySelector('.Publication_t').textContent = data.publication_t;
+//            document.querySelector('.Year_c').textContent = data.year_c;
+//            document.querySelector('.Country').textContent = data.country;
+//            document.querySelector('.Institution').textContent = data.institution;
+//            document.querySelector('.Impact_f').textContent = data.impact_f;
+//             ////announce
+//             document.querySelector('.announcements-section h2').textContent = data.announcements;
+//             document.querySelector('.contact-section h2').textContent = data.contact;
+//             /////////in_touch
+//             document.querySelector('.col-lg-8 h2').textContent = data.in_touch;
+//             document.querySelector('.p1').textContent = data.feel_free;
+//             document.getElementById('name').setAttribute('placeholder', data.name);
+//         document.getElementById('email').setAttribute('placeholder', data.email);
+//         document.getElementById('mobile').setAttribute('placeholder', data.mobile);
+//         document.getElementById('title').setAttribute('placeholder', data.subject);
+//         document.getElementById('message').setAttribute('placeholder', data.message);
+//         document.querySelector('.btnsend').textContent = data.send_message;
+
+// ///////////////////get_office_info
+//         document.querySelector('.col-lg-4 h2').textContent = data.get_office_info;
+//         document.querySelector('.p2').textContent = data.visit_office;
+//         document.querySelector('.s1').textContent = data.address;
+//            document.querySelector('.s2').textContent = data.phone;
+//            document.querySelector('.s3').textContent = data.email;
+//            document.querySelector('.s4').textContent = data.website;
            
-           document.querySelector('#en-btn').innerHTML = data.english;
-           document.querySelector('#ar-btn').innerHTML = data.arabic;
-          
-          // document.querySelector('.prgrph:nth-child(1) p').innerHTML = <strong>${data.addressValue}</strong> 
-        //document.querySelector('.prgrph:nth-child(2) p').innerHTML = <strong>${data.phone}</strong> 
-        //document.querySelector('.prgrph:nth-child(3) p').innerHTML = <strong>${data.email}</strong> ${data.emailValue};
-        //document.querySelector('.prgrph:nth-child(4) p').innerHTML = <strong>${data.website}</strong> 
+//            document.querySelector('#en-btn').innerHTML = data.english;
+//            document.querySelector('#ar-btn').innerHTML = data.arabic;
 
-        
-          // document.querySelector('#en-btn').textContent = data.en;
-          // document.querySelector('#ar-btn').textContent = data.ar;
-            // Update Announcements
-          //  document.querySelectorAll('.card h3').forEach((el, i) => el.textContent = data[announcement_${i + 1}]);
-            
-            // Adjust text direction
-            if (lang === 'ar') {
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', 'ar');
-            } else {
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.documentElement.setAttribute('lang', 'en');
-               
-            }
-        })
-        .catch(error => console.error('Error loading language file:', error));
-      }
+//             // Adjust text direction
+//             if (lang === 'ar') {
+//                 document.documentElement.setAttribute('dir', 'rtl');
+//                 document.documentElement.setAttribute('lang', 'ar');
+//             } else {
+//                 document.documentElement.setAttribute('dir', 'ltr');
+//                 document.documentElement.setAttribute('lang', 'en');
+//             }
+
+//             // Update About Us section after language change
+//             AboutUs(lang); // Call AboutUs to refresh its content
+//         })
+//         .catch(error => console.error('Error loading language file:', error));
+// }
+
+// Load the correct language when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('lang') || 'en'; // Default to English if no language is set
+    AboutUs(savedLang); // Load About Us content in saved language
+});
+
+
+
+
+
+
+// استدعاء الدالة عندما يتم تحميل الصفحة مع استخدام اللغة المحفوظة في localStorage
+document.addEventListener('DOMContentLoaded', () => {
+    const lang = localStorage.getItem('lang') || 'en'; // افتراضي الإنجليزية إذا لم يتم اختيار لغة
+    AboutUs(lang);
+});
 
 </script>
 <script>
-    function Announcements() {
+   function Announcements() {
     console.log('announcement');
     axios.get('https://bloggi.test/api/all_announcements')
       .then(response => {
         const announcements = response.data.announcements;
         console.log('announcements:', announcements);
-
+  
         if (Array.isArray(announcements)) {
           const announceContainer = document.querySelector('#announcements-section');
           announceContainer.innerHTML = '';
-
+  
           announcements.forEach(announce => {
             const announceElement = document.createElement('div');
             announceElement.innerHTML = `
@@ -323,9 +360,11 @@ function switchLanguage(lang) {
       })
       .catch(error => console.error('Error fetching announcements:', error));
   }
-
+  
   // Fetch announcements when the page loads
   document.addEventListener('DOMContentLoaded', Announcements);
+
+  
   </script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>

@@ -13,21 +13,15 @@
     "thinker": "Thinker",
     "english": "English",
       "arabic": "Arabic",
-    "months": {
-      "january": "January",
-      "february": "February",
-      "march": "March",
-      "april": "April",
-      "may": "May",
-      "june": "June",
-      "july": "July",
-      "august": "August",
-      "september": "September",
-      "october": "October",
-      "november": "November",
-      "december": "December"
-      
-    },
+      "previous": "Previous",
+    "next": "Next",
+
+    
+    "author":"Author:",
+    "valuenumber":"Value & Number:",
+    "downloadButton" :"Download the article in PDF format",
+      "backButton":"Back to Posts",
+   
     "about_us": "About Us",
     "description": "Description",
     "journal_information": "Journal Information",

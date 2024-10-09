@@ -100,6 +100,88 @@
     margin: 0 5px;
 }
 
+/* تنسيق عنوان المنشور */
+.single-post h2 {
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* تنسيق الزر */
+.download-button ,.back-button{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #00b4d8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.download-button:hover ,.back-button:hover {
+    background-color: #0077b6;
+}
+
+/* تنسيق الفقرة */
+.single-post p {
+    font-size: 18px;
+    color: #555;
+    text-align: justify;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+.post-meta {
+    display: flex;
+    flex-direction: column; /* يجعل العناصر داخل .post-meta عمودية */
+    align-items: flex-start; /* يجعل العناصر تبدأ من اليسار (أو اليمين في حالة اللغة العربية) */
+    margin-bottom: 20px; /* إضافة مسافة بين قسم post-meta والمحتوى الآخر */
+    font-style: italic;
+}
+
+.post-meta span {
+    margin-bottom: 5px; /* مسافة بسيطة بين كل عنصر */
+    font-size: 14px; /* حجم الخط */
+    color: #555; /* لون النص */
+}
+/* تنسيق التاريخ */
+.post-date {
+    font-size: 14px;
+    color: #888;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* الكلمات المفتاحية */
+.keywords {
+    font-size: 18px;
+    color: #0a9396;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+/* فقرة بالفرنسية */
+.single-post {
+    font-size: 16px;
+    color: #555;
+    text-align: justify;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* مقالات مشابهة */
+.related-articles {
+    font-size: 18px;
+    color: #0077b6;
+    font-weight: bold;
+    margin-top: 40px;
+    text-align: right;
+}
+
+
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .card {

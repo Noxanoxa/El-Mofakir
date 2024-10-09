@@ -1,43 +1,43 @@
-// Function to fetch search results
-function fetchsearch(search) {
-  axios.get(`https://bloggi.test/api/search?keyword=${search}`)
-    .then(response => {
-      const posts = response.data.posts;
-      console.log('search Posts:', posts);
+// // Function to fetch search results
+// function fetchsearch(search) {
+//   axios.get(`https://bloggi.test/api/search?keyword=${search}`)
+//     .then(response => {
+//       const posts = response.data.posts;
+//       console.log('search Posts:', posts);
 
-      if (Array.isArray(posts)) {
-        const postContainer = document.querySelector('#post-container');
-        postContainer.innerHTML = '';
+//       if (Array.isArray(posts)) {
+//         const postContainer = document.querySelector('#post-container');
+//         postContainer.innerHTML = '';
 
-        posts.forEach(post => {
-          const postElement = document.createElement('div');
-          postElement.classList.add('card');
-          postElement.innerHTML = `
-            <h2 class="card-title">${post.title}</h2>
-            <p class="card-text">${post.description}</p>
-            <a href="${post.url}" class="card-link">Read More</a>
-            <div class="card-date">${post.created_date}</div>
-          `;
-          postContainer.appendChild(postElement);
-        });
-      } else {
-        console.error('Error: Expected an array of posts');
-      }
-    })
-    .catch(error => console.error('Error fetching posts:', error));
-}
+//         posts.forEach(post => {
+//           const postElement = document.createElement('div');
+//           postElement.classList.add('card');
+//           postElement.innerHTML = `
+//             <h2 class="card-title">${post.title}</h2>
+//             <p class="card-text">${post.description}</p>
+//             <a href="${post.url}" class="card-link">Read More</a>
+//             <div class="card-date">${post.created_date}</div>
+//           `;
+//           postContainer.appendChild(postElement);
+//         });
+//       } else {
+//         console.error('Error: Expected an array of posts');
+//       }
+//     })
+//     .catch(error => console.error('Error fetching posts:', error));
+// }
 
-// Add event listener to the search form
-document.getElementById('search-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the form from submitting the default way
-  const search = document.getElementById('srch').value;
-  fetchsearch(search); // Trigger the search function with the input value
-});
+// // Add event listener to the search form
+// document.getElementById('search-form').addEventListener('submit', function(event) {
+//   event.preventDefault(); // Prevent the form from submitting the default way
+//   const search = document.getElementById('srch').value;
+//   fetchsearch(search); // Trigger the search function with the input value
+// });
 
-// Optional: You can load some default posts when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-  fetchsearch(''); // You can modify this to load initial data if needed
-});
+// // Optional: You can load some default posts when the page loads
+// document.addEventListener('DOMContentLoaded', function() {
+//   fetchsearch(''); // You can modify this to load initial data if needed
+// });
 
 /////authority function
 function fetchAuthority() {
@@ -71,35 +71,41 @@ function fetchAuthority() {
       .catch(error => console.error('Error fetching authors:', error));
 }
 
-
-// Fetch Publishing Authority when the page loads
 document.addEventListener('DOMContentLoaded', fetchAuthority);
+
+
 ////recent post
 function fetchRecentPosts() {
-    axios.get('https://bloggi.test/api/recent-posts')
-      .then(response => {
-          var posts = response.data.posts; // Access the data property
-          console.log('Recent_Posts:', posts);
+    axios.get('https://bloggi.test/api/recent_posts')
+        .then(response => {
+            const posts = response.data.posts; // Access the data property
+            console.log('Recent_Posts:', posts);
 
-          // Check if posts is an array
-          if (Array.isArray(posts)) {
-              const postContainer = document.querySelector('#posts-list');
-              postContainer.innerHTML = ''; // Clear existing posts
+            if (Array.isArray(posts)) {
+                const postContainer = document.querySelector('#posts-list');
+                postContainer.innerHTML = ''; // Clear existing posts
 
-              posts.forEach(post => {
-                   const postElement = document.createElement('ul');
-                  postElement.classList.add('li');
-                  postElement.innerHTML =`
-                    <a class="post-title">${post.title}</a>
-                  <p class="post-date">${post.created_date}</p>
-                 ` ;
-                  postContainer.appendChild(postElement);
-              });
-          } else {
-              console.error('Error: Expected an array of posts');
-          }
-      })
-      .catch(error => console.error('Error fetching posts:', error));
+                posts.forEach(post => {
+                    const postElement = document.createElement('li');
+                    postElement.classList.add('li');
+                    postElement.innerHTML = `
+                        <a href="#" class="post-title" data-post-slug="${post.slug_en}">${post.title}</a>
+                        <p class="post-date">${post.created_date}</p>
+                    `;
+                    postContainer.appendChild(postElement);
+
+                    // Add event listener to the title to fetch post details
+                    postElement.querySelector('.post-title').addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const postSlug = event.target.getAttribute('data-post-slug');
+                        fetchPostDetails(postSlug); // Fetch and display single post using slug
+                    });
+                });
+            } else {
+                console.error('Error: Expected an array of posts');
+            }
+        })
+        .catch(error => console.error('Error fetching posts:', error));
 }
 
 
@@ -121,7 +127,7 @@ function fetchArchives() {
                   const archiveElement = document.createElement('ul');
                   archiveElement.classList.add('li');
                   archiveElement.innerHTML =`
-                    <a href="#" class="year">${archive.year}${archive.month}(${archive.published})</a>
+                    <a href="#" class="year">${archive.year} ${archive.month} (${archive.published})</a>
                  ` ;
                   archiveContainer.appendChild(archiveElement);
               });

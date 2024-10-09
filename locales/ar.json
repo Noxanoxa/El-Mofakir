@@ -13,21 +13,15 @@
     "thinker": "المفكر",
      "english": "الانجليزية",
       "arabic": "العربية",
-    "months": {
-      "january": "يناير",
-      "february": "فبراير",
-      "march": "مارس",
-      "april": "أبريل",
-      "may": "مايو",
-      "june": "يونيو",
-      "july": "يوليو",
-      "august": "أغسطس",
-      "september": "سبتمبر",
-      "october": "أكتوبر",
-      "november": "نوفمبر",
-      "december": "ديسمبر"
-     
-    },
+      "previous": "السابق",
+      "next": "التالي",
+
+      
+      "author":":الكاتب",
+      "valuenumber":":رقم العدد",
+      "downloadButton" :"تحميل المقال بصيغة PDF",
+      "backButton":"الرجوع الى المقالات",
+   
     "about_us": "من نحن",
     "description": "الوصف",
     "journal_information": "معلومات المجلة",

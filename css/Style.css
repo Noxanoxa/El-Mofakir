@@ -71,6 +71,46 @@ html ,body {
     margin-bottom: 30px;
 }
 
+/* Pagination Styles */
+.wn__pagination {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.wn__pagination li {
+    margin: 0 5px;
+}
+
+.wn__pagination li a {
+    text-decoration: none;
+    color: green;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.wn__pagination li a:hover {
+    background-color: green;
+    color: #fff;
+}
+
+.wn__pagination li.active span {
+    background-color: green;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.wn__pagination li.disabled span {
+    color: #999;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
 
 
 /* Responsive Layout */
