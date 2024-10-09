@@ -12,7 +12,7 @@ function Announcements() {
           announcements.forEach(announce => {
             const announceElement = document.createElement('div');
             announceElement.innerHTML = `
-              <h3>${announce.title}</h3>
+              <h3>${announce.local == 'ar' ? announce.title : announce.title_en}</h3>
               <p>${announce.description}</p>
               <p class="date">${announce.created_date}</p>
             `;

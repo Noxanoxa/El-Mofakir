@@ -1,19 +1,19 @@
-html, body {
+html ,body {
     height: 100%;
     margin: 0;
     background-color: #eee;
 }
 
+
 .wrapper {
     display: flex;
     flex-direction: column;
+   
 }
-
 #navbar {
     min-height: 10vh;
     align-items: center;
 }
-
 .main-content {
     display: flex;
     flex: 1;
@@ -41,11 +41,10 @@ html, body {
     flex-direction: column;
     align-items: flex-end;
 }
-
 [dir="rtl"] #content {
     padding-top: 0px;
     margin-right: 10px;
-    margin-left: -80px;
+    margin-left: -120px;
 }
 
 [dir="rtl"] #right-sidebar {
@@ -71,6 +70,7 @@ html, body {
     width: 100%;
     margin-bottom: 30px;
 }
+
 
 /* Pagination Styles */
 .wn__pagination {
@@ -133,27 +133,72 @@ html, body {
         align-items: center; /* Center the sidebar content */
     }
 }
-
-@media (max-width: 768px) {
+@media (max-width: 980px) {
+    .main-content {
+        padding: 0 10px;
+    }
     #right-sidebar {
         width: 100%; /* Full width for tablets and smaller screens */
         max-width: 400px; /* Limit max width on medium screens */
     }
 
     #content {
+        width: 100%;
         max-width: 500px;
+        margin: 0 auto;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0 10px;
+    }
+    #right-sidebar {
+        width: 100%; /* Full width for tablets and smaller screens */
+        max-width: 400px; /* Limit max width on medium screens */
+    }
+
+    #content {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+
     }
 }
 
 @media (max-width: 480px) {
+    .main-content {
+        padding: 0 5px;
+    }
     #right-sidebar {
         width: 100%; /* Full width on mobile */
         max-width: 100%; /* No limit on mobile screens */
         padding: 10px; /* Reduce padding for mobile */
+        margin: 0;
     }
 
     #content {
         width: 100%; /* Full width on mobile */
         max-width: 100%; /* No limit on mobile */
+        margin: 0 auto;
     }
 }
+
+.back-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color:transparent;
+    color: rgb(4, 4, 4);
+    padding: 10px 15px;
+    border-radius: 50%;
+    text-align: center;
+   /*  display: none; نبدأ بإخفائه */
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .back-top:hover {
+    background-color: #555;
+  }

@@ -8,35 +8,45 @@ function loadComponent(id, file) {
 }
 
 function switchLanguage(lang) {
-  const langFile = `/locales/${lang}.json`;
+    const langFile = `/locales/${lang}.json`;
 
-  // جلب ملف الترجمة المناسب
-  fetch(langFile)
-      .then(response => response.json())
-      .then(data => {
-          // تغيير النصوص في الـnavbar
-          document.querySelector('a[href="index.html"]').textContent = data.home;
-          document.querySelector('a[href="components/secend-page/contact.html#about-section"]').textContent = data.about_us;
-          document.querySelector('a[href="components/secend-page/contact.html#announcements-section"]').textContent = data.annonce;
-          document.querySelector('a[href="components/secend-page/contact.html#contact-section"]').textContent = data.contact;
-          document.querySelector('.plogo').textContent = data.logo;
-          document.querySelector('.search1').textContent = data.search;
-          document.querySelector('.recent').textContent = data.recent_posts;
-          document.querySelector('.publi').textContent = data.publishing_authority;
-          document.querySelector('.archive').textContent = data.archives;
-          document.querySelector('.card-link').textContent = data.read_more;
+    // جلب ملف الترجمة المناسب
+    fetch(langFile)
+        .then(response => response.json())
+        .then(data => {
+            // تغيير النصوص في الـnavbar
+            document.querySelector('a[href="index.html"]').textContent = data.home;
+            document.querySelector('a[href="components/secend-page/contact.html#about-section"]').textContent = data.about_us;
+            document.querySelector('a[href="components/secend-page/contact.html#announcements-section"]').textContent = data.annonce;
+            document.querySelector('a[href="components/secend-page/contact.html#contact-section"]').textContent = data.contact;
+            document.querySelector('.plogo').textContent = data.logo;
+            document.querySelector('.search1').textContent = data.search;
+            document.getElementById('srch').setAttribute('placeholder', data.search);
+
+            document.querySelector('.recent').textContent = data.recent_posts;
+            document.querySelector('.publi').textContent = data.publishing_authority;
+            document.querySelector('.archive').textContent = data.archives;
+            document.querySelector('#en-btn').innerHTML = data.english;
+           document.querySelector('#ar-btn').innerHTML = data.arabic;
+            
+          //  document.getElementById('.card-link').textContent = data.read_more;
+          document.querySelectorAll('.read-more').forEach(button => {
+            button.textContent = data.readMore;
+        });
+           
+            if (lang === 'ar') {
+               
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+        })
+        .catch(error => console.error('Error loading language file:', error));
+      }
       
-          // تغيير اتجاه النص بناءً على اللغة
-          if (lang === 'ar') {
-              document.documentElement.setAttribute('dir', 'rtl');
-              document.documentElement.setAttribute('lang', 'ar');
-          } else {
-              document.documentElement.setAttribute('dir', 'ltr');
-              document.documentElement.setAttribute('lang', 'en');
-          }
-      })
-      .catch(error => console.error('Error loading language file:', error));
-}
+
 
 // تحميل Navbar و Recent Posts
 loadComponent('post','components/post/post.html');
@@ -68,6 +78,7 @@ function fetchPosts(page = 1) {
             `;
             postContainer.appendChild(postElement);
           });
+          console.log(meta);
           renderPagination(meta);
         } else {
           console.error('Error: Expected an array of posts');
@@ -76,7 +87,7 @@ function fetchPosts(page = 1) {
       .catch(error => console.error('Error fetching posts:', error));
 }
 
-function renderPagination(meta) {
+function renderPagination(meta, search = null) {
     const paginationContainer = document.querySelector('.wn__pagination');
     paginationContainer.innerHTML = ''; // Clear previous pagination
 
@@ -136,10 +147,90 @@ function renderPagination(meta) {
         link.addEventListener('click', event => {
             event.preventDefault();
             const page = event.target.getAttribute('data-page');
-            fetchPosts(page);
+            
+            if (search) {
+                console.log(search, page);
+                fetchsearch(search, page); // Fetch search results for the selected page
+            } else {
+                fetchPosts(page); // Fetch regular posts if no search term is provided
+            }
         });
     });
 }
 
 // Fetch posts when the page loads
-document.addEventListener('DOMContentLoaded', () => fetchPosts());
+// document.addEventListener('DOMContentLoaded', () => fetchPosts());
+// Function to fetch search results
+function fetchsearch(search, page = 1) {
+    axios.get(`https://bloggi.test/api/search?keyword=${search}&page=${page}`)
+        .then(response => {
+            const { data, meta } = response.data; // Assuming `meta` contains pagination info for search results
+            console.log('Search data:', data);
+
+            if (Array.isArray(data)) {
+                const postContainer = document.querySelector('#post-container');
+                postContainer.innerHTML = ''; // Clear existing data
+
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('card');
+                    postElement.innerHTML = `
+                        <h2 class="card-title">${post.title}</h2>
+                        <p class="card-text">${post.description}</p>
+                        <a href="${post.url}" class="card-link">Read More</a>
+                        <div class="card-date">${post.created_date}</div>
+                    `;
+                    postContainer.appendChild(postElement);
+                });
+                console.log(meta, search);
+                renderPagination(meta, search); // Pass the search term to the pagination function
+            } else {
+                console.error('Error: Expected an array of data');
+            }
+        })
+        .catch(error => console.error('Error fetching search results:', error));
+}
+function fetchArchives(archive, page = 1) {
+    axios.get(`https://bloggi.test/api//archive/${archive}&page=${page}`)
+        .then(response => {
+            const { data, meta } = response.data; // Assuming `meta` contains pagination info for search results
+            console.log('archive data:', data);
+
+            if (Array.isArray(data)) {
+                const postContainer = document.querySelector('#post-container');
+                postContainer.innerHTML = ''; // Clear existing data
+
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('card');
+                    postElement.innerHTML = `
+                        <h2 class="card-title">${post.title}</h2>
+                        <p class="card-text">${post.description}</p>
+                        <a href="${post.url}" class="card-link">Read More</a>
+                        <div class="card-date">${post.created_date}</div>
+                    `;
+                    postContainer.appendChild(postElement);
+                });
+                console.log(meta, archive);
+                renderPagination(meta, archive); // Pass the archive term to the pagination function
+            } else {
+                console.error('Error: Expected an array of data');
+            }
+        })
+        .catch(error => console.error('Error fetching archive results:', error));
+}
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const search = urlParams.get('search1');
+      console.log('search keyword:',search);
+      
+      if (!search || search.trim() === '') {
+          // If search is null, undefined, or empty, call fetchPosts
+          fetchPosts();  
+           
+      } else {
+          // If search has a value, call fetchsearch with the search term
+          fetchsearch(search);
+          
+      }
+  });

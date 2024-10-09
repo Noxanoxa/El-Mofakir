@@ -234,8 +234,9 @@ h2 {
     align-items: center;
     margin-bottom: 20px;
 }
-.archives li a {
-    color: green;
+
+.year {
+    color: rgb(15, 15, 15);
     text-decoration: none;
 }
 
@@ -265,4 +266,3 @@ h2 {
 #list-archives::-webkit-scrollbar-thumb:hover {
     background-color: green; /* Color of the scrollbar thumb on hover */
 }
-

@@ -77,88 +77,152 @@ h2 {
 }
 
 /* Announcements Section */
+
 .announcements-section {
+
     margin-top: 40px;
+
     text-align: center;
+
 }
+
+ 
 
 /* Slider container */
+
 .cards-slider {
+
     overflow: hidden;
+
     width: 100%;
+
 }
+
+ 
 
 /* Continuous movement of cards */
+
 .cards-container {
+
     display: flex;
+
     animation: moveCards 40s linear infinite;
+
     align-items: stretch; /* Ensure all cards have the same height */
+
 }
+
+ 
 
 @keyframes moveCards {
+
     0% {
+
         transform: translateX(100%);
+
     }
+
     100% {
+
         transform: translateX(-100%);
+
     }
+
 }
+
+ 
 
 .card {
+
     background-color: #f0f0f0;
+
     padding: 20px;
+
     margin: 10px;
+
     border-radius: 10px;
+
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    
+
+ 
+
     /* Allow width to grow based on content */
-    flex-grow: 1;        /* Card grows based on content */
-    flex-shrink: 0;      /* Prevent cards from shrinking too much */
-    flex-basis: auto;    /* Width based on content */
-    
+
+    flex-grow: 0;       /* Card grows based on content */
+
+    flex-shrink: 0;     /* Prevent cards from shrinking */
+
+    flex-basis: auto;   /* Auto width based on content */
+
+    width: auto;        /* Width adapts to content */
+
+ 
+
     /* Set consistent height */
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
-    height: 100%; /* Ensure consistent height for all cards */
+
+    height: 250px; /* Fixed consistent height for all cards */
+
 }
+
+ 
 
 .card h3 {
+
     margin-bottom: 10px;
+
     color: #555;
+
 }
+
+ 
 
 .card p {
+
     color: #555;
+
     line-height: 1.6;
+
 }
+
+ 
 
 .card .date {
+
     margin-top: 15px;
+
     font-size: 14px;
+
     color: #888;
+
 }
+
+ 
 
 /* Responsive design */
-@media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-    }
 
-    .info-section, .description-section {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
+@media (max-width: 768px) {
 
     .cards-container {
+
         flex-direction: row;
+
     }
+
+ 
 
     .card {
-        max-width: 100%;
-    }
-}
 
+        max-width: 100%;
+
+    }
+
+}
 
 
 
@@ -176,7 +240,7 @@ form {
     flex-direction: column;
 }
 
-.conth2 {
+.h2contact {
     margin-top: 30px;
 }
 #contact-form {
