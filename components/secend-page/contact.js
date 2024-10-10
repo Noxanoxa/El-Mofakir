@@ -50,18 +50,17 @@ function AboutUs(lang) {
 
 // Function to switch language and update the page
 function switchLanguage(lang) {
-  const langFile = `/locales/${lang}.json`;
+    const langFile = `/locales/${lang}.json`;
 
-  // Save the selected language to localStorage
-  localStorage.setItem('lang', lang);
+    // حفظ اللغة المختارة في localStorage
+    localStorage.setItem('lang', lang);
 
-  // Fetch language file for updating other text elements
-  fetch(langFile)
-      .then(response => response.json())
-      .then(data => {
-          console.log(data);
-
-          
+    // Fetch language file for updating other text elements
+    fetch(langFile)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+   
          // Update navbar
          document.querySelector('a[href="/index.html"]').textContent = data.home;
           document.querySelector('a[href="#about-section"]').textContent = data.about_us;
@@ -115,9 +114,12 @@ function switchLanguage(lang) {
               document.documentElement.setAttribute('dir', 'ltr');
               document.documentElement.setAttribute('lang', 'en');
           }
-
-          // Update About Us section after language change
-          AboutUs(lang); // Call AboutUs to refresh its content
-      })
-      .catch(error => console.error('Error loading language file:', error));
+          AboutUs(lang);
+        })
+        .catch(error => console.error('Error loading language file:', error));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'en'; // الافتراضي الإنجليزية
+    switchLanguage(savedLang); // استدعاء الدالة لتطبيق اللغة المحفوظة
+});

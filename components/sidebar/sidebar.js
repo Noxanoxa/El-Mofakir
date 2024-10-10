@@ -57,7 +57,8 @@ function fetchAuthority() {
                      <li>
                         <img src="${author.user_image}" alt="${author.name}" class="auth-img" />
                         <div class="auth-info">
-                            <a href="#post1" class="name-auth">${author.name}</a>
+                            <a href="${author.pdf_url}" class="name-auth" download>
+                                    ${author.name}
                         </div>
                         </li>
                      
@@ -75,69 +76,57 @@ document.addEventListener('DOMContentLoaded', fetchAuthority);
 
 
 ////recent post
-function fetchRecentPosts() {
-    axios.get('https://bloggi.test/api/recent_posts')
-        .then(response => {
-            const posts = response.data.posts; // Access the data property
-            console.log('Recent_Posts:', posts);
 
-            if (Array.isArray(posts)) {
-                const postContainer = document.querySelector('#posts-list');
-                postContainer.innerHTML = ''; // Clear existing posts
-
-                posts.forEach(post => {
-                    const postElement = document.createElement('li');
-                    postElement.classList.add('li');
-                    postElement.innerHTML = `
-                        <a href="#" class="post-title" data-post-slug="${post.slug_en}">${post.title}</a>
-                        <p class="post-date">${post.created_date}</p>
-                    `;
-                    postContainer.appendChild(postElement);
-
-                    // Add event listener to the title to fetch post details
-                    postElement.querySelector('.post-title').addEventListener('click', (event) => {
-                        event.preventDefault();
-                        const postSlug = event.target.getAttribute('data-post-slug');
-                        fetchPostDetails(postSlug); // Fetch and display single post using slug
-                    });
-                });
-            } else {
-                console.error('Error: Expected an array of posts');
-            }
-        })
-        .catch(error => console.error('Error fetching posts:', error));
-}
 
 
 // Fetch posts when the page loads
 document.addEventListener('DOMContentLoaded', fetchRecentPosts);
 //function archives
-function fetchArchives() {
-    axios.get('https://bloggi.test/api/archives')
-      .then(response => {
-          var archives = response.data.archives; // Access the data property
-          console.log('Recent_archives:', archives);
+// Function to fetch archives
+function fetchArchives(lang) {
+    axios.get(`https://bloggi.test/api/archives?lang=${lang}`) // تأكد من أن API يقبل اللغة كمعامل
+        .then(response => {
+            var archives = response.data.archives; // Access the data property
+            console.log('Recent_archives:', archives);
 
-          // Check if archives is an array
-          if (Array.isArray(archives)) {
-              const archiveContainer = document.querySelector('#list-archives');
-              archiveContainer.innerHTML = ''; // Clear existing archives
+            // Check if archives is an array
+            if (Array.isArray(archives)) {
+                const archiveContainer = document.querySelector('#list-archives');
+                archiveContainer.innerHTML = ''; // Clear existing archives
 
-              archives.forEach(archive => {
-                  const archiveElement = document.createElement('ul');
-                  archiveElement.classList.add('li');
-                  archiveElement.innerHTML =`
-                    <a href="#" class="year">${archive.year} ${archive.month} (${archive.published})</a>
-                 ` ;
-                  archiveContainer.appendChild(archiveElement);
-              });
-          } else {
-              console.error('Error: Expected an array of archives');
-          }
-      })
-      .catch(error => console.error('Error fetching archives:', error));
+                archives.forEach(archive => {
+                    const archiveElement = document.createElement('ul');
+                    archiveElement.classList.add('li');
+                    const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
+                    const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
+                    console.log(monthStr);
+                    const monthYear = `${monthStr}-${archive.year}`;
+                    console.log('Month-Year:', monthYear);
+                    archiveElement.innerHTML = `
+                        <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
+                    `;
+                    archiveContainer.appendChild(archiveElement);
+                });
+
+                // Add event listeners to archive links
+                document.querySelectorAll('.year').forEach(link => {
+                    link.addEventListener('click', event => {
+                        event.preventDefault();
+                        const date = event.target.getAttribute('data-date');
+                        console.log('Clicked on archive:', date);
+                        fetchPostsArchive(date, lang); // Pass the selected language to the fetchPostsArchive function
+                    });
+                });
+            } else {
+                console.error('Error: Expected an array of archives');
+            }
+        })
+        .catch(error => console.error('Error fetching archives:', error));
 }
 
-
 // Fetch Archives when the page loads
-document.addEventListener('DOMContentLoaded', fetchArchives);
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // استخدم اللغة المحفوظة
+    fetchArchives(savedLanguage); // Pass the selected language
+});
+
