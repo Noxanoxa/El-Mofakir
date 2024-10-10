@@ -79,10 +79,26 @@ function fetchArchives() {
               archives.forEach(archive => {
                   const archiveElement = document.createElement('ul');
                   archiveElement.classList.add('li');
-                  archiveElement.innerHTML =`
-                    <a href="#" class="year">${archive.year}${archive.month}(${archive.published})</a>
-                 ` ;
+                  const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
+                  const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
+                  console.log(monthStr);
+                  const monthYear = `${monthStr}-${archive.year}`;
+                  console.log('Month-Year:', monthYear);
+                  archiveElement.innerHTML = `
+                      <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
+                  `;
                   archiveContainer.appendChild(archiveElement);
+              });
+
+              // Add event listeners to archive links
+              document.querySelectorAll('.year').forEach(link => {
+                  link.addEventListener('click', event => {
+                      event.preventDefault();
+                      const date = event.target.getAttribute('data-date');
+                    // const date = '8-2020';
+                      console.log('Clicked on archive:', date);
+                      fetchPostsArchive(date);
+                  });
               });
           } else {
               console.error('Error: Expected an array of archives');
@@ -135,5 +151,3 @@ document.addEventListener('DOMContentLoaded', fetchArchives);
 // document.addEventListener('DOMContentLoaded', function() {
 //   fetchsearch(''); // You can modify this to load initial data if needed
 // });
-  
-
