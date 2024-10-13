@@ -83,46 +83,52 @@ document.addEventListener('DOMContentLoaded', fetchAuthority);
 document.addEventListener('DOMContentLoaded', fetchRecentPosts);
 //function archives
 // Function to fetch archives
-function fetchArchives(lang) {
-    axios.get(`https://bloggi.test/api/archives?lang=${lang}`) // تأكد من أن API يقبل اللغة كمعامل
-        .then(response => {
-            var archives = response.data.archives; // Access the data property
-            console.log('Recent_archives:', archives);
+//function archives
+function fetchArchives() {
+    axios.get('https://bloggi.test/api/archives')
+      .then(response => {
+          var archives = response.data.archives; // Access the data property
+          console.log('Recent_archives:', archives);
 
-            // Check if archives is an array
-            if (Array.isArray(archives)) {
-                const archiveContainer = document.querySelector('#list-archives');
-                archiveContainer.innerHTML = ''; // Clear existing archives
+          // Check if archives is an array
+          if (Array.isArray(archives)) {
+              const archiveContainer = document.querySelector('#list-archives');
+              archiveContainer.innerHTML = ''; // Clear existing archives
 
-                archives.forEach(archive => {
-                    const archiveElement = document.createElement('ul');
-                    archiveElement.classList.add('li');
-                    const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
-                    const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
-                    console.log(monthStr);
-                    const monthYear = `${monthStr}-${archive.year}`;
-                    console.log('Month-Year:', monthYear);
-                    archiveElement.innerHTML = `
-                        <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
-                    `;
-                    archiveContainer.appendChild(archiveElement);
-                });
+              archives.forEach(archive => {
+                  const archiveElement = document.createElement('ul');
+                  archiveElement.classList.add('li');
+                  const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
+                  const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
+                  console.log(monthStr);
+                  const monthYear = `${monthStr}-${archive.year}`;
+                  console.log('Month-Year:', monthYear);
+                  archiveElement.innerHTML = `
+                      <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
+                  `;
+                  archiveContainer.appendChild(archiveElement);
+              });
 
-                // Add event listeners to archive links
-                document.querySelectorAll('.year').forEach(link => {
-                    link.addEventListener('click', event => {
-                        event.preventDefault();
-                        const date = event.target.getAttribute('data-date');
-                        console.log('Clicked on archive:', date);
-                        fetchPostsArchive(date, lang); // Pass the selected language to the fetchPostsArchive function
-                    });
-                });
-            } else {
-                console.error('Error: Expected an array of archives');
-            }
-        })
-        .catch(error => console.error('Error fetching archives:', error));
+              // Add event listeners to archive links
+              document.querySelectorAll('.year').forEach(link => {
+                  link.addEventListener('click', event => {
+                      event.preventDefault();
+                      const date = event.target.getAttribute('data-date');
+                    // const date = '8-2020';
+                      console.log('Clicked on archive:', date);
+                      fetchPostsArchive(date);
+                  });
+              });
+          } else {
+              console.error('Error: Expected an array of archives');
+          }
+      })
+      .catch(error => console.error('Error fetching archives:', error));
 }
+
+// Fetch Archives when the page loads
+document.addEventListener('DOMContentLoaded', fetchArchives);
+
 
 // Fetch Archives when the page loads
 document.addEventListener('DOMContentLoaded', () => {

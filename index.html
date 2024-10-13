@@ -69,9 +69,10 @@
     </div>
 </div>
 <div id="backToTop"></div>
-    <footer id="footer"></footer>
+   
+
 </div>
- 
+<footer id="footer"></footer>
 <!-- <main>
     <div class="container">
         هذا هو المكان الذي سيتم تحميل مكون الاتصال فيه 
@@ -89,28 +90,29 @@
    
    <script src="components/post/post.js"></script>
    
-   <script src="components/footer/footer.js"></script>
+  
+   <script src="js/lang.js"></script>
    <script>
-    let lastScrollPosition = 0;
-const navbar = document.getElementById('navbar');
-let navbarVisible = true;  // حالة لتتبع ما إذا كانت الـ navbar مرئية
+//     let lastScrollPosition = 0;
+// const navbar = document.getElementById('navbar');
+// let navbarVisible = true;  
 
-window.addEventListener('scroll', function() {
-    let currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+// window.addEventListener('scroll', function() {
+//     let currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-    // إذا كنت تصعد لأعلى، إظهار الـ navbar
-    if (currentScrollPosition < lastScrollPosition) {
-        navbar.classList.remove('navbar-hidden');
-        navbarVisible = true;
-    } else if (navbarVisible) {
-        // إذا كنت تنزل لأسفل والـ navbar مرئية، تبقى مرئية
-        navbar.classList.add('navbar-hidden');
-        navbarVisible = false; // إخفاء الـ navbar فقط مرة واحدة عند النزول
-    }
+//     // إذا كنت تصعد لأعلى، إظهار الـ navbar
+//     if (currentScrollPosition < lastScrollPosition) {
+//         navbar.classList.remove('navbar-hidden');
+//         navbarVisible = true;
+//     } else if (navbarVisible) {
+//         // إذا كنت تنزل لأسفل والـ navbar مرئية، تبقى مرئية
+//         navbar.classList.add('navbar-hidden');
+//         navbarVisible = false; // إخفاء الـ navbar فقط مرة واحدة عند النزول
+//     }
 
-    // تحديث موقع التمرير الأخير
-    lastScrollPosition = currentScrollPosition;
-});
+//     // تحديث موقع التمرير الأخير
+//     lastScrollPosition = currentScrollPosition;
+// });
    </script>
 </body>
 </html>
