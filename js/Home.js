@@ -49,10 +49,11 @@ function fetchPosts(page = 1, lang = 'en') {
                     postElement.classList.add('card');
                     postElement.innerHTML = `
                         <h4 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h4>
-                        <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
+                        <div class="card-author">by ${post.author.name}</div>
                         <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
                         <div class="card-date">${post.created_date}</div>
                     `;
+
                     postContainer.appendChild(postElement);
 
                     // تفعيل زر "Read More"
@@ -87,18 +88,30 @@ function fetchPostDetails(postSlug, lang) {
             }
             const postContainer = document.querySelector('#post-container');
             postContainer.innerHTML = `
-                <div class="single-post">
-                    <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
-                    <div class="post-meta">
-                        <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${lang === 'ar' ? post.author : post.author_en}</span>
-                        <span class="post-number">${lang === 'ar' ? 'القيمة والرقم: ' : 'Value & Number: '}${post.issue_number}</span>
-                        <span class="post-date">${post.created_date}</span>
-                    </div>
-                    <p>${lang === 'ar' ? post.description : post.description_en}</p>
-                    <a href="/path-to-your-pdf-file.pdf" class="download-button" download>${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}</a>
-                    <a href="#" id="back-to-posts" class="back-button">${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}</a>
-                </div>
-            `;
+    <div class="single-post">
+        <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
+
+        <div class="post-meta">
+            <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${lang === 'ar' ? post.author : post.author_en}</span>
+            <span class="post-number">${lang === 'ar' ? 'القيمة والرقم: ' : 'Value & Number: '}${post.issue_number}</span>
+            <span class="post-date">${post.created_at}</span>
+        </div>
+
+        <label class="description-label">${lang === 'ar' ? 'الوصف' : 'Description'}</label>
+        <p class="post-description">${lang === 'ar' ? post.description : post.description_en}</p>
+
+        <div class="button-group">
+            <a href="/path-to-your-pdf-file.pdf" class="download-button" download>
+                ${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}
+            </a>
+            <a href="#" id="back-to-posts" class="back-button">
+                ${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
+            </a>
+        </div>
+    </div>
+`;
+
+
 
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
                 event.preventDefault();

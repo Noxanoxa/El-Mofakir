@@ -1,78 +1,77 @@
 /* General styles */
 .post {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f3f3; /* Softer background for contrast */
     margin: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* min-height: 300vh; */
 }
 
+/* Container */
 .container {
     display: flex;
-    flex-direction: column; /* Display cards in a column */
+    flex-direction: column;
     gap: 20px; /* Space between cards */
-    justify-content: center; /* Optional: Center the cards vertically */
-    align-items: center; /* Center the cards horizontally */
+    align-items: center;
+    padding: 20px;
 }
 
 /* Card style */
 .card {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 850px; /* Keep the width as needed */
+    border-radius: 10px; /* Slightly larger radius for friendlier appearance */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+    width: 100%; /* Full width for a responsive container */
+    max-width: 850px; /* Limit max width */
     padding: 20px;
-    transition: box-shadow 0.3s ease;
-    display: flex;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Add scale effect */
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
 }
 
 .card-title {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 22px;
     color: #333;
-}
-
-.card-text {
-    padding-left: 10px;
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
-    height: 40px; 
-    /* Multiline truncation */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Show up to 2 lines of text */
-    -webkit-box-orient: vertical;
+    margin-bottom: 4%;
+    font-weight: 600;
 }
 
 .card-link {
-    display: inline-block;
-    margin: 10px 10px 0;
-    font-size: 14px;
-    color: green;
+    font-size: 16px;
+    color: green; /* Brighter color for better visibility */
     text-decoration: none;
+    font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .card-link:hover {
-    color: #2980b9;
+    color: #27ae60;
+}
+.card-author {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    color: #7f8c8d;
 }
 .card-date {
     position: absolute;
     bottom: 10px;
     right: 10px;
     font-size: 12px;
-    color: gray;
+    color: #7f8c8d;
 }
+
+/* Pagination */
 .pagination-controls {
     display: flex;
     justify-content: center;
@@ -85,90 +84,98 @@
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     margin: 0 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .nav-btn:hover {
     background-color: #2980b9;
+    transform: scale(1.05); /* Subtle grow effect */
 }
 
 .current-page {
     font-size: 16px;
     margin: 0 5px;
 }
-
-/* تنسيق عنوان المنشور */
+/*det pg */
+/* Post Title */
 .single-post h2 {
-    font-size: 28px;
-    color: #333;
+    font-size: 30px;
+    color: #2c3e50;
     text-align: center;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
 }
 
-/* تنسيق الزر */
-.download-button ,.back-button{
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #00b4d8;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.download-button:hover ,.back-button:hover {
-    background-color: #0077b6;
-}
-
-/* تنسيق الفقرة */
-.single-post p {
-    font-size: 18px;
-    color: #555;
-    text-align: justify;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
+/* Post Metadata */
 .post-meta {
     display: flex;
-    flex-direction: column; /* يجعل العناصر داخل .post-meta عمودية */
-    align-items: flex-start; /* يجعل العناصر تبدأ من اليسار (أو اليمين في حالة اللغة العربية) */
-    margin-bottom: 20px; /* إضافة مسافة بين قسم post-meta والمحتوى الآخر */
+    flex-direction: row; /* Horizontal layout for meta info */
+    justify-content: space-between; /* Spread out the elements */
+    align-items: center;
     font-style: italic;
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 20px;
 }
 
 .post-meta span {
-    margin-bottom: 5px; /* مسافة بسيطة بين كل عنصر */
-    font-size: 14px; /* حجم الخط */
-    color: #555; /* لون النص */
-}
-/* تنسيق التاريخ */
-.post-date {
-    font-size: 14px;
-    color: #888;
-    text-align: left;
-    margin-bottom: 20px;
+    margin: 0 10px;
 }
 
-/* الكلمات المفتاحية */
-.keywords {
+/* Description Label */
+.description-label {
     font-size: 18px;
-    color: #0a9396;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: right;
+    color: #16a085;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
 }
 
-/* فقرة بالفرنسية */
-.single-post {
-    font-size: 16px;
-    color: #555;
+/* Post Description */
+.post-description {
+    font-size: 18px;
+    color: #34495e;
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+    line-height: 1.7;
+    margin-bottom: 25px;
     text-align: justify;
-    line-height: 1.8;
-    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.post-description:hover {
+    background-color: #e0f7fa; /* Light hover effect */
+}
+
+/* Buttons Centered */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.download-button, .back-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.download-button:hover, .back-button:hover {
+    background-color: teal;
+    transform: translateY(-3px);
 }
 
 /* مقالات مشابهة */
@@ -179,7 +186,6 @@
     margin-top: 40px;
     text-align: right;
 }
-
 
 
 /* Responsive Styles */
