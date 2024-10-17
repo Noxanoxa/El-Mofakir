@@ -116,6 +116,7 @@ function fetchPostDetails(postSlug, lang) {
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
                 event.preventDefault();
                 fetchPosts(1, lang);  // العودة إلى قائمة المنشورات
+              console.log('posts in line 119');
                 currentMode = 'list';  // العودة إلى وضع "list"
                 currentPostSlug = null;  // إعادة تعيين postSlug
             });
@@ -205,159 +206,6 @@ function fetchRecentPosts(lang = 'en') {
 }
 
 
-
-// function renderPagination(meta, search = null, archiveDate = null, lang = 'en') {
-//     const paginationContainer = document.querySelector(".wn__pagination");
-//     paginationContainer.innerHTML = ""; // مسح الترقيم السابق
-  
-//     if (meta.last_page > 1) {
-//         // Previous Page Link
-//         if (meta.current_page > 1) {
-//             paginationContainer.innerHTML += `
-//                 <li>
-//                     <a href="#" data-page="${meta.current_page - 1}" rel="prev" aria-label="${lang === 'ar' ? 'السابق' : 'Previous'}">&lsaquo;</a>
-//                 </li>
-//             `;
-//         } else {
-//             paginationContainer.innerHTML += `
-//                 <li class="disabled" aria-disabled="true" aria-label="${lang === 'ar' ? 'السابق' : 'Previous'}">
-//                     <span aria-hidden="true">&lsaquo;</span>
-//                 </li>
-//             `;
-//         }
-  
-//         // Pagination Elements
-//         meta.links.forEach((link) => {
-//             if (link.url) {
-//                 if (link.active) {
-//                     paginationContainer.innerHTML += `
-//                         <li class="active" aria-current="page"><span>${link.label}</span></li>
-//                     `;
-//                 } else {
-//                     paginationContainer.innerHTML += `
-//                         <li><a href="#" data-page="${new URL(link.url).searchParams.get("page")}">${link.label}</a></li>
-//                     `;
-//                 }
-//             } else {
-//                 paginationContainer.innerHTML += `
-//                     <li class="disabled" aria-disabled="true"><span>${link.label}</span></li>
-//                 `;
-//             }
-//         });
-  
-//         // Next Page Link
-//         if (meta.current_page < meta.last_page) {
-//             paginationContainer.innerHTML += `
-//                 <li>
-//                     <a href="#" data-page="${meta.current_page + 1}" rel="next" aria-label="${lang === 'ar' ? 'التالي' : 'Next'}">&rsaquo;</a>
-//                 </li>
-//             `;
-//         } else {
-//             paginationContainer.innerHTML += `
-//                 <li class="disabled" aria-disabled="true" aria-label="${lang === 'ar' ? 'التالي' : 'Next'}">
-//                     <span aria-hidden="true">&rsaquo;</span>
-//                 </li>
-//             `;
-//         }
-//     }
-  
-//     paginationContainer.querySelectorAll("a[data-page]").forEach((link) => {
-//         link.addEventListener("click", (event) => {
-//             event.preventDefault();
-//             const page = event.target.getAttribute("data-page");
-  
-//             if (search) {
-//                 fetchsearch(search, page, lang);
-//             } else if (archiveDate) {
-//                 fetchPostsArchive(archiveDate, page, lang);
-//             } else {
-//                 fetchPosts(page, lang);
-//             }
-//         });
-//     });
-//   }
-  
-    
-//     // Fetch posts when the page loads
-//     // document.addEventListener('DOMContentLoaded', () => fetchPosts());
-//     // Function to fetch search results
-//     function fetchsearch(search, page = 1, lang = null) {
-//       lang = lang || localStorage.getItem('selectedLanguage') || 'en';
-//       axios
-//           .get(`https://bloggi.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
-//           .then((response) => {
-//               const { data, meta } = response.data; // Assuming `meta` contains pagination info for search results
-//               console.log("Search data:", data);
-//               console.log("lang is:", lang);
-//               if (Array.isArray(data)) {
-//                   const postContainer = document.querySelector("#post-container");
-//                   postContainer.innerHTML = ""; // Clear existing data
-  
-//                   data.forEach((post) => {
-//                       const postElement = document.createElement("div");
-//                       postElement.classList.add("card");
-//                       postElement.innerHTML = `
-//                           <h2 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h2>
-//                           <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
-//                           <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-//                           <div class="card-date">${post.created_date}</div>
-//                       `;
-//                       postContainer.appendChild(postElement);
-//                       postElement.querySelector(".card-link").addEventListener("click", (event) => {
-//                           event.preventDefault();
-//                           const postSlug = event.target.getAttribute("data-post-slug");
-//                           console.log("Fetching details for slug:", postSlug);
-//                           fetchPostDetails(postSlug, lang);
-//                       });
-//                   });
-//                   renderPagination(meta, search, null, lang); // Pass the language to the pagination function
-//               } else {
-//                   console.error("Error: Expected an array of data");
-//               }
-//           })
-//           .catch((error) => console.error("Error fetching search results:", error));
-//   }
-  
-  
-//     // Function to fetch posts for a given archive date
-//     function fetchPostsArchive(date, page = 1, lang = null) {
-//       lang = lang || localStorage.getItem('selectedLanguage') || 'en';
-//       console.log("Fetching posts for archive date:", date);
-//       axios
-//           .get(`https://bloggi.test/api/archive/${date}?page=${page}&lang=${lang}`)
-//           .then((response) => {
-//               const { data, meta } = response.data; // Access the data and meta properties
-//               console.log("Posts for archive:", data);
-//               if (Array.isArray(data)) {
-//                   const postContainer = document.querySelector("#post-container");
-//                   postContainer.innerHTML = ""; // Clear existing posts
-//                   console.log("lang is:", lang);
-//                   data.forEach((post) => {
-//                       const postElement = document.createElement("div");
-//                       postElement.classList.add("card");
-//                       postElement.innerHTML = `
-//                           <h2 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h2>
-//                           <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
-//                           <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-//                           <div class="card-date">${post.created_date}</div>
-//                       `;
-//                       postContainer.appendChild(postElement);
-//                       postElement.querySelector(".card-link").addEventListener("click", (event) => {
-//                           event.preventDefault();
-//                           const postSlug = event.target.getAttribute("data-post-slug");
-//                           console.log("Fetching details for slug:", postSlug);
-//                           fetchPostDetails(postSlug, lang);
-//                       });
-//                   });
-//                   renderPagination(meta, null, date, lang); // Pass the language to the pagination function
-//               } else {
-//                   console.error("Error: Expected an array of posts");
-//               }
-//           })
-//           .catch((error) => console.error("Error fetching posts for archive:", error));
-//   }
-
-
 function renderPagination(meta, search = null, archiveDate = null, lang = 'en') {
     const paginationContainer = document.querySelector(".wn__pagination");
     paginationContainer.innerHTML = ""; // مسح الترقيم السابق
@@ -423,6 +271,7 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
             } else if (archiveDate) {
                 fetchPostsArchive(archiveDate, page, lang);
             } else {
+              console.log('posts in line 275');
                 fetchPosts(page, lang);
             }
         });
@@ -517,6 +366,7 @@ function fetchsearch(search, page = 1, lang = null) {
         .get(`https://bloggi.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
         .then((response) => {
             const { data, meta } = response.data;
+            console.log('Search Results:', data);
             if (Array.isArray(data)) {
                 const postContainer = document.querySelector("#post-container");
                 postContainer.innerHTML = ""; // مسح البيانات القديمة
@@ -597,15 +447,18 @@ function switchLanguage(lang) {
                 fetchPostsArchive(archiveDate, 1, lang); // استدعاء المشاركات المؤرشفة باللغة الجديدة
             } else {
                 // التحقق إذا كان هناك استعلام بحث مخزن
-                const searchQuery = localStorage.getItem('currentSearchQuery');
+              const urlParams = new URLSearchParams(window.location.search);
+              const searchQuery = urlParams.get('search1');
                 if (searchQuery) {
+                    console.log('Switching language with search query:', searchQuery);
                     fetchsearch(searchQuery, 1, lang); // استدعاء نتائج البحث باللغة الجديدة
                 }
         
                 // إذا كنت في صفحة عرض المشاركة (Read More)
-                if (currentMode === 'single' && currentPostSlug) {
+               else if (currentMode === 'single' && currentPostSlug) {
                     fetchPostDetails(currentPostSlug, lang);  // إعادة تحميل تفاصيل المنشور بنفس الـ postSlug
                 } else {
+                 console.log('posts in line 459');
                     fetchPosts(1, lang);  // عرض قائمة المنشورات إذا لم يكن هناك منشور فردي
                 }
             }
@@ -648,50 +501,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const savedLanguage = localStorage.getItem('selectedLanguage');
     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-     fetchPosts(1, savedLanguage); // جلب الصفحة الأولى باللغة المختارة
+
      fetchRecentPosts(savedLanguage);
 });
 
 
 
-
-// document.addEventListener("DOMContentLoaded", function () {
-
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const search = urlParams.get("search1");
-//     console.log("search keyword:", search);
-//     const savedLanguage = localStorage.getItem('selectedLanguage');
-//     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-//      fetchPosts(1, savedLanguage); // جلب الصفحة الأولى باللغة المختارة
-//      fetchRecentPosts(savedLanguage);
-   
-//       fetchsearch(search);
-    
-    
-// });
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // منطق اللغة
-//     if (!localStorage.getItem('selectedLanguage')) {
-//         localStorage.setItem('selectedLanguage', 'en'); // تعيين اللغة الافتراضية إلى الإنجليزية
-//     }
-
-//     const savedLanguage = localStorage.getItem('selectedLanguage');
-    
-//     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-//     fetchRecentPosts(savedLanguage); // جلب المنشورات الحديثة
-
-//     // منطق البحث
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const search = urlParams.get("search1");
-//     console.log("search keyword:", search);
-
-//     if (!search || search.trim() === "") {
-//         // إذا كانت نتيجة البحث فارغة، يتم استدعاء fetchPosts
-//         fetchPosts(1, savedLanguage); // جلب الصفحة الأولى باللغة المختارة
-//     } else {
-//         // إذا كانت نتيجة البحث موجودة، يتم استدعاء fetchsearch
-//         fetchsearch(search);
-//     }
-// });

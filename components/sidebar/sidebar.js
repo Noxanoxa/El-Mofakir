@@ -1,45 +1,3 @@
-// // Function to fetch search results
-// function fetchsearch(search) {
-//   axios.get(`https://bloggi.test/api/search?keyword=${search}`)
-//     .then(response => {
-//       const posts = response.data.posts;
-//       console.log('search Posts:', posts);
-
-//       if (Array.isArray(posts)) {
-//         const postContainer = document.querySelector('#post-container');
-//         postContainer.innerHTML = '';
-
-//         posts.forEach(post => {
-//           const postElement = document.createElement('div');
-//           postElement.classList.add('card');
-//           postElement.innerHTML = `
-//             <h2 class="card-title">${post.title}</h2>
-//             <p class="card-text">${post.description}</p>
-//             <a href="${post.url}" class="card-link">Read More</a>
-//             <div class="card-date">${post.created_date}</div>
-//           `;
-//           postContainer.appendChild(postElement);
-//         });
-//       } else {
-//         console.error('Error: Expected an array of posts');
-//       }
-//     })
-//     .catch(error => console.error('Error fetching posts:', error));
-// }
-
-// // Add event listener to the search form
-// document.getElementById('search-form').addEventListener('submit', function(event) {
-//   event.preventDefault(); // Prevent the form from submitting the default way
-//   const search = document.getElementById('srch').value;
-//   fetchsearch(search); // Trigger the search function with the input value
-// });
-
-// // Optional: You can load some default posts when the page loads
-// document.addEventListener('DOMContentLoaded', function() {
-//   fetchsearch(''); // You can modify this to load initial data if needed
-// });
-
-/////authority function
 function fetchAuthority() {
     axios.get('https://bloggi.test/api/authors')
       .then(response => {
@@ -75,10 +33,6 @@ function fetchAuthority() {
 document.addEventListener('DOMContentLoaded', fetchAuthority);
 
 
-////recent post
-
-
-
 // Fetch posts when the page loads
 document.addEventListener('DOMContentLoaded', fetchRecentPosts);
 //function archives
@@ -88,7 +42,6 @@ function fetchArchives() {
     axios.get('https://bloggi.test/api/archives')
       .then(response => {
           var archives = response.data.archives; // Access the data property
-          console.log('Recent_archives:', archives);
 
           // Check if archives is an array
           if (Array.isArray(archives)) {
@@ -100,9 +53,7 @@ function fetchArchives() {
                   archiveElement.classList.add('li');
                   const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
                   const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
-                  console.log(monthStr);
                   const monthYear = `${monthStr}-${archive.year}`;
-                  console.log('Month-Year:', monthYear);
                   archiveElement.innerHTML = `
                       <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
                   `;
@@ -115,7 +66,7 @@ function fetchArchives() {
                       event.preventDefault();
                       const date = event.target.getAttribute('data-date');
                     // const date = '8-2020';
-                      console.log('Clicked on archive:', date);
+
                       fetchPostsArchive(date);
                   });
               });
