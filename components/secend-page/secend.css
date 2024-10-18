@@ -1,32 +1,29 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #FAF7F0; /* Light cream background */
     padding: 20px;
     margin: 0;
-    padding: 0;
 }
 
 .about-container {
     max-width: 1200px;
     margin: auto;
-    background: #fff;
+    background: transparent;
     padding: 20px;
-   
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
-    
+    color: #B17457; /* Warm brown for headings */
 }
 
 .content {
@@ -39,20 +36,21 @@ h2 {
 .info-section, .description-section {
     flex: 1;
     padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
+    background-color: #D8D2C2; /* Soft beige */
+    border-radius: 20px;
     margin-right: 20px;
 }
 
 .description-section {
     margin-right: 0;
+    color: #4A4947; /* Dark grey for contrast */
 }
 
 .journal-info {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    background-color: #fff;
+    background-color: #FAF7F0; /* Light cream background */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -61,7 +59,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #D8D2C2; /* Use soft beige for border */
     font-size: 16px;
 }
 
@@ -71,12 +69,13 @@ h2 {
 
 .journal-info span {
     font-weight: bold;
-    color: #555;
+    color: #B17457; /* Warm brown for labels */
 }
 
 .description-section p {
     margin-bottom: 15px;
     line-height: 1.8;
+    color: #4A4947; /* Dark grey for text */
 }
 
 /* Announcements Section */
@@ -106,20 +105,19 @@ h2 {
         transform: translateX(-100%);
     }
 }
+
 .card {
-    background-color: #f0f0f0;
+    background-color: #D8D2C2; /* Soft beige */
     padding: 20px;
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-    /* Allow width to grow based on content */
     flex-grow: 0;       /* Card grows based on content */
     flex-shrink: 0;     /* Prevent cards from shrinking */
     flex-basis: auto;   /* Auto width based on content */
-    width: auto;        /* Width adapts to content */
+    width: auto;
 
-    /* Set consistent height */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -129,11 +127,11 @@ h2 {
 
 .card h3 {
     margin-bottom: 10px;
-    color: #555;
+    color: #B17457; /* Warm brown for card titles */
 }
 
 .card p {
-    color: #555;
+    color: #4A4947; /* Dark grey for card content */
     line-height: 1.6;
 }
 
@@ -154,95 +152,75 @@ h2 {
     }
 }
 
-/*////////////////////////////////////////////////////////*/
+/* //////////////////////////////////////////////////////// */
 .container {
     max-width: 1200px;
     margin: auto;
-   margin-top: 40px;
+    margin-top: 40px;
     padding: 20px;
     display: flex;
     justify-content: space-between;
-  
 }
-.h2contact{
+
+.h2contact {
     margin-top: 50px;
+    color: #B17457; /* Warm brown */
 }
+
 form {
     display: flex;
     flex-direction: column;
 }
 
-
 #contact-form {
     gap: 40px;
-    border-radius: 200px;
+    border-radius: 20px;
     border: none;
-    
 }
 
-input ,textarea {
-   border: none;
-   border-bottom: 2px solid #000;
-   margin-bottom: 20px;
-   outline: none;
-   background: none;
-   
+input, textarea {
+    border: none;
+    border-bottom: 2px solid #B17457; /* Warm brown for input border */
+    margin-bottom: 20px;
+    outline: none;
+    background: none;
 }
-
 
 .btnsend {
     width: 25%;
     height: 40px;
-    border: 2px solid #000 ;
+    border: 2px solid #B17457; /* Warm brown for button border */
     font-weight: bold;
-
-   
 }
+
 .btnsend:hover {
-    background-color: #28a745;
+    background-color: #D8D2C2; /* Soft beige on hover */
 }
 
-/* تنسيق إضافي لتحسين الظهور */
-h2 span{
-    color: #837e7e;
+/* Additional styling for improved appearance */
+h2 span {
+    color: #837e7e; /* Light grey */
 }
 
 p {
-    color: #555;
+    color: #4A4947; /* Dark grey */
     margin-bottom: 40px;
 }
+
 .prgrph {
-  
-   display: flex;
-   align-items: center;
-   margin-bottom: 10px;
-   
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
-.prgrph i{
+
+.prgrph i {
     margin-right: 10px;
     font-size: 20px;
     margin-bottom: 48px;
     color: #000;
 }
 
-/*
-h1 .plogo{
-    font-style: #ddd;
-}
-input[type="text"], input[type="email"], textarea {
-    border: 1px solid #ddd;
-}
-
-input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    border-color: #5cb85c;
-    outline: none;
-}*/
-
-
-
 /* Media Queries for Responsive Design */
-
-/* For tablets and smaller desktops */
 @media (max-width: 768px) {
     .container {
         flex-direction: column; /* Stack items vertically */
@@ -266,7 +244,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
     input, textarea {
         font-size: 16px; /* Adjust input font size */
-    
     }
 
     button {

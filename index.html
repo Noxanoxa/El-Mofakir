@@ -22,11 +22,13 @@
    <header id="navbar">
 
      <input type="checkbox" name="" id="chk1"> 
-        <div class="logo"><h1 class="plogo">El Mufakkir</h1></div>
+     
+        <a href="/index.html" class="logo">El Mufakkir</a>
+   
         <div class="navbar" id="navbar">
         <ul>
             <li>
-                <a href="index.html">Home</a>
+                <a href="index.html" onclick="exitArchiveMode()">Home</a>
             </li>
             <li>
                 <a href="components/secend-page/contact.html#about-section">About Us</a>
@@ -39,8 +41,10 @@
                 
             </li>
         </ul></div>
+        <div class="buttons-container">
         <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
-    <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arcabic</button>
+  <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arabic</button>
+        </div>
        <!-- <div class="search-box">
             <form action="">
                 <input type="text" name="search" id="srch" placeholder="Search">

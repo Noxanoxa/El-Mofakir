@@ -44,7 +44,7 @@ function fetchAuthority() {
     axios.get('https://bloggi.test/api/authors')
       .then(response => {
           var authors = response.data.authors; // Access the data property
-          console.log('Publishing Authority:', authors);
+         // console.log('Publishing Authority:', authors);
 
           // Check if authors is an array
           if (Array.isArray(authors)) {
@@ -88,7 +88,7 @@ function fetchArchives() {
     axios.get('https://bloggi.test/api/archives')
       .then(response => {
           var archives = response.data.archives; // Access the data property
-          console.log('Recent_archives:', archives);
+         // console.log('Recent_archives:', archives);
 
           // Check if archives is an array
           if (Array.isArray(archives)) {
@@ -100,9 +100,9 @@ function fetchArchives() {
                   archiveElement.classList.add('li');
                   const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
                   const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
-                  console.log(monthStr);
+                 // console.log(monthStr);
                   const monthYear = `${monthStr}-${archive.year}`;
-                  console.log('Month-Year:', monthYear);
+                 // console.log('Month-Year:', monthYear);
                   archiveElement.innerHTML = `
                       <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
                   `;

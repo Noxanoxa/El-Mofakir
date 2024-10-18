@@ -34,7 +34,7 @@ let currentMode = 'list'; // 'list' أو 'single'
 let currentPostSlug = null; // لحفظ slug المنشور الحالي في حالة "Read More"
 
 function fetchPosts(page = 1, lang = 'en') {
-  
+
     axios.get(`https://bloggi.test/api/all_posts?page=${page}`)
         .then(response => {
             const { data, meta } = response.data;
@@ -64,7 +64,7 @@ function fetchPosts(page = 1, lang = 'en') {
                         fetchPostDetails(postSlug, lang);  // تحديث تفاصيل المنشور
                     });
                 });
-                renderPagination(meta, lang);
+                renderPagination(meta, null ,null, lang);
             } else {
                 console.error('Error: Expected an array of posts');
             }
@@ -206,158 +206,6 @@ function fetchRecentPosts(lang = 'en') {
 
 
 
-// function renderPagination(meta, search = null, archiveDate = null, lang = 'en') {
-//     const paginationContainer = document.querySelector(".wn__pagination");
-//     paginationContainer.innerHTML = ""; // مسح الترقيم السابق
-  
-//     if (meta.last_page > 1) {
-//         // Previous Page Link
-//         if (meta.current_page > 1) {
-//             paginationContainer.innerHTML += `
-//                 <li>
-//                     <a href="#" data-page="${meta.current_page - 1}" rel="prev" aria-label="${lang === 'ar' ? 'السابق' : 'Previous'}">&lsaquo;</a>
-//                 </li>
-//             `;
-//         } else {
-//             paginationContainer.innerHTML += `
-//                 <li class="disabled" aria-disabled="true" aria-label="${lang === 'ar' ? 'السابق' : 'Previous'}">
-//                     <span aria-hidden="true">&lsaquo;</span>
-//                 </li>
-//             `;
-//         }
-  
-//         // Pagination Elements
-//         meta.links.forEach((link) => {
-//             if (link.url) {
-//                 if (link.active) {
-//                     paginationContainer.innerHTML += `
-//                         <li class="active" aria-current="page"><span>${link.label}</span></li>
-//                     `;
-//                 } else {
-//                     paginationContainer.innerHTML += `
-//                         <li><a href="#" data-page="${new URL(link.url).searchParams.get("page")}">${link.label}</a></li>
-//                     `;
-//                 }
-//             } else {
-//                 paginationContainer.innerHTML += `
-//                     <li class="disabled" aria-disabled="true"><span>${link.label}</span></li>
-//                 `;
-//             }
-//         });
-  
-//         // Next Page Link
-//         if (meta.current_page < meta.last_page) {
-//             paginationContainer.innerHTML += `
-//                 <li>
-//                     <a href="#" data-page="${meta.current_page + 1}" rel="next" aria-label="${lang === 'ar' ? 'التالي' : 'Next'}">&rsaquo;</a>
-//                 </li>
-//             `;
-//         } else {
-//             paginationContainer.innerHTML += `
-//                 <li class="disabled" aria-disabled="true" aria-label="${lang === 'ar' ? 'التالي' : 'Next'}">
-//                     <span aria-hidden="true">&rsaquo;</span>
-//                 </li>
-//             `;
-//         }
-//     }
-  
-//     paginationContainer.querySelectorAll("a[data-page]").forEach((link) => {
-//         link.addEventListener("click", (event) => {
-//             event.preventDefault();
-//             const page = event.target.getAttribute("data-page");
-  
-//             if (search) {
-//                 fetchsearch(search, page, lang);
-//             } else if (archiveDate) {
-//                 fetchPostsArchive(archiveDate, page, lang);
-//             } else {
-//                 fetchPosts(page, lang);
-//             }
-//         });
-//     });
-//   }
-  
-    
-//     // Fetch posts when the page loads
-//     // document.addEventListener('DOMContentLoaded', () => fetchPosts());
-//     // Function to fetch search results
-//     function fetchsearch(search, page = 1, lang = null) {
-//       lang = lang || localStorage.getItem('selectedLanguage') || 'en';
-//       axios
-//           .get(`https://bloggi.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
-//           .then((response) => {
-//               const { data, meta } = response.data; // Assuming `meta` contains pagination info for search results
-//               console.log("Search data:", data);
-//               console.log("lang is:", lang);
-//               if (Array.isArray(data)) {
-//                   const postContainer = document.querySelector("#post-container");
-//                   postContainer.innerHTML = ""; // Clear existing data
-  
-//                   data.forEach((post) => {
-//                       const postElement = document.createElement("div");
-//                       postElement.classList.add("card");
-//                       postElement.innerHTML = `
-//                           <h2 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h2>
-//                           <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
-//                           <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-//                           <div class="card-date">${post.created_date}</div>
-//                       `;
-//                       postContainer.appendChild(postElement);
-//                       postElement.querySelector(".card-link").addEventListener("click", (event) => {
-//                           event.preventDefault();
-//                           const postSlug = event.target.getAttribute("data-post-slug");
-//                           console.log("Fetching details for slug:", postSlug);
-//                           fetchPostDetails(postSlug, lang);
-//                       });
-//                   });
-//                   renderPagination(meta, search, null, lang); // Pass the language to the pagination function
-//               } else {
-//                   console.error("Error: Expected an array of data");
-//               }
-//           })
-//           .catch((error) => console.error("Error fetching search results:", error));
-//   }
-  
-  
-//     // Function to fetch posts for a given archive date
-//     function fetchPostsArchive(date, page = 1, lang = null) {
-//       lang = lang || localStorage.getItem('selectedLanguage') || 'en';
-//       console.log("Fetching posts for archive date:", date);
-//       axios
-//           .get(`https://bloggi.test/api/archive/${date}?page=${page}&lang=${lang}`)
-//           .then((response) => {
-//               const { data, meta } = response.data; // Access the data and meta properties
-//               console.log("Posts for archive:", data);
-//               if (Array.isArray(data)) {
-//                   const postContainer = document.querySelector("#post-container");
-//                   postContainer.innerHTML = ""; // Clear existing posts
-//                   console.log("lang is:", lang);
-//                   data.forEach((post) => {
-//                       const postElement = document.createElement("div");
-//                       postElement.classList.add("card");
-//                       postElement.innerHTML = `
-//                           <h2 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h2>
-//                           <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
-//                           <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-//                           <div class="card-date">${post.created_date}</div>
-//                       `;
-//                       postContainer.appendChild(postElement);
-//                       postElement.querySelector(".card-link").addEventListener("click", (event) => {
-//                           event.preventDefault();
-//                           const postSlug = event.target.getAttribute("data-post-slug");
-//                           console.log("Fetching details for slug:", postSlug);
-//                           fetchPostDetails(postSlug, lang);
-//                       });
-//                   });
-//                   renderPagination(meta, null, date, lang); // Pass the language to the pagination function
-//               } else {
-//                   console.error("Error: Expected an array of posts");
-//               }
-//           })
-//           .catch((error) => console.error("Error fetching posts for archive:", error));
-//   }
-
-
 function renderPagination(meta, search = null, archiveDate = null, lang = 'en') {
     const paginationContainer = document.querySelector(".wn__pagination");
     paginationContainer.innerHTML = ""; // مسح الترقيم السابق
@@ -419,79 +267,49 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
             const page = event.target.getAttribute("data-page");
   
             if (search) {
+                console.log("entre 1",search);
                 fetchsearch(search, page, lang);
             } else if (archiveDate) {
+                console.log("entre 2");
                 fetchPostsArchive(archiveDate, page, lang);
             } else {
+                console.log("entre 3");
                 fetchPosts(page, lang);
             }
         });
     });
 }
-function fetchsearch(search, page = 1, lang = null) {
-    lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // استخدام اللغة المختارة أو الافتراضية
-    axios
-        .get(`https://bloggi.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
-        .then((response) => {
-            const { data, meta } = response.data;
-            if (Array.isArray(data)) {
-                const postContainer = document.querySelector("#post-container");
-                postContainer.innerHTML = ""; // مسح البيانات القديمة
-
-                data.forEach((post) => {
-                    const postElement = document.createElement("div");
-                    postElement.classList.add("card");
-                    postElement.innerHTML = `
-                        <h2 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h2>
-                        <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
-                        <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-                        <div class="card-date">${post.created_date}</div>
-                    `;
-                    postContainer.appendChild(postElement);
-
-                    // تحديث رابط "اقرأ المزيد"
-                    postElement.querySelector(".card-link").addEventListener("click", (event) => {
-                        event.preventDefault();
-                        const postSlug = event.target.getAttribute("data-post-slug");
-                        fetchPostDetails(postSlug, lang);
-                    });
-                });
-
-                // تحديث الترقيم مع اللغة المختارة
-                renderPagination(meta, search, null, lang);
-            } else {
-                console.error("Error: Expected an array of search results");
-            }
-        })
-        .catch((error) => console.error("Error fetching search results:", error));
+function exitArchiveMode() {
+    localStorage.removeItem('currentArchiveDate'); // Clear archive state
+    // fetchPosts(1, localStorage.getItem('selectedLanguage') || 'en'); // Fetch regular posts
 }
-
 function fetchPostsArchive(date, page = 1, lang = null) {
-    lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // استخدام اللغة المختارة أو الافتراضية
+    lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
     console.log("Fetching posts for archive date:", date, "in language:", lang);
     
-    // تخزين تاريخ الأرشيف في localStorage
+    // Store the archive date in localStorage
     localStorage.setItem('currentArchiveDate', date);
+    
     axios
         .get(`https://bloggi.test/api/archive/${date}?page=${page}&lang=${lang}`)
         .then((response) => {
-            const { data, meta } = response.data; // استرداد البيانات
+            const { data, meta } = response.data; // Retrieve the data
             if (Array.isArray(data)) {
                 const postContainer = document.querySelector("#post-container");
-                postContainer.innerHTML = ""; // مسح المشاركات السابقة
+                postContainer.innerHTML = ""; // Clear previous posts
 
                 data.forEach((post) => {
                     const postElement = document.createElement("div");
                     postElement.classList.add("card");
                     postElement.innerHTML = `
-                        <h2 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h2>
-                        <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
-                        <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-                        <div class="card-date">${post.created_date}</div>
-                    `;
+                    <h4 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h4>
+                    <div class="card-author">by ${post.author.name}</div>
+                    <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
+                    <div class="card-date">${post.created_date}</div>
+                `;
                     postContainer.appendChild(postElement);
 
-                    // تحديث رابط "اقرأ المزيد" لعرض التفاصيل
+                    // Update "Read More" link to fetch post details
                     postElement.querySelector(".card-link").addEventListener("click", (event) => {
                         event.preventDefault();
                         const postSlug = event.target.getAttribute("data-post-slug");
@@ -499,7 +317,7 @@ function fetchPostsArchive(date, page = 1, lang = null) {
                     });
                 });
 
-                // تحديث الترقيم مع اللغة المختارة
+                // Update pagination with selected language
                 renderPagination(meta, null, date, lang);
             } else {
                 console.error("Error: Expected an array of posts");
@@ -508,11 +326,9 @@ function fetchPostsArchive(date, page = 1, lang = null) {
         .catch((error) => console.error("Error fetching posts for archive:", error));
 }
 
+
 function fetchsearch(search, page = 1, lang = null) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // استخدام اللغة المختارة أو الافتراضية
-    currentSearchQuery = search; // حفظ استعلام البحث الحالي
-    localStorage.setItem('currentSearchQuery', search); // حفظ استعلام البحث
-    console.log('Current Search Query:', search);
     axios
         .get(`https://bloggi.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
         .then((response) => {
@@ -525,8 +341,8 @@ function fetchsearch(search, page = 1, lang = null) {
                     const postElement = document.createElement("div");
                     postElement.classList.add("card");
                     postElement.innerHTML = `
-                        <h2 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h2>
-                        <p class="card-text">${lang === 'ar' ? post.description : post.description_en}</p>
+                        <h4 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h4>
+                        <div class="card-author">by ${post.author.name}</div>
                         <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
                         <div class="card-date">${post.created_date}</div>
                     `;
@@ -557,12 +373,12 @@ function switchLanguage(lang) {
     fetch(langFile)
         .then(response => response.json())
         .then(data => {
-            // تغيير النصوص في الـnavbar
+            // Change navbar texts
             document.querySelector('a[href="index.html"]').textContent = data.home;
             document.querySelector('a[href="components/secend-page/contact.html#about-section"]').textContent = data.about_us;
             document.querySelector('a[href="components/secend-page/contact.html#announcements-section"]').textContent = data.annonce;
             document.querySelector('a[href="components/secend-page/contact.html#contact-section"]').textContent = data.contact;
-            document.querySelector('.plogo').textContent = data.logo;
+            document.querySelector('.logo').textContent = data.logo;
             document.querySelector('.search1').textContent = data.search;
             document.getElementById('srch').setAttribute('placeholder', data.search);
 
@@ -573,18 +389,18 @@ function switchLanguage(lang) {
             document.querySelector('#en-btn').innerHTML = data.english;
             document.querySelector('#ar-btn').innerHTML = data.arabic;
 
-            // ترجمة الـ Pagination
+            // Update pagination texts
             document.querySelectorAll('a[aria-label="Previous"]').forEach(button => {
                 button.setAttribute('aria-label', data.previous);
-                button.innerHTML = data.previous; // تغيير النص
+                button.innerHTML = data.previous; // Change text
             });
 
             document.querySelectorAll('a[aria-label="Next"]').forEach(button => {
                 button.setAttribute('aria-label', data.next);
-                button.innerHTML = data.next; // تغيير النص
+                button.innerHTML = data.next; // Change text
             });
 
-            // ضبط اتجاه النص
+            // Adjust text direction
             if (lang === 'ar') {
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.documentElement.setAttribute('lang', 'ar');
@@ -592,38 +408,35 @@ function switchLanguage(lang) {
                 document.documentElement.setAttribute('dir', 'ltr');
                 document.documentElement.setAttribute('lang', 'en');
             }
-            const archiveDate = localStorage.getItem('currentArchiveDate');
+
+            // Check URL for search or archive queries
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search1');
+            const archiveDate = localStorage.getItem('currentArchiveDate'); // Fix logging
+            console.log('Archive Date:', archiveDate); // Log actual value
+
             if (archiveDate) {
-                fetchPostsArchive(archiveDate, 1, lang); // استدعاء المشاركات المؤرشفة باللغة الجديدة
+                // Fetch search results with the new language
+                fetchPostsArchive(archiveDate, 1, lang);
+            } else if (searchQuery) {
+                // Fetch archive posts with the new language
+                fetchsearch(searchQuery, 1, lang);
+               
+            } else if (currentMode === 'single' && currentPostSlug) {
+                // Reload post details with the new language
+                fetchPostDetails(currentPostSlug, lang);
             } else {
-                // التحقق إذا كان هناك استعلام بحث مخزن
-                const searchQuery = localStorage.getItem('currentSearchQuery');
-                if (searchQuery) {
-                    fetchsearch(searchQuery, 1, lang); // استدعاء نتائج البحث باللغة الجديدة
-                }
-        
-                // إذا كنت في صفحة عرض المشاركة (Read More)
-                if (currentMode === 'single' && currentPostSlug) {
-                    fetchPostDetails(currentPostSlug, lang);  // إعادة تحميل تفاصيل المنشور بنفس الـ postSlug
-                } else {
-                    fetchPosts(1, lang);  // عرض قائمة المنشورات إذا لم يكن هناك منشور فردي
-                }
+                // Fetch posts if no specific search, archive, or post is requested
+                fetchPosts(1, lang);
             }
-    
+
             fetchRecentPosts(lang);
-            // تحديث نصوص إضافية في الصفحة
+
+            // Update additional texts
             document.querySelector('.post-author').textContent = data.author;
             document.querySelector('.post-number').textContent = data.valuenumber;
             document.querySelector('.download-button').textContent = data.downloadButton;
             document.querySelector('.back-button').textContent = data.backButton;
-
-        //     if (currentMode === "search") {
-        //       fetchsearch(currentSearchQuery, 1, lang); // استدعاء البحث مع اللغة الجديدة
-        //   } else if (currentMode === "archive") {
-        //       fetchPostsArchive(currentArchiveDate, 1, lang); // استدعاء الأرشيف مع اللغة الجديدة
-        //   } else {
-        //       fetchPosts(1, lang); // استدعاء جلب المنشورات العادية مع اللغة الجديدة
-        //   }
         })
         .catch(error => console.error('Error loading language file:', error));
 }
@@ -648,7 +461,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const savedLanguage = localStorage.getItem('selectedLanguage');
     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-     fetchPosts(1, savedLanguage); // جلب الصفحة الأولى باللغة المختارة
+    
+    
      fetchRecentPosts(savedLanguage);
 });
 

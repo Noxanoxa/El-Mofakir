@@ -1,14 +1,21 @@
 /* General styles */
 .post {
     font-family: 'Arial', sans-serif;
-    background-color: #f3f3f3; /* Softer background for contrast */
+    background-color: #D8D2C2; /* Softer background for contrast */
     margin: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+[dir="rtl"]  .post{
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
+}
 /* Container */
 .container {
     display: flex;
@@ -17,10 +24,14 @@
     align-items: center;
     padding: 20px;
 }
-
+[dir="rtl"] .container{
+    padding: 20px;
+    margin-right: -100px;
+    margin-left: -100px;
+}
 /* Card style */
 .card {
-    background-color: #fff;
+    background-color: #FAF7F0;
     border-radius: 10px; /* Slightly larger radius for friendlier appearance */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
     width: 100%; /* Full width for a responsive container */
@@ -32,7 +43,9 @@
     justify-content: space-between;
     align-items: center;
 }
-
+[dir="rtl"] .card {
+    padding: 10px;
+}
 .card:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
     transform: translateY(-3px); /* Lift effect on hover */
@@ -40,14 +53,14 @@
 
 .card-title {
     font-size: 22px;
-    color: #333;
+    color: #B17457;
     margin-bottom: 4%;
     font-weight: 600;
 }
 
 .card-link {
     font-size: 16px;
-    color: green; /* Brighter color for better visibility */
+    color: #B17457; /* Brighter color for better visibility */
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -103,7 +116,7 @@
 /* Post Title */
 .single-post h2 {
     font-size: 30px;
-    color: #2c3e50;
+    color: #4A4947;
     text-align: center;
     font-weight: 700;
     margin-bottom: 25px;
@@ -128,7 +141,7 @@
 /* Description Label */
 .description-label {
     font-size: 18px;
-    color: #16a085;
+    color: #B17457;
     font-weight: 600;
     margin-bottom: 10px;
     display: block;
@@ -139,7 +152,7 @@
 .post-description {
     font-size: 18px;
     color: #34495e;
-    background-color: #ecf0f1;
+    background-color: #FAF7F0;
     padding: 15px;
     border-radius: 8px;
     line-height: 1.7;
@@ -148,7 +161,9 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
-
+[dir="rtl"] .post-description{
+    
+}
 .post-description:hover {
     background-color: #e0f7fa; /* Light hover effect */
 }
@@ -164,7 +179,7 @@
 .download-button, .back-button {
     display: inline-block;
     padding: 12px 25px;
-    background-color: green;
+    background-color: #B17457;
     color: white;
     font-size: 16px;
     font-weight: 600;
@@ -174,7 +189,7 @@
 }
 
 .download-button:hover, .back-button:hover {
-    background-color: teal;
+    background-color: #4A4947;
     transform: translateY(-3px);
 }
 
@@ -185,6 +200,51 @@
     font-weight: bold;
     margin-top: 40px;
     text-align: right;
+}
+
+/* General RTL adjustments */
+[dir="rtl"] .post, 
+[dir="rtl"] .container, 
+[dir="rtl"] .card {
+    direction: rtl; /* Switches text direction */
+    text-align: right; /* Align text to the right */
+}
+
+/* Ensure metadata is aligned correctly */
+[dir="rtl"] .post-meta {
+    flex-direction: row-reverse; 
+    margin-left: 90px;
+    margin-right: 90px;}
+
+/* Adjust padding and alignment for the description */
+[dir="rtl"] .post-description {
+    margin-left: 90px;
+    margin-right: 90px;
+}
+
+/* Align pagination buttons */
+[dir="rtl"] .pagination-controls {
+    direction: rtl; /* Reverse the pagination controls */
+}
+
+/* Specific RTL card adjustments */
+[dir="rtl"] .card-author {
+    left: auto;
+    right: 10px; /* Move the author text to the right */
+}
+[dir="rtl"] .description-label {
+    direction: rtl;
+    flex-direction: row-reverse;
+    margin-left: 890px; 
+}
+[dir="rtl"] .card-date {
+    right: auto;
+    left: 10px; /* Move the date to the left */
+}
+
+/* Related articles section */
+.related-articles {
+    text-align: right; /* Align the title to the right */
 }
 
 

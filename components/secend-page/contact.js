@@ -66,7 +66,7 @@ function switchLanguage(lang) {
           document.querySelector('a[href="#about-section"]').textContent = data.about_us;
           document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
           document.querySelector('a[href="#contact-section"]').textContent = data.contact;
-          document.querySelector('.plogo').textContent = data.logo;
+          document.querySelector('.logo').textContent = data.logo;
 
           // Update About Us section
           document.querySelector('.about-container h2').textContent = data.about_us;
