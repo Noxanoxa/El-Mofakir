@@ -65,6 +65,7 @@ function fetchPosts(page = 1, lang = 'en') {
                     });
                 });
                 renderPagination(meta, null ,null, lang);
+                
             } else {
                 console.error('Error: Expected an array of posts');
             }
@@ -78,6 +79,12 @@ function fetchPostDetails(postSlug, lang) {
     currentMode = 'single';  // تغيير الحالة إلى عرض المنشور الفردي
     currentPostSlug = postSlug;  // حفظ الـ postSlug
     localStorage.removeItem('currentArchiveDate');
+
+    // إخفاء الترقيم
+    const paginationContainer = document.querySelector(".wn__pagination");
+if (paginationContainer) {
+    paginationContainer.style.display = 'none'; // إخفاء الترقيم
+}
 
     axios.get(`https://bloggi.test/api/post/${postSlug}`)
         .then(response => {
@@ -111,13 +118,16 @@ function fetchPostDetails(postSlug, lang) {
     </div>
 `;
 
-
-
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
+              
                 event.preventDefault();
                 fetchPosts(1, lang);  // العودة إلى قائمة المنشورات
+               
                 currentMode = 'list';  // العودة إلى وضع "list"
                 currentPostSlug = null;  // إعادة تعيين postSlug
+
+                document.querySelector(".wn__pagination").style.display = 'block';
+               
             });
         })
         .catch(error => console.error('Error fetching post details:', error));

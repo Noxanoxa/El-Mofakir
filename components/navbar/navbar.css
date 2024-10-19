@@ -1,4 +1,4 @@
-/* General Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -34,6 +34,10 @@ header {
     text-decoration: none !important; /* Forcefully remove any text decorations */
     border-bottom: none; /* Remove any potential border below */
     cursor: pointer;
+}
+[dir="rtl"] .logo {
+    font-size: 40px; 
+    font-family: "Thabit" ,serif;
 }
 
 /* Responsive Logo for Tablets and Phones */
@@ -112,6 +116,34 @@ header {
     display: none;
 }
 
+
+header#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #4A4947;
+    color: white;
+    z-index: 1000;
+    padding: 10px 20px;
+}
+
+/* Styling for the footer */
+
+main {
+    flex-grow: 1; /* This ensures the main content grows and takes up the space between the navbar and footer */
+    padding: 80px 20px; /* Add top padding to prevent the content from overlapping with the fixed navbar */
+}
+
+/* Media queries for responsive behavior */
+@media (max-width: 768px) {
+    header#navbar .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+
 /* Media Query for Tablets (max-width: 1000px) */
 @media (max-width: 1000px) {
     .menu {
@@ -142,17 +174,16 @@ header {
     #chk1:checked ~ .navbar ul {
         right: 0;
     }
-
-    .lang-switcher {
-        display: none; 
-    }
 }
 
 @media (max-width: 600px) {
     .logo h1 {
         font-size: 20px;
     }
-
+    .lang-switcher {
+      margin-right: 20px;
+      margin-left: 20px;
+    }
     .menu {
         margin-right: 10px; /* Adjust space for smaller screens */
     }

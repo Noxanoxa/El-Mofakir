@@ -201,36 +201,34 @@
     margin-top: 40px;
     text-align: right;
 }
+/* 
 
-/* General RTL adjustments */
 [dir="rtl"] .post, 
 [dir="rtl"] .container, 
 [dir="rtl"] .card {
-    direction: rtl; /* Switches text direction */
-    text-align: right; /* Align text to the right */
+    direction: rtl; 
+    text-align: right; 
 }
 
-/* Ensure metadata is aligned correctly */
 [dir="rtl"] .post-meta {
     flex-direction: row-reverse; 
     margin-left: 90px;
     margin-right: 90px;}
 
-/* Adjust padding and alignment for the description */
 [dir="rtl"] .post-description {
     margin-left: 90px;
     margin-right: 90px;
 }
 
-/* Align pagination buttons */
+
 [dir="rtl"] .pagination-controls {
-    direction: rtl; /* Reverse the pagination controls */
+    direction: rtl; 
 }
 
-/* Specific RTL card adjustments */
+
 [dir="rtl"] .card-author {
     left: auto;
-    right: 10px; /* Move the author text to the right */
+    right: 10px; 
 }
 [dir="rtl"] .description-label {
     direction: rtl;
@@ -239,28 +237,26 @@
 }
 [dir="rtl"] .card-date {
     right: auto;
-    left: 10px; /* Move the date to the left */
+    left: 10px; 
 }
-
-/* Related articles section */
 .related-articles {
-    text-align: right; /* Align the title to the right */
+    text-align: right; 
 }
 
 
-/* Responsive Styles */
+/
 @media (max-width: 768px) {
     .card {
-        width: 100%; /* Full width for tablets and smaller screens */
-        max-width: 600px; /* Limit max width on medium screens */
+        width: 100%; 
+        max-width: 600px; 
     }
 
     .card-title {
-        font-size: 18px; /* Adjust font size */
+        font-size: 18px; 
     }
 
     .card-text {
-        font-size: 13px; /* Adjust font size for better readability */
+        font-size: 13px; 
     }
 
     .card-link {
@@ -274,28 +270,119 @@
 
 @media (max-width: 480px) {
     .container {
-        padding: 10px; /* Reduce padding for mobile */
+        padding: 10px; 
     }
 
     .card {
         padding: 15px;
-        width: 100%; /* Full width on mobile */
+        width: 100%; 
     }
 
     .card-title {
-        font-size: 16px; /* Smaller title for mobile */
+        font-size: 16px; 
     }
 
     .card-text {
-        font-size: 12px; /* Adjust font size */
-        -webkit-line-clamp: 3; /* Show more lines on smaller screens */
+        font-size: 12px; 
+        -webkit-line-clamp: 3; 
     }
 
     .card-link {
-        font-size: 12px; /* Adjust link font size */
+        font-size: 12px; 
     }
 
     .card-date {
         font-size: 10px;
+    }
+} */
+/* General RTL adjustments */
+[dir="rtl"] .post, 
+[dir="rtl"] .container, 
+[dir="rtl"] .card {
+    direction: rtl; /* Switch text direction */
+    text-align: right; /* Align text to the right */
+}
+
+/* Ensure metadata is aligned correctly */
+[dir="rtl"] .post-meta {
+    flex-direction: row-reverse;
+    justify-content: space-between; /* Adjust alignment of post-meta */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Adjust padding and alignment for the description */
+[dir="rtl"] .post-description {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: justify;
+    padding: 15px;
+}
+
+/* Specific RTL card adjustments */
+[dir="rtl"] .card-author {
+    left: auto;
+    right: 10px; /* Move the author text to the right */
+}
+
+[dir="rtl"] .card-date {
+    right: auto;
+    left: 10px; /* Move the date to the left */
+}
+/* Responsive Mode for Tablets */
+@media (max-width: 768px) {
+    .card {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        justify-content: flex-start;
+        padding: 15px;
+    }
+
+    .card-link {
+        margin-top: auto; /* Push "Read More" to the bottom */
+        text-align: right; /* Align text to the right */
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .card {
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        justify-content: flex-start;
+        padding: 10px;
+    }
+
+    .card-link {
+        margin-top: auto; /* Push "Read More" to the bottom */
+        text-align: right; /* Align text to the right */
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+}
+
+[dir="rtl"] .description-label{
+    text-align: right;
+}
+[dir="rtl"] .container {
+    padding: 10px; /* Adjust padding */
+    margin: 0; /* Remove extra margins */
+
+}
+
+[dir="rtl"] .post-meta {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    [dir="rtl"] .card-author {
+        right: 0;
+    }
+
+    [dir="rtl"] .card-date {
+        left: 0;
     }
 }

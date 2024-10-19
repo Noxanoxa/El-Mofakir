@@ -12,18 +12,20 @@ p, li {
     font-size: 16px;
     line-height: 1.5;
 }
-
 .sidebar {
     background: linear-gradient(135deg, #f8f9fa, #e8e9eb);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 40px;
+    margin-right: 40px;
+   
+    width: 100%; /* Ensure the sidebar takes full width on tablets and smaller screens */
+    max-width: 400px; /* Limits the sidebar width on larger screens */
 }
 
-
-
 .search-box {
-    width: 400px; /* This limits the width of the entire search box */
+    width: 400px; /* Width of the search box */
     background-color: #FAF7F0;
     border: 1px solid #ddd;
     padding: 15px;
@@ -35,13 +37,13 @@ p, li {
 }
 
 .search-box h2 {
-    width: 100%; /* Makes the h2 take up the full width of the search-box */
-    text-align: center; /* Centers the text inside the box */
-    border-bottom: 1px solid #ddd; /* Adds a line below the text */
-    padding-bottom: 10px; /* Adds some space between the text and the line */
-    margin-bottom: 15px; /* Adds space below the h2 */
-    font-size: 20px; /* Adjusts font size to fit nicely in the box */
-    box-sizing: border-box; /* Ensures padding and borders are included in the width */
+    width: 100%; /* Full width of the search-box */
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    box-sizing: border-box;
 }
 
 .search-box input {
@@ -55,14 +57,15 @@ p, li {
     font-size: 16px;
     text-align: center;
     padding-left: 15px;
-    padding-right: 50px;
+    padding-right: 50px; /* Create space for the button */
     box-sizing: border-box;
+    position: relative;
 }
 
 .search-box button {
     position: absolute;
-    top: 75%;
-    right: 16px;
+    top: 70%; /* Center the button vertically */
+    right: 15px; /* Align the button inside the input */
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
@@ -75,6 +78,12 @@ p, li {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box input::placeholder {
+    color: rgb(150, 150, 150); /* Optional styling for placeholder text */
+    text-align: left;
+    padding-left: 15px;
 }
 
 
@@ -92,7 +101,7 @@ p, li {
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
 }
-.recent-posts:hover, .pub-auth:hover, .archives:hover {
+.search-box ,.recent-posts:hover, .pub-auth:hover, .archives:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -212,4 +221,51 @@ p, li {
     color: grey;
     font-size: 12px;
     margin-top: -5px; /* Adjusts date position slightly closer to the title if needed */
+}
+@media screen and (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+        align-items: center; /* Center content */
+    }
+
+    .sidebar {
+        width: 90%; /* Ensure the sidebar is responsive */
+        margin: 0 auto; /* Center the sidebar */
+        max-width: none; /* Remove max-width on smaller screens */
+    }
+    
+    .recent-posts, .pub-auth, .archives, .search-box {
+        width: 100%; /* Full width for all elements in the sidebar */
+        margin: 20px 0; /* Add margin between elements */
+    }
+}
+
+/* Additional adjustments for mobile screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Full width on mobile */
+        margin: 0; /* Remove margin to fit the screen */
+    }
+
+    .recent-posts, .pub-auth, .archives, .search-box {
+        width: 100%; /* Full width for smaller screens */
+    }
+}
+
+/* RTL (Arabic mode) adjustments */
+[dir="rtl"] .sidebar {
+    margin-right: 40px; /* Ensure consistent margin in RTL mode */
+    margin-left: 0; /* Remove left margin in RTL mode */
+}
+
+[dir="rtl"] .search-box, [dir="rtl"] .recent-posts, [dir="rtl"] .pub-auth, [dir="rtl"] .archives {
+    text-align: right; /* Align text to the right in RTL mode */
+}
+
+[dir="rtl"] .search-box button {
+    left: 16px; /* Move button to the left in RTL mode */
+    right: auto; /* Remove right positioning in RTL mode */
+}
+[dir="rtl"] .search-box input::placeholder{
+    text-align:right; 
 }
