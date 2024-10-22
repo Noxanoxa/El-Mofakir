@@ -1,47 +1,7 @@
-// // Function to fetch search results
-// function fetchsearch(search) {
-//   axios.get(`https://bloggi.test/api/search?keyword=${search}`)
-//     .then(response => {
-//       const posts = response.data.posts;
-//       console.log('search Posts:', posts);
-
-//       if (Array.isArray(posts)) {
-//         const postContainer = document.querySelector('#post-container');
-//         postContainer.innerHTML = '';
-
-//         posts.forEach(post => {
-//           const postElement = document.createElement('div');
-//           postElement.classList.add('card');
-//           postElement.innerHTML = `
-//             <h2 class="card-title">${post.title}</h2>
-//             <p class="card-text">${post.description}</p>
-//             <a href="${post.url}" class="card-link">Read More</a>
-//             <div class="card-date">${post.created_date}</div>
-//           `;
-//           postContainer.appendChild(postElement);
-//         });
-//       } else {
-//         console.error('Error: Expected an array of posts');
-//       }
-//     })
-//     .catch(error => console.error('Error fetching posts:', error));
-// }
-
-// // Add event listener to the search form
-// document.getElementById('search-form').addEventListener('submit', function(event) {
-//   event.preventDefault(); // Prevent the form from submitting the default way
-//   const search = document.getElementById('srch').value;
-//   fetchsearch(search); // Trigger the search function with the input value
-// });
-
-// // Optional: You can load some default posts when the page loads
-// document.addEventListener('DOMContentLoaded', function() {
-//   fetchsearch(''); // You can modify this to load initial data if needed
-// });
 
 /////authority function
 function fetchAuthority() {
-    axios.get('https://bloggi.test/api/authors')
+    axios.get('https://elmofakir.test/api/authors')
       .then(response => {
           var authors = response.data.authors; // Access the data property
          // console.log('Publishing Authority:', authors);
@@ -85,7 +45,7 @@ document.addEventListener('DOMContentLoaded', fetchRecentPosts);
 // Function to fetch archives
 //function archives
 function fetchArchives() {
-    axios.get('https://bloggi.test/api/archives')
+    axios.get('https://elmofakir.test/api/archives')
       .then(response => {
           var archives = response.data.archives; // Access the data property
          // console.log('Recent_archives:', archives);

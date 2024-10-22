@@ -1,32 +1,6 @@
 
-// function AboutUs() {
-//     axios.get('https://bloggi.test/api/page/about-us')
-//       .then(response => {
-//         const aboutUs = response.data.page;
-//         console.log('about us:', aboutUs);
-  
-//         if (aboutUs) {
-//           const aboutUsContainer = document.querySelector('#about-container');
-//             aboutUsContainer.innerHTML = `
-//             <h2>${aboutUs.title_en}</h2>
-//             <div class="content">
-//               <div class="description-section">
-//               ${aboutUs.description}
-//               </div>
-//             </div>
-//             `;
-//         } else {
-//           console.error('Error: Expected an object for about us');
-//         }
-//       })
-//       .catch(error => console.error('Error fetching about us:', error));
-//   }
-  
-//   // Fetch about us when the page loads
-//   document.addEventListener('DOMContentLoaded', AboutUs);
-// Function to fetch and display the About Us content based on the selected language
 function AboutUs(lang) {
-  axios.get('https://bloggi.test/api/page/about-us')
+  axios.get('https://elmofakir.test/api/page/about-us')
       .then(response => {
           const aboutUs = response.data.page;
           console.log('about us:', aboutUs);

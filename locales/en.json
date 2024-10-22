@@ -21,6 +21,10 @@
     "valuenumber":"Value & Number:",
     "downloadButton" :"Download the article in PDF format",
       "backButton":"Back to Posts",
+
+      "posts":"Posts :",
+      "archive :":"Archive :",
+      "search_Results :":"Search Results :",
    
     "about_us": "About Us",
     "description": "Description",

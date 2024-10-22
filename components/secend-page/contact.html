@@ -80,7 +80,7 @@
           <div class="col-lg-8 col-12">
             <h2><span> in touch</span></h2>
             <p class="p1">Feel free to reach out to us for any inquiries or feedback.</p>
-            <form method="POST" action="http://bloggi.test/api/contact-us" id="contact-form">
+            <form method="POST" action="http://elmofakir.test/api/contact-us" id="contact-form">
               <input name="_token" type="hidden" value="W7aN6Q1WsfwYv6OGHX3XGiCMjVeW20gaLyrosGbs">
               <div>
                 <input placeholder="Name" id="name" type="text" required>
@@ -183,120 +183,59 @@ function loadComponent(id, file) {
       };
 
       // Send the data to the backend using Axios
-      axios.post('http://bloggi.test/api/contact-us', formData)
-        .then(response => {
-          // Handle success (display success message or perform other actions)
-          console.log('Message sent successfully:', response);
-          alert('Your message has been sent successfully!'); // Alert or display success message
-          // Optionally, reset the form
-          document.getElementById('contact-form').reset();
-        })
-        .catch(error => {
-          // Handle error (display error message or perform other actions)
-          console.error('Error sending message:', error);
-          alert('There was an error sending your message. Please try again later.');
-        });
-    });
+      axios.post('http://elmofakir.test/api/contact-us', formData)
+      .then(response => {
+    console.log('Message sent successfully:', response);
+
+    // Create a success message div
+    const successMessage = document.createElement('div');
+    successMessage.innerText = 'Your message has been sent successfully!';
+    successMessage.style.backgroundColor = '#FCDEC0';  // Lightest color for the background
+    successMessage.style.color = '#7D5A50';            // Darker color for the text
+    successMessage.style.border = '1px solid #B4846C'; // Slightly darker border
+    successMessage.style.padding = '10px';
+    successMessage.style.margin = '10px 0';
+    successMessage.style.borderRadius = '5px';
+    successMessage.style.textAlign = 'center';
+
+    // Insert the success message into the DOM
+    const formContainer = document.getElementById('contact-form');
+    formContainer.insertAdjacentElement('beforebegin', successMessage);
+
+    // Optionally, reset the form
+    document.getElementById('contact-form').reset();
+
+    // Optionally, remove the message after a delay
+    setTimeout(() => {
+        successMessage.remove();
+    }, 5000);  // Removes after 5 seconds
+})
+.catch(error => {
+    console.error('Error sending message:', error);
+
+    // Create an error message div
+    const errorMessage = document.createElement('div');
+    errorMessage.innerText = 'There was an error sending your message. Please try again later.';
+    errorMessage.style.backgroundColor = '#E5B299';    // Softer color for the background
+    errorMessage.style.color = '#7D5A50';              // Darker color for the text
+    errorMessage.style.border = '1px solid #B4846C';   // Border
+    errorMessage.style.padding = '10px';
+    errorMessage.style.margin = '10px 0';
+    errorMessage.style.borderRadius = '5px';
+    errorMessage.style.textAlign = 'center';
+
+    // Insert the error message into the DOM
+    const formContainer = document.getElementById('contact-form');
+    formContainer.insertAdjacentElement('beforebegin', errorMessage);
+
+    // Optionally, remove the message after a delay
+    setTimeout(() => {
+        errorMessage.remove();
+    }, 5000);  // Removes after 5 seconds
 });
 
-// // Function to fetch and display the About Us content based on the selected language
-// function AboutUs(lang) {
-//     axios.get('https://bloggi.test/api/page/about-us')
-//         .then(response => {
-//             const aboutUs = response.data.page;
-//             console.log('about us:', aboutUs);
-//             console.log('Current language:', lang); // Debugging log
-
-//             if (aboutUs) {
-//                 const aboutUsContainer = document.querySelector('#about-container');
-//                 aboutUsContainer.innerHTML = `
-//                     <h2>${lang === 'ar' ? aboutUs.title : aboutUs.title_en}</h2>
-//                     <div class="content">
-//                         <div class="description-section">
-//                         ${lang === 'ar' ? aboutUs.description : aboutUs.description_en}
-//                         </div>
-//                     </div>
-//                 `;
-//             } else {
-//                 console.error('Error: Expected an object for about us');
-//             }
-//         })
-//         .catch(error => console.error('Error fetching about us:', error));
-// }
-
-// // Function to switch language and update the page
-// function switchLanguage(lang) {
-//     const langFile = `/locales/${lang}.json`;
-
-//     // Save the selected language to localStorage
-//     localStorage.setItem('lang', lang);
-
-//     // Fetch language file for updating other text elements
-//     fetch(langFile)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-
-//             // Update navbar and other sections
-//            // Update navbar
-//            document.querySelector('a[href="/index.html"]').textContent = data.home;
-//             document.querySelector('a[href="#about-section"]').textContent = data.about_us;
-//             document.querySelector('a[href="#announcements-section"]').textContent = data.annonce;
-//             document.querySelector('a[href="#contact-section"]').textContent = data.contact;
-//             document.querySelector('.plogo').textContent = data.logo;
-
-//             // Update About Us section
-//             document.querySelector('.about-container h2').textContent = data.about_us;
-//            // document.querySelector('.description-section h2').textContent = data.description;
-//              ////////journal_information
-//              document.querySelector('.info-section h2').textContent = data.journal_information;
-//            document.querySelector('.EISSN').textContent = data.eissn;
-//            document.querySelector('.Frequency').textContent = data.frequency;
-//            document.querySelector('.Acceptance').textContent = data.acceptance;
-//            document.querySelector('.Response_t').textContent = data.response_t;
-//            document.querySelector('.Publication_t').textContent = data.publication_t;
-//            document.querySelector('.Year_c').textContent = data.year_c;
-//            document.querySelector('.Country').textContent = data.country;
-//            document.querySelector('.Institution').textContent = data.institution;
-//            document.querySelector('.Impact_f').textContent = data.impact_f;
-//             ////announce
-//             document.querySelector('.announcements-section h2').textContent = data.announcements;
-//             document.querySelector('.contact-section h2').textContent = data.contact;
-//             /////////in_touch
-//             document.querySelector('.col-lg-8 h2').textContent = data.in_touch;
-//             document.querySelector('.p1').textContent = data.feel_free;
-//             document.getElementById('name').setAttribute('placeholder', data.name);
-//         document.getElementById('email').setAttribute('placeholder', data.email);
-//         document.getElementById('mobile').setAttribute('placeholder', data.mobile);
-//         document.getElementById('title').setAttribute('placeholder', data.subject);
-//         document.getElementById('message').setAttribute('placeholder', data.message);
-//         document.querySelector('.btnsend').textContent = data.send_message;
-
-// ///////////////////get_office_info
-//         document.querySelector('.col-lg-4 h2').textContent = data.get_office_info;
-//         document.querySelector('.p2').textContent = data.visit_office;
-//         document.querySelector('.s1').textContent = data.address;
-//            document.querySelector('.s2').textContent = data.phone;
-//            document.querySelector('.s3').textContent = data.email;
-//            document.querySelector('.s4').textContent = data.website;
-           
-//            document.querySelector('#en-btn').innerHTML = data.english;
-//            document.querySelector('#ar-btn').innerHTML = data.arabic;
-
-//             // Adjust text direction
-//             if (lang === 'ar') {
-//                 document.documentElement.setAttribute('dir', 'rtl');
-//                 document.documentElement.setAttribute('lang', 'ar');
-//             } else {
-//                 document.documentElement.setAttribute('dir', 'ltr');
-//                 document.documentElement.setAttribute('lang', 'en');
-//             }
-
-//             // Update About Us section after language change
-//             AboutUs(lang); // Call AboutUs to refresh its content
-//         })
-//         .catch(error => console.error('Error loading language file:', error));
-// }
+    });
+});
 
 // Load the correct language when the page loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -319,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
    function Announcements() {
     console.log('announcement');
-    axios.get('https://bloggi.test/api/all_announcements')
+    axios.get('https://elmofakir.test/api/all_announcements')
       .then(response => {
         const announcements = response.data.announcements;
         console.log('announcements:', announcements);

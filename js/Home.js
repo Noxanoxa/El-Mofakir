@@ -35,11 +35,11 @@ let currentPostSlug = null; // لحفظ slug المنشور الحالي في ح
 
 function fetchPosts(page = 1, lang = 'en') {
 
-    axios.get(`https://bloggi.test/api/all_posts?page=${page}`)
+    axios.get(`https://elmofakir.test/api/all_posts?page=${page}`)
         .then(response => {
             const { data, meta } = response.data;
             console.log('Posts:', data);
-
+            document.getElementById('content-label').innerText =  `${lang === 'ar' ? 'المقالات :' : 'Posts :'}`;
             if (Array.isArray(data)) {
                 const postContainer = document.querySelector('#post-container');
                 postContainer.innerHTML = ''; // مسح المنشورات الحالية
@@ -76,109 +76,88 @@ function fetchPosts(page = 1, lang = 'en') {
 
 function fetchPostDetails(postSlug, lang) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en';
-    currentMode = 'single';  // تغيير الحالة إلى عرض المنشور الفردي
-    currentPostSlug = postSlug;  // حفظ الـ postSlug
-    localStorage.removeItem('currentArchiveDate');
+    currentMode = 'single';  // Set mode to single post
+    currentPostSlug = postSlug;  // Save the postSlug
+    localStorage.setItem('currentPostSlug', postSlug);  // Store postSlug in localStorage
+    localStorage.removeItem('currentArchiveDate');  // Remove archive date if any
 
-    // إخفاء الترقيم
+    // Hide pagination
     const paginationContainer = document.querySelector(".wn__pagination");
-if (paginationContainer) {
-    paginationContainer.style.display = 'none'; // إخفاء الترقيم
-}
+    if (paginationContainer) {
+        paginationContainer.style.display = 'none';  // Hide pagination
+    }
 
-    axios.get(`https://bloggi.test/api/post/${postSlug}`)
+    document.getElementById('content-label').innerText = '';  // Clear content label
+
+    axios.get(`https://elmofakir.test/api/post/${postSlug}`)
         .then(response => {
             const post = response.data.post;
             if (!post || Object.keys(post).length === 0) {
                 console.error('Error: No post details found for this slug.');
                 return;
             }
+
             const postContainer = document.querySelector('#post-container');
             postContainer.innerHTML = `
-    <div class="single-post">
-        <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
+                <div class="single-post">
+                    <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
 
-        <div class="post-meta">
-            <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${lang === 'ar' ? post.author : post.author_en}</span>
-            <span class="post-number">${lang === 'ar' ? 'القيمة والرقم: ' : 'Value & Number: '}${post.issue_number}</span>
-            <span class="post-date">${post.created_at}</span>
-        </div>
+                    <div class="post-meta">
+                        <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${post.author.name}</span>
+                        <span class="post-number">${lang === 'ar' ? 'القيمة والرقم: ' : 'Volume & Number: '}${post.volume.number} & ${post.issue.number}</span>
+                        <span class="post-date">${post.created_date}</span>
+                    </div>
 
-        <label class="description-label">${lang === 'ar' ? 'الوصف' : 'Description'}</label>
-        <p class="post-description">${lang === 'ar' ? post.description : post.description_en}</p>
+                    <label class="description-label">${lang === 'ar' ? 'الوصف' : 'Description'}</label>
+                    <p class="post-description">${lang === 'ar' ? post.description : post.description_en}</p>
 
-        <div class="button-group">
-            <a href="/path-to-your-pdf-file.pdf" class="download-button" download>
-                ${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}
-            </a>
-            <a href="#" id="back-to-posts" class="back-button">
-                ${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
-            </a>
-        </div>
-    </div>
-`;
+                    <div class="button-group">
+                        <a href="https://elmofakir.test/api/posts/${post.slug_en}/download-all" class="download-button" download>
+                            ${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}
+                        </a>
+                        <a href="#" id="back-to-posts" class="back-button">
+                            ${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
+                        </a>
+                    </div>
+                </div>
+            `;
 
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
-              
                 event.preventDefault();
-                fetchPosts(1, lang);  // العودة إلى قائمة المنشورات
-               
-                currentMode = 'list';  // العودة إلى وضع "list"
-                currentPostSlug = null;  // إعادة تعيين postSlug
+                fetchPosts(1, lang);  // Return to the list of posts
+                
+                currentMode = 'list';  // Switch back to list mode
+                currentPostSlug = null;  // Reset postSlug
+                localStorage.removeItem('currentPostSlug');  // Remove postSlug from localStorage
 
-                document.querySelector(".wn__pagination").style.display = 'block';
-               
+                // Show pagination when back to posts
+                if (paginationContainer) {
+                    paginationContainer.style.display = 'flex';  // Show pagination
+                }
             });
         })
         .catch(error => console.error('Error fetching post details:', error));
 }
 
+// Check if there's a saved postSlug in localStorage when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const savedPostSlug = localStorage.getItem('currentPostSlug');
+    const lang = localStorage.getItem('selectedLanguage') || 'en';
+
+    if (savedPostSlug) {
+        // If a postSlug exists in localStorage, load the post details
+        fetchPostDetails(savedPostSlug, lang);
+    } else {
+        // Otherwise, load the default list of posts
+        fetchPosts(1, lang);
+    }
+});
 
 
-// function fetchRecentPosts(lang = 'en') {
-//     axios.get('https://bloggi.test/api/recent_posts')
-//         .then(response => {
-//             const posts = response.data.posts;
-//             console.log(`Recent Posts [${lang}]:`, posts);
 
-//             if (Array.isArray(posts)) {
-//                 const postContainer = document.querySelector('#posts-list');
-//                 postContainer.innerHTML = ''; // Clear existing posts
 
-//                 posts.forEach(post => {
-//                     /////////////////////////////////////////////////////////////////////
-                   
-//                     console.log(`Post Slug [${lang}]:`, postSlug);  // Log slug for debugging
-
-//                     const postElement = document.createElement('li');
-//                     postElement.classList.add('li');
-//                     postElement.innerHTML = `
-//                         <a href="#" class="post-title" data-post-slug="${postSlug}">
-//                             ${lang === 'ar' ? post.title : post.title_en}
-//                         </a>
-//                         <p class="post-date">${post.created_date}</p>
-//                     `;
-//                     postContainer.appendChild(postElement);
-
-//                     // Add event listener to fetch post details
-//                     postElement.querySelector('.post-title').addEventListener('click', (event) => {
-//                         event.preventDefault();
-//                         const postSlug = event.target.getAttribute('data-post-slug');
-//                         console.log('Fetching post details for recent post slug:', postSlug);  // Log the clicked slug
-//                         fetchPostDetails(postSlug, lang);
-//                         console.log(`the lang is:`, lang);
-
-                        
-//                     });
-//                 });
-//             } else {
-//                 console.error('Error: Expected an array of posts');
-//             }
-//         })
-//         .catch(error => console.error('Error fetching recent posts:', error));
-// }
 function fetchRecentPosts(lang = 'en') {
-    axios.get('https://bloggi.test/api/recent_posts')
+    axios.get('https://elmofakir.test/api/recent_posts')
         .then(response => {
             const { posts } = response.data;  // تأكد أن هذا هو الهيكل الصحيح من الـ API
            // console.log(`Recent Posts [${lang}]:`, posts);
@@ -301,12 +280,14 @@ function fetchPostsArchive(date, page = 1, lang = null) {
     localStorage.setItem('currentArchiveDate', date);
     
     axios
-        .get(`https://bloggi.test/api/archive/${date}?page=${page}&lang=${lang}`)
+        .get(`https://elmofakir.test/api/archive/${date}?page=${page}&lang=${lang}`)
         .then((response) => {
             const { data, meta } = response.data; // Retrieve the data
             if (Array.isArray(data)) {
                 const postContainer = document.querySelector("#post-container");
                 postContainer.innerHTML = ""; // Clear previous posts
+                document.getElementById('content-label').innerText =  `${lang === 'ar' ? 'الارشيف :' : 'Archive :'}`;
+               
 
                 data.forEach((post) => {
                     const postElement = document.createElement("div");
@@ -340,9 +321,11 @@ function fetchPostsArchive(date, page = 1, lang = null) {
 function fetchsearch(search, page = 1, lang = null) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // استخدام اللغة المختارة أو الافتراضية
     axios
-        .get(`https://bloggi.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
+        .get(`https://elmofakir.test/api/search?keyword=${search}&page=${page}&lang=${lang}`)
         .then((response) => {
             const { data, meta } = response.data;
+            document.getElementById('content-label').innerText = `${lang === 'ar' ? 'نتائج البحث :' : 'Search Results:'}`;
+
             if (Array.isArray(data)) {
                 const postContainer = document.querySelector("#post-container");
                 postContainer.innerHTML = ""; // مسح البيانات القديمة
@@ -417,6 +400,14 @@ function switchLanguage(lang) {
             } else {
                 document.documentElement.setAttribute('dir', 'ltr');
                 document.documentElement.setAttribute('lang', 'en');
+            }
+
+            if (currentMode === 'list') {
+                document.getElementById('content-label').innerText = data.posts;
+            } else if (currentMode === 'archive') {
+                document.getElementById('content-label').innerText = data.archive;
+            } else if (currentMode === 'search') {
+                document.getElementById('content-label').innerText = data.search_results;
             }
 
             // Check URL for search or archive queries

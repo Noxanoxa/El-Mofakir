@@ -29,7 +29,16 @@ html, body {
     width: 70%;
     margin: 20px; /* Margin around the content */
     background-color: #FAF7F0;
-    margin-top: 100px; /* Light cream for content background */
+    margin-top: 0px; /* Light cream for content background */
+}
+
+#content-label {
+    font-size: 2em; /* Adjust font size for a more professional look */
+    font-weight: bold; /* Keep the bold weight for emphasis */
+    padding: 100px 40px 0px; /* Add padding for better spacing */
+    color: #B17450; /* Darker color for text for professionalism */
+    display: inline-block; /* Make the label fit the width of the text */
+    font-family: 'Arial', sans-serif; /* Professional font choice */
 }
 
 #right-sidebar {
@@ -42,7 +51,7 @@ html, body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-left: 20px; 
     margin-right: 20px; /* Adding right margin for sidebar */
-    margin-top: 120px;
+    margin-top: 20px;
 }
 
 /* RTL adjustments */
@@ -54,13 +63,13 @@ html, body {
 [dir="rtl"] #content {
     margin-right: 20px;
     margin-left: 20px;
-    margin-top: 100px;
+    margin-top: 0px;
 }
 
 [dir="rtl"] #right-sidebar {
     margin-right: 20px;
     margin-left: 20px; /* Adjusting sidebar margins for RTL */
-    margin-top: 120px;
+    margin-top: 20px;
 }
 /* Search Box Styles */
 #search-box {

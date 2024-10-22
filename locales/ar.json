@@ -21,6 +21,10 @@
       "valuenumber":":رقم العدد",
       "downloadButton" :"تحميل المقال بصيغة PDF",
       "backButton":"الرجوع الى المقالات",
+
+      "posts":" المقالات :",
+      "archive :":"الارشيف :",
+      "search_Results :":"نتائج البحث :",
    
     "about_us": "من نحن",
     "description": "الوصف",

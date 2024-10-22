@@ -20,12 +20,12 @@ p, li {
     margin-left: 40px;
     margin-right: 40px;
    
-    width: 100%; /* Ensure the sidebar takes full width on tablets and smaller screens */
-    max-width: 400px; /* Limits the sidebar width on larger screens */
+    width: 100%; 
+    max-width: 400px; 
 }
 
 .search-box {
-    width: 400px; /* Width of the search box */
+    width: 400px; 
     background-color: #FAF7F0;
     border: 1px solid #ddd;
     padding: 15px;
@@ -37,7 +37,7 @@ p, li {
 }
 
 .search-box h2 {
-    width: 100%; /* Full width of the search-box */
+    width: 100%; 
     text-align: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
@@ -57,15 +57,15 @@ p, li {
     font-size: 16px;
     text-align: center;
     padding-left: 15px;
-    padding-right: 50px; /* Create space for the button */
+    padding-right: 50px; 
     box-sizing: border-box;
     position: relative;
 }
 
 .search-box button {
     position: absolute;
-    top: 70%; /* Center the button vertically */
-    right: 15px; /* Align the button inside the input */
+    top: 70%; 
+    right: 15px; 
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
@@ -81,7 +81,7 @@ p, li {
 }
 
 .search-box input::placeholder {
-    color: rgb(150, 150, 150); /* Optional styling for placeholder text */
+    color: rgb(150, 150, 150); 
     text-align: left;
     padding-left: 15px;
 }
@@ -208,63 +208,62 @@ p, li {
     text-decoration: none;
     color: #B17457;
     font-weight: bold;
-    display: block; /* Ensures title takes up full width */
-    margin-bottom: 5px; /* Adds space between title and date */
+    display: block; 
+    margin-bottom: 5px; 
 }
 
 .recent-posts .post-title:hover {
     text-decoration: underline;
 }
 
-/* Date styling below the title */
+
 .recent-posts .post-date {
     color: grey;
     font-size: 12px;
-    margin-top: -5px; /* Adjusts date position slightly closer to the title if needed */
+    margin-top: -5px;
 }
 @media screen and (max-width: 1024px) {
     .main-content {
         flex-direction: column;
-        align-items: center; /* Center content */
+        align-items: center; 
     }
 
     .sidebar {
-        width: 90%; /* Ensure the sidebar is responsive */
-        margin: 0 auto; /* Center the sidebar */
-        max-width: none; /* Remove max-width on smaller screens */
+        width: 90%; 
+        margin: 0 auto; 
+        max-width: none; 
     }
     
     .recent-posts, .pub-auth, .archives, .search-box {
-        width: 100%; /* Full width for all elements in the sidebar */
-        margin: 20px 0; /* Add margin between elements */
+        width: 100%; 
+        margin: 20px 0; 
     }
 }
 
-/* Additional adjustments for mobile screens */
+
 @media (max-width: 768px) {
     .sidebar {
-        width: 100%; /* Full width on mobile */
-        margin: 0; /* Remove margin to fit the screen */
+        width: 100%; 
+        margin: 0; 
     }
 
     .recent-posts, .pub-auth, .archives, .search-box {
-        width: 100%; /* Full width for smaller screens */
+        width: 100%; 
     }
 }
 
-/* RTL (Arabic mode) adjustments */
 [dir="rtl"] .sidebar {
-    margin-right: 40px; /* Ensure consistent margin in RTL mode */
-    margin-left: 0; /* Remove left margin in RTL mode */
+    margin-right: 40px; 
+    margin-left: 0; 
 }
 
 [dir="rtl"] .search-box, [dir="rtl"] .recent-posts, [dir="rtl"] .pub-auth, [dir="rtl"] .archives {
-    text-align: right; /* Align text to the right in RTL mode */
+    text-align: right; 
 }
 
 [dir="rtl"] .search-box button {
-    left: 16px; /* Move button to the left in RTL mode */
-    right: auto; /* Remove right positioning in RTL mode */
+    left: 16px; 
+    right: auto; 
 }
 [dir="rtl"] .search-box input::placeholder{
     text-align:right; 

@@ -31,8 +31,8 @@ header {
     font-weight: 600;
     text-transform: uppercase;
     font-family: cursive, Helvetica, sans-serif;
-    text-decoration: none !important; /* Forcefully remove any text decorations */
-    border-bottom: none; /* Remove any potential border below */
+    text-decoration: none !important; 
+    border-bottom: none; 
     cursor: pointer;
 }
 [dir="rtl"] .logo {
@@ -40,16 +40,16 @@ header {
     font-family: "Thabit" ,serif;
 }
 
-/* Responsive Logo for Tablets and Phones */
+
 @media (max-width: 1000px) {
     .logo {
-        font-size: 30px; /* Adjust for tablets */
+        font-size: 30px; 
     }
 }
 
 @media (max-width: 600px) {
     .logo {
-        font-size: 20px; /* Adjust for phones */
+        font-size: 20px; 
     }
 }
 
@@ -127,14 +127,13 @@ header#navbar {
     padding: 10px 20px;
 }
 
-/* Styling for the footer */
 
 main {
-    flex-grow: 1; /* This ensures the main content grows and takes up the space between the navbar and footer */
-    padding: 80px 20px; /* Add top padding to prevent the content from overlapping with the fixed navbar */
+    flex-grow: 1; 
+    padding: 80px 20px;
 }
 
-/* Media queries for responsive behavior */
+
 @media (max-width: 768px) {
     header#navbar .navbar ul {
         flex-direction: column;
@@ -143,15 +142,13 @@ main {
 }
 
 
-
-/* Media Query for Tablets (max-width: 1000px) */
 @media (max-width: 1000px) {
     .menu {
         display: block;
         cursor: pointer;
         font-size: 2rem;
         color: #FCDEC0;
-        margin-right: 20px; /* Adds space between menu icon and the language switcher or other elements */
+        margin-right: 20px; 
     }
 
     .navbar ul {
@@ -185,6 +182,6 @@ main {
       margin-left: 20px;
     }
     .menu {
-        margin-right: 10px; /* Adjust space for smaller screens */
+        margin-right: 10px; 
     }
 }
