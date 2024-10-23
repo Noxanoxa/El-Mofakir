@@ -14,8 +14,10 @@ function loadComponent(id, file) {
 }
 const savedLanguage = localStorage.getItem('selectedLanguage');
 if (savedLanguage) {
+    console.log('here17');
     switchLanguage(savedLanguage);
 } else {
+    console.log('here20');
     switchLanguage('en'); 
     
 }
@@ -124,6 +126,8 @@ function fetchPostDetails(postSlug, lang) {
 
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
                 event.preventDefault();
+                console.log("line 127");
+                exitArchiveMode();  
                 fetchPosts(1, lang);  // Return to the list of posts
                 
                 currentMode = 'list';  // Switch back to list mode
@@ -147,12 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedPostSlug) {
         // If a postSlug exists in localStorage, load the post details
         fetchPostDetails(savedPostSlug, lang);
-    } else {
-        // Otherwise, load the default list of posts
-        fetchPosts(1, lang);
-    }
+    } 
 });
-
 
 
 
@@ -262,7 +262,7 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
                 console.log("entre 2");
                 fetchPostsArchive(archiveDate, page, lang);
             } else {
-                console.log("entre 3");
+                console.log("line 267");
                 fetchPosts(page, lang);
             }
         });
@@ -270,7 +270,10 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
 }
 function exitArchiveMode() {
     localStorage.removeItem('currentArchiveDate'); // Clear archive state
-    // fetchPosts(1, localStorage.getItem('selectedLanguage') || 'en'); // Fetch regular posts
+    // remove search query from URL
+    const url = new URL(window.location.href);
+    url.searchParams.delete('search1');
+    
 }
 function fetchPostsArchive(date, page = 1, lang = null) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
@@ -428,6 +431,7 @@ function switchLanguage(lang) {
                 fetchPostDetails(currentPostSlug, lang);
             } else {
                 // Fetch posts if no specific search, archive, or post is requested
+                console.log("line 432");
                 fetchPosts(1, lang);
             }
 
@@ -446,10 +450,12 @@ function switchLanguage(lang) {
 
 
 document.getElementById('en-btn').addEventListener('click', () => {
+    console.log('here448');
     switchLanguage('en');
 });
 
 document.getElementById('ar-btn').addEventListener('click', () => {
+    console.log('here452');
     switchLanguage('ar');
 });
 
@@ -461,52 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const savedLanguage = localStorage.getItem('selectedLanguage');
+    // console.log('here464');
     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
     
     
      fetchRecentPosts(savedLanguage);
 });
-
-
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const search = urlParams.get("search1");
-//     console.log("search keyword:", search);
-//     const savedLanguage = localStorage.getItem('selectedLanguage');
-//     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-//      fetchPosts(1, savedLanguage); // جلب الصفحة الأولى باللغة المختارة
-//      fetchRecentPosts(savedLanguage);
-   
-//       fetchsearch(search);
-    
-    
-// });
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // منطق اللغة
-//     if (!localStorage.getItem('selectedLanguage')) {
-//         localStorage.setItem('selectedLanguage', 'en'); // تعيين اللغة الافتراضية إلى الإنجليزية
-//     }
-
-//     const savedLanguage = localStorage.getItem('selectedLanguage');
-    
-//     switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-//     fetchRecentPosts(savedLanguage); // جلب المنشورات الحديثة
-
-//     // منطق البحث
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const search = urlParams.get("search1");
-//     console.log("search keyword:", search);
-
-//     if (!search || search.trim() === "") {
-//         // إذا كانت نتيجة البحث فارغة، يتم استدعاء fetchPosts
-//         fetchPosts(1, savedLanguage); // جلب الصفحة الأولى باللغة المختارة
-//     } else {
-//         // إذا كانت نتيجة البحث موجودة، يتم استدعاء fetchsearch
-//         fetchsearch(search);
-//     }
-// });
