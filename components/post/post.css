@@ -26,8 +26,8 @@
 }
 [dir="rtl"] .container{
     padding: 20px;
-    margin-right: -100px;
-    margin-left: -100px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 /* Card style */
 .card {
@@ -161,8 +161,13 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
-[dir="rtl"] .post-description{
-    
+[dir="rtl"] .post-description {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 15px;
+    text-align: justify; /* To ensure better text alignment in paragraphs */
+    direction: rtl; /* This ensures the text direction is right-to-left */
+    line-height: 1.8;
 }
 .post-description:hover {
     background-color: #e0f7fa; /* Light hover effect */
@@ -201,101 +206,7 @@
     margin-top: 40px;
     text-align: right;
 }
-/* 
 
-[dir="rtl"] .post, 
-[dir="rtl"] .container, 
-[dir="rtl"] .card {
-    direction: rtl; 
-    text-align: right; 
-}
-
-[dir="rtl"] .post-meta {
-    flex-direction: row-reverse; 
-    margin-left: 90px;
-    margin-right: 90px;}
-
-[dir="rtl"] .post-description {
-    margin-left: 90px;
-    margin-right: 90px;
-}
-
-
-[dir="rtl"] .pagination-controls {
-    direction: rtl; 
-}
-
-
-[dir="rtl"] .card-author {
-    left: auto;
-    right: 10px; 
-}
-[dir="rtl"] .description-label {
-    direction: rtl;
-    flex-direction: row-reverse;
-    margin-left: 890px; 
-}
-[dir="rtl"] .card-date {
-    right: auto;
-    left: 10px; 
-}
-.related-articles {
-    text-align: right; 
-}
-
-
-/
-@media (max-width: 768px) {
-    .card {
-        width: 100%; 
-        max-width: 600px; 
-    }
-
-    .card-title {
-        font-size: 18px; 
-    }
-
-    .card-text {
-        font-size: 13px; 
-    }
-
-    .card-link {
-        font-size: 13px;
-    }
-
-    .card-date {
-        font-size: 11px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 10px; 
-    }
-
-    .card {
-        padding: 15px;
-        width: 100%; 
-    }
-
-    .card-title {
-        font-size: 16px; 
-    }
-
-    .card-text {
-        font-size: 12px; 
-        -webkit-line-clamp: 3; 
-    }
-
-    .card-link {
-        font-size: 12px; 
-    }
-
-    .card-date {
-        font-size: 10px;
-    }
-} */
-/* General RTL adjustments */
 [dir="rtl"] .post, 
 [dir="rtl"] .container, 
 [dir="rtl"] .card {
@@ -312,12 +223,7 @@
 }
 
 /* Adjust padding and alignment for the description */
-[dir="rtl"] .post-description {
-    margin-left: 0;
-    margin-right: 0;
-    text-align: justify;
-    padding: 15px;
-}
+
 
 /* Specific RTL card adjustments */
 [dir="rtl"] .card-author {
