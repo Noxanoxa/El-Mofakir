@@ -75,12 +75,24 @@ function fetchPosts(page = 1, lang = 'en') {
         .catch(error => console.error('Error fetching posts:', error));
 }
 
-
-function fetchPostDetails(postSlug, lang) {
-    lang = lang || localStorage.getItem('selectedLanguage') || 'en';
+// دالة لتحديد الوضع إلى "single" وحفظ الـ postSlug
+function setSinglePostMode(postSlug) {
     currentMode = 'single';  // Set mode to single post
     currentPostSlug = postSlug;  // Save the postSlug
     localStorage.setItem('currentPostSlug', postSlug);  // Store postSlug in localStorage
+}
+
+// دالة للتبديل إلى وضع القائمة "list" وإعادة تعيين postSlug
+function setListMode() {
+    currentMode = 'list';  // Switch back to list mode
+    currentPostSlug = null;  // Reset postSlug
+    localStorage.removeItem('currentPostSlug');  // Remove postSlug from localStorage
+}
+
+function fetchPostDetails(postSlug, lang) {
+    lang = lang || localStorage.getItem('selectedLanguage') || 'en';
+    setSinglePostMode(postSlug);  // استخدام الدالة لتحديد وضع single
+    
     localStorage.removeItem('currentArchiveDate');  // Remove archive date if any
 
     // Hide pagination
@@ -126,13 +138,11 @@ function fetchPostDetails(postSlug, lang) {
 
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
                 event.preventDefault();
-                console.log("line 127");
+                console.log("Returning to post list");
                 exitArchiveMode();  
                 fetchPosts(1, lang);  // Return to the list of posts
                 
-                currentMode = 'list';  // Switch back to list mode
-                currentPostSlug = null;  // Reset postSlug
-                localStorage.removeItem('currentPostSlug');  // Remove postSlug from localStorage
+                setListMode();  // استخدام الدالة لتبديل الوضع إلى القائمة
 
                 // Show pagination when back to posts
                 if (paginationContainer) {
@@ -142,6 +152,7 @@ function fetchPostDetails(postSlug, lang) {
         })
         .catch(error => console.error('Error fetching post details:', error));
 }
+
 
 // Check if there's a saved postSlug in localStorage when the page loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -269,12 +280,12 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
     });
 }
 function exitArchiveMode() {
-    localStorage.removeItem('currentArchiveDate'); // Clear archive state
-    // remove search query from URL
+    localStorage.removeItem('currentArchiveDate');  // حذف حالة الأرشيف
     const url = new URL(window.location.href);
-    url.searchParams.delete('search1');
-    
+    url.searchParams.delete('search1');  // حذف استعلام البحث من الـ URL إذا كان موجوداً
+    history.pushState({}, '', url);  // تحديث الـ URL بدون إعادة تحميل الصفحة
 }
+
 function fetchPostsArchive(date, page = 1, lang = null) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
     console.log("Fetching posts for archive date:", date, "in language:", lang);
@@ -318,6 +329,14 @@ function fetchPostsArchive(date, page = 1, lang = null) {
             }
         })
         .catch((error) => console.error("Error fetching posts for archive:", error));
+}
+function handleHomeClick(event) {
+    event.preventDefault();  // This prevents the default action of the link
+    exitArchiveMode();  // Exit archive mode if applicable
+    setListMode();  // Switch back to the list mode
+    
+    // Optionally, if you want to manually redirect to the homepage after running the functions
+    window.location.href = 'index.html';
 }
 
 
