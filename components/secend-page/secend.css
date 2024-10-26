@@ -45,6 +45,8 @@ h2 {
 .description-section {
     margin-right: 0;
     color: #4A4947; /* Dark grey for contrast */
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .journal-info {
@@ -219,6 +221,13 @@ p {
     font-size: 20px;
     margin-bottom: 48px;
     color: #000;
+}
+[dir="rtl"] .prgrph i {
+    margin-right: 0px;
+    margin-left: 10px;
+    font-size: 20px;
+    margin-bottom: 48px;
+    color: #000; 
 }
 
 /* Media Queries for Responsive Design */

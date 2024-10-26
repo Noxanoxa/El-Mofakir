@@ -212,8 +212,8 @@ html, body {
 /* Back to Top Button */
 .back-top {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 60px;
+    right: 45px;
     background-color: transparent;
     color: #4A4947; /* Dark grey */
     padding: 10px 15px;

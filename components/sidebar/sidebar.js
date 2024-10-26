@@ -4,7 +4,7 @@ function fetchAuthority() {
     axios.get('https://elmofakir.test/api/authors')
       .then(response => {
           var authors = response.data.authors; // Access the data property
-         // console.log('Publishing Authority:', authors);
+          console.log('Publishing Authority:', authors);
 
           // Check if authors is an array
           if (Array.isArray(authors)) {
@@ -41,9 +41,7 @@ document.addEventListener('DOMContentLoaded', fetchAuthority);
 
 // Fetch posts when the page loads
 document.addEventListener('DOMContentLoaded', fetchRecentPosts);
-//function archives
-// Function to fetch archives
-//function archives
+
 function fetchArchives() {
     axios.get('https://elmofakir.test/api/archives')
       .then(response => {

@@ -41,7 +41,7 @@ function fetchPosts(page = 1, lang = 'en') {
         .then(response => {
             const { data, meta } = response.data;
             console.log('Posts:', data);
-            document.getElementById('content-label').innerText =  `${lang === 'ar' ? 'المقالات :' : 'Posts :'}`;
+            document.getElementById('content-label').innerText =  `${lang === 'ar' ? 'المقالات :' : 'Articles:'}`;
             if (Array.isArray(data)) {
                 const postContainer = document.querySelector('#post-container');
                 postContainer.innerHTML = ''; // مسح المنشورات الحالية
@@ -50,23 +50,27 @@ function fetchPosts(page = 1, lang = 'en') {
                     const postElement = document.createElement('div');
                     postElement.classList.add('card');
                     postElement.innerHTML = `
-                        <h4 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h4>
+                        <h4 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h4>
                         <div class="card-author">by ${post.author.name}</div>
                         <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
                         <div class="card-date">${post.created_date}</div>
                     `;
-
+                
                     postContainer.appendChild(postElement);
-
-                    // تفعيل زر "Read More"
-                    postElement.querySelector('.card-link').addEventListener('click', (event) => {
+                
+                    // تفعيل زر "Read More" والعنوان "card-title"
+                    const fetchDetails = (event) => {
                         event.preventDefault();
                         const postSlug = event.target.getAttribute('data-post-slug');
                         console.log('Fetching details for slug:', postSlug);
                         fetchPostDetails(postSlug, lang);  // تحديث تفاصيل المنشور
-                    });
+                    };
+                
+                    postElement.querySelector('.card-title').addEventListener('click', fetchDetails);
+                    postElement.querySelector('.card-link').addEventListener('click', fetchDetails);
                 });
-                renderPagination(meta, null ,null, lang);
+                
+                renderPagination(meta, null, null, lang);
                 
             } else {
                 console.error('Error: Expected an array of posts');
@@ -94,7 +98,7 @@ function fetchPostDetails(postSlug, lang) {
     setSinglePostMode(postSlug);  // استخدام الدالة لتحديد وضع single
     
     localStorage.removeItem('currentArchiveDate');  // Remove archive date if any
-
+   
     // Hide pagination
     const paginationContainer = document.querySelector(".wn__pagination");
     if (paginationContainer) {
@@ -127,9 +131,11 @@ function fetchPostDetails(postSlug, lang) {
 
                     <div class="button-group">
                         <a href="https://elmofakir.test/api/posts/${post.slug_en}/download-all" class="download-button" download>
+                        <i class="fa-solid fa-download"></i> 
                             ${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}
                         </a>
                         <a href="#" id="back-to-posts" class="back-button">
+                        <i class="fa-solid fa-arrow-right"></i>
                             ${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
                         </a>
                     </div>
@@ -180,7 +186,7 @@ function fetchRecentPosts(lang = 'en') {
                 posts.forEach(post => {
                     // إنشاء عنصر HTML مباشرة بدون استخدام postSlug بشكل منفصل
                     const postElement = document.createElement('li');
-                    postElement.classList.add('li');
+                    postElement.classList.add('post-item'); // تأكد من استخدام نفس اسم الفئة
                     postElement.innerHTML = `
                         <a href="#" class="post-title" data-post-slug="${post.slug_en}">
                             ${lang === 'ar' ? post.title : post.title_en}
@@ -280,10 +286,23 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
     });
 }
 function exitArchiveMode() {
-    localStorage.removeItem('currentArchiveDate');  // حذف حالة الأرشيف
+    localStorage.removeItem('currentArchiveDate');  
     const url = new URL(window.location.href);
-    url.searchParams.delete('search1');  // حذف استعلام البحث من الـ URL إذا كان موجوداً
+    url.searchParams.delete('search1');  
     history.pushState({}, '', url);  // تحديث الـ URL بدون إعادة تحميل الصفحة
+}
+ 
+function exitSearchMode() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Remove the 'search1' query parameter
+    urlParams.delete('search1');
+
+    // Update the URL without reloading the page
+    window.history.pushState({}, document.title, window.location.pathname + '?' + urlParams.toString());
+
+    // Optionally, you can also call a function to fetch the default posts or a specific mode after exiting search mode
+   
 }
 
 function fetchPostsArchive(date, page = 1, lang = null) {
@@ -303,27 +322,32 @@ function fetchPostsArchive(date, page = 1, lang = null) {
                 document.getElementById('content-label').innerText =  `${lang === 'ar' ? 'الارشيف :' : 'Archive :'}`;
                
 
-                data.forEach((post) => {
-                    const postElement = document.createElement("div");
-                    postElement.classList.add("card");
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.classList.add('card');
                     postElement.innerHTML = `
-                    <h4 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h4>
-                    <div class="card-author">by ${post.author.name}</div>
-                    <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-                    <div class="card-date">${post.created_date}</div>
-                `;
+                        <h4 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h4>
+                        <div class="card-author">by ${post.author.name}</div>
+                        <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
+                        <div class="card-date">${post.created_date}</div>
+                    `;
+                
                     postContainer.appendChild(postElement);
-
-                    // Update "Read More" link to fetch post details
-                    postElement.querySelector(".card-link").addEventListener("click", (event) => {
+                
+                    // تفعيل زر "Read More" والعنوان "card-title"
+                    const fetchDetails = (event) => {
                         event.preventDefault();
-                        const postSlug = event.target.getAttribute("data-post-slug");
-                        fetchPostDetails(postSlug, lang);
-                    });
+                        const postSlug = event.target.getAttribute('data-post-slug');
+                        console.log('Fetching details for slug:', postSlug);
+                        fetchPostDetails(postSlug, lang);  // تحديث تفاصيل المنشور
+                    };
+                
+                    postElement.querySelector('.card-title').addEventListener('click', fetchDetails);
+                    postElement.querySelector('.card-link').addEventListener('click', fetchDetails);
                 });
-
-                // Update pagination with selected language
-                renderPagination(meta, null, date, lang);
+                
+                renderPagination(meta, null, null, lang);
+                
             } else {
                 console.error("Error: Expected an array of posts");
             }
@@ -348,10 +372,11 @@ function fetchsearch(search, page = 1, lang = null) {
             const { data, meta } = response.data;
             document.getElementById('content-label').innerText = `${lang === 'ar' ? 'نتائج البحث :' : 'Search Results:'}`;
 
-            if (Array.isArray(data)) {
-                const postContainer = document.querySelector("#post-container");
-                postContainer.innerHTML = ""; // مسح البيانات القديمة
+            const postContainer = document.querySelector("#post-container");
+            postContainer.innerHTML = ""; // مسح البيانات القديمة
 
+            if (Array.isArray(data) && data.length > 0) {
+                // Render posts if there are any
                 data.forEach((post) => {
                     const postElement = document.createElement("div");
                     postElement.classList.add("card");
@@ -368,17 +393,23 @@ function fetchsearch(search, page = 1, lang = null) {
                         event.preventDefault();
                         const postSlug = event.target.getAttribute("data-post-slug");
                         fetchPostDetails(postSlug, lang);
+                        exitSearchMode();
                     });
                 });
 
                 // تحديث الترقيم مع اللغة المختارة
                 renderPagination(meta, search, null, lang);
             } else {
-                console.error("Error: Expected an array of search results");
+                // No posts found, display a message
+                const noResultsMessage = document.createElement("div");
+                noResultsMessage.classList.add("no-results");
+                noResultsMessage.innerText = lang === 'ar' ? "هذه المقالة غير موجودة" : "This article does not exist";
+                postContainer.appendChild(noResultsMessage);
             }
         })
         .catch((error) => console.error("Error fetching search results:", error));
 }
+
 
 
 function switchLanguage(lang) {
@@ -424,13 +455,13 @@ function switchLanguage(lang) {
                 document.documentElement.setAttribute('lang', 'en');
             }
 
-            if (currentMode === 'list') {
-                document.getElementById('content-label').innerText = data.posts;
-            } else if (currentMode === 'archive') {
-                document.getElementById('content-label').innerText = data.archive;
-            } else if (currentMode === 'search') {
-                document.getElementById('content-label').innerText = data.search_results;
-            }
+            // if (currentMode === 'list') {
+            //     document.getElementById('content-label').innerText = data.posts;
+            // } else if (currentMode === 'archive') {
+            //     document.getElementById('content-label').innerText = data.archive;
+            // } else if (currentMode === 'search') {
+            //     document.getElementById('content-label').innerText = data.search_results;
+            // }
 
             // Check URL for search or archive queries
             const urlParams = new URLSearchParams(window.location.search);
@@ -444,6 +475,7 @@ function switchLanguage(lang) {
             } else if (searchQuery) {
                 // Fetch archive posts with the new language
                 fetchsearch(searchQuery, 1, lang);
+                exitSearchMode();
                
             } else if (currentMode === 'single' && currentPostSlug) {
                 // Reload post details with the new language

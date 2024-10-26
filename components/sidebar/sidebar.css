@@ -204,24 +204,36 @@ p, li {
 .year {
     color: #0f0f0f;
 }
+#posts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-item {
+    display: flex;
+    justify-content: space-between; /* يجعل العنوان في اليسار والتاريخ في اليمين */
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .recent-posts .post-title {
     text-decoration: none;
     color: #B17457;
     font-weight: bold;
-    display: block; 
-    margin-bottom: 5px; 
+    flex-grow: 1; /* يأخذ المساحة المتبقية */
 }
 
-.recent-posts .post-title:hover {
+.post-title:hover {
     text-decoration: underline;
 }
 
-
-.recent-posts .post-date {
+.post-date {
     color: grey;
     font-size: 12px;
-    margin-top: -5px;
+    white-space: nowrap; /* يمنع انكسار التاريخ */
+    margin-left: 10px;
 }
+
 @media screen and (max-width: 1024px) {
     .main-content {
         flex-direction: column;
@@ -267,4 +279,10 @@ p, li {
 }
 [dir="rtl"] .search-box input::placeholder{
     text-align:right; 
+}
+.no-results {
+    text-align: center;
+    font-size: 1.2em;
+    color: #7D5A50; /* Use your desired color */
+    margin: 20px 0;
 }
