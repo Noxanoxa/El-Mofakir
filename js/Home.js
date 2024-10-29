@@ -122,7 +122,7 @@ function fetchPostDetails(postSlug, lang) {
 
                     <div class="post-meta">
                         <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${post.author.name}</span>
-                        <span class="post-number">${lang === 'ar' ? 'القيمة والرقم: ' : 'Volume & Number: '}${post.volume.number} & ${post.issue.number}</span>
+                        <span class="post-number">${lang === 'ar' ? 'العدد والرقم: ' : 'Volume & Number: '}${post.volume == null ? lang === 'ar' ? 'لم يتم اسناده بعد' : 'not assigned yet' : post.volume.number} & ${post.issue == null ? lang === 'ar' ? 'لم يتم اسناده بعد' : 'not assigned yet' : post.issue.number}</span>
                         <span class="post-date">${post.created_date}</span>
                     </div>
 
