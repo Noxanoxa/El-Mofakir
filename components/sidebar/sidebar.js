@@ -15,12 +15,14 @@ function fetchAuthority() {
                   const authorElement = document.createElement('ul');
                   authorElement.innerHTML =`
                      <li>
-                        <img src="${author.user_image}" alt="${author.name}" class="auth-img" />
-                        <div class="auth-info">
-                            <a href="${author.pdf_url}" class="name-auth" download>
-                                    ${author.name}
-                        </div>
-                        </li>
+    <img src="${author.user_image}" alt="${author.name}" class="auth-img" />
+    <div class="auth-info">
+        <a href="https://elmofakir.test/api/author/${author.name}" class="name-auth" download>
+            ${author.name}
+        </a>
+    </div>
+</li>
+
                      
                  ` ;
                   authorContainer.appendChild(authorElement);
