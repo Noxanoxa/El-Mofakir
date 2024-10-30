@@ -85,3 +85,14 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.welcom {
+    font-family: Arial, sans-serif;
+    font-size: 1.5em;
+    color: #7D5A50;
+    padding: 10px 20px;
+    text-align: center;
+    margin: 127px auto 0px;
+    width: fit-content;
+}
+

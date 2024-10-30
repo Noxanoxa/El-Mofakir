@@ -483,7 +483,7 @@ function switchLanguage(lang) {
             document.querySelector('.recent').textContent = data.recent_posts;
             document.querySelector('.publi').textContent = data.publishing_authority;
             document.querySelector('.archive').textContent = data.archives;
-
+           
             document.querySelector('#en-btn').innerHTML = data.english;
             document.querySelector('#ar-btn').innerHTML = data.arabic;
 

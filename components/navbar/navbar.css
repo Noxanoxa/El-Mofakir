@@ -218,3 +218,37 @@ main {
         margin-right: 10px; 
     }
 }
+
+
+/* Default English (LTR) */
+.navbar ul li .fa-house:before,
+.navbar ul li .fa-users:before,
+.navbar ul li .fa-bullhorn:before,
+.navbar ul li .fa-address-book:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    padding-right: 8px; /* Space on the right for LTR */
+}
+
+/* Adjust padding for Arabic (RTL) */
+:lang(ar) .navbar ul li .fa-house:before,
+:lang(ar) .navbar ul li .fa-users:before,
+:lang(ar) .navbar ul li .fa-bullhorn:before,
+:lang(ar) .navbar ul li .fa-address-book:before {
+    padding-right: 0;
+    padding-left: 8px; /* Space on the left for RTL */
+}
+
+/* Font Awesome Icons */
+.navbar ul li .fa-house:before {
+    content: "\f015";
+}
+.navbar ul li .fa-users:before {
+    content: "\f0c0";
+}
+.navbar ul li .fa-bullhorn:before {
+    content: "\f0a1";
+}
+.navbar ul li .fa-address-book:before {
+    content: "\f2b9";
+}
