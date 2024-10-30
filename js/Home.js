@@ -476,6 +476,7 @@ function switchLanguage(lang) {
             document.querySelector('a[href="components/secend-page/contact.html#about-section"]').textContent = data.about_us;
             document.querySelector('a[href="components/secend-page/contact.html#announcements-section"]').textContent = data.annonce;
             document.querySelector('a[href="components/secend-page/contact.html#contact-section"]').textContent = data.contact;
+            document.querySelector('a[href="/Expert/login/login.html"]').textContent = data.login;
             document.querySelector('.logo').textContent = data.logo;
             document.querySelector('.search1').textContent = data.search;
             document.getElementById('srch').setAttribute('placeholder', data.search);
@@ -483,7 +484,7 @@ function switchLanguage(lang) {
             document.querySelector('.recent').textContent = data.recent_posts;
             document.querySelector('.publi').textContent = data.publishing_authority;
             document.querySelector('.archive').textContent = data.archives;
-           
+            document.querySelector('.epr').textContent = data.expert;
             document.querySelector('#en-btn').innerHTML = data.english;
             document.querySelector('#ar-btn').innerHTML = data.arabic;
 
