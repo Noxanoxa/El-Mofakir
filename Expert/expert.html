@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Profile</title>
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="expert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/components/footer/footer.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+</head>
+<body>
+
+   <header id="navbar">
+
+     <input type="checkbox" name="" id="chk1"> 
+     
+        <a href="/index.html" class="logo"  onclick="handleHomeClick(event)">El Mufakkir</a>
+   
+        <div class="navbar" id="navbar">
+        <ul>
+            <li>
+                <a href="index.html" onclick="handleHomeClick(event)">
+                    Home <i class="fa-solid fa-house"></i>
+                </a>
+
+            </li>
+            <li>
+                <a href="components/secend-page/contact.html#about-section">
+                    About Us <i class="fa-solid fa-users"></i>
+                </a>
+            </li>
+            <li>
+                <a href="components/secend-page/contact.html#announcements-section">
+                    Annonce <i class="fa-solid fa-bullhorn"></i>
+                </a>
+            </li>
+            <li>
+                <a  href="components/secend-page/contact.html#contact-section">Contact<i class="fa-regular fa-address-book"></i></a>
+                
+            </li>
+        </ul></div>
+        <div class="buttons-container">
+        <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+         <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arabic</button>
+        </div>
+       
+        <div class="logout-icon">
+            <a href="logout.html" onclick="handleLogout(event)" title="Log Out">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
+        </div>
+            <div class="menu">
+                <label for="chk1"><i class="fa fa-bars"></i></label>
+            </div>
+
+   </header>
+
+   <div class="greeting">
+    <p id="welcomeMessage"></p> <!-- الرسالة الترحيبية -->
+    <p id="username"></p> <!-- اسم المستخدم -->
+</div>
+
+
+     <div class="container">
+        
+        <div class="profile-display">
+            <h2>Expert Information</h2>
+            <div class="profile-info">
+                <img src="/assets/téléchargement.png" alt="Expert" class="profile-image2">
+                <div class="info">
+                    <p><strong>First Name:</strong> John</p>
+                    <p><strong>Last Name:</strong> Doe</p>
+                    <p><strong>Email:</strong> johndoe@example.com</p>
+                    <p><strong>Phone Number:</strong> +123 456 7890</p>
+                    <p>
+                        <strong>Uploaded Cv:</strong>
+                        <a href="#" download>
+                            <i class="fa-solid fa-download"></i> <!-- أيقونة التحميل -->
+                        </a>
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="profile-edit">
+            <h2>Edit Information</h2>
+            <div class="image-container">
+                <img src="/assets/téléchargement.png" alt="Expert" class="profile-image" id="displayImage">
+                
+<i class="fas fa-pen image-edit-icon" onclick="document.getElementById('imageUpload').click()" title="Change Image"></i>
+
+
+<input type="file" id="imageUpload" style="display: none;" onchange="uploadImage(event)" accept="image/*">
+
+
+<img id="editImage" src="" alt="Edit Image" class="image-preview" style="display: none;">
+<img id="displayImage" src="" alt="Display Image" class="image-preview"style="display: none;">
+
+
+            </div>
+            <form id="editForm">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" value="John">
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" value="Doe">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="johndoe@example.com">
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" value="+123 456 7890">
+
+                <label for="document">Upload PDF Document:</label>
+                <input type="file" id="document" accept="application/pdf">
+
+                <button type="button" onclick="saveChanges()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <footer id="footer"></footer>
+
+    <script src="expert.js"></script>
+    <script src="/components/footer/footer.js"></script>
+</body>
+
+</html>

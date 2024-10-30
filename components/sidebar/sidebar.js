@@ -37,57 +37,86 @@ function fetchAuthority() {
 document.addEventListener('DOMContentLoaded', fetchAuthority);
 
 
-////recent post
-
-
-
 // Fetch posts when the page loads
 document.addEventListener('DOMContentLoaded', fetchRecentPosts);
 
-function fetchArchives() {
-    axios.get('https://elmofakir.test/api/archives')
+
+function fetchExpert() {
+    axios.get('https://elmofakir.test/api/professionals')
       .then(response => {
-          var archives = response.data.archives; // Access the data property
-         // console.log('Recent_archives:', archives);
+          const experts = response.data.professionals; // Access the data property
+          console.log('Experts:', experts);
 
-          // Check if archives is an array
-          if (Array.isArray(archives)) {
-              const archiveContainer = document.querySelector('#list-archives');
-              archiveContainer.innerHTML = ''; // Clear existing archives
+          // Check if experts is an array
+          if (Array.isArray(experts)) {
+              const expertContainer = document.querySelector('#exprt-list');
+              expertContainer.innerHTML = ''; // Clear existing experts
 
-              archives.forEach(archive => {
-                  const archiveElement = document.createElement('ul');
-                  archiveElement.classList.add('li');
-                  const month = new Date(`${archive.month} 1, 2000`).getMonth() + 1; // Convert month name to digit
-                  const monthStr = String(month).padStart(2, '0'); // Format month as two-digit number
-                 // console.log(monthStr);
-                  const monthYear = `${monthStr}-${archive.year}`;
-                 // console.log('Month-Year:', monthYear);
-                  archiveElement.innerHTML = `
-                      <a href="#" class="year" data-date="${monthYear}">${monthStr}-${archive.year} (${archive.published})</a>
+              experts.forEach(expert => {
+                  const expertElement = document.createElement('ul');
+                  expertElement.innerHTML = `
+                      <li>
+                          <img src="${expert.image}" alt="${expert.name}" class="expert-img" />
+                          <div class="expert-info">
+                              <a href="https://elmofakir.test/api/professional/${expert.name}" class="name-expert" download>
+                                  ${expert.name}
+                              </a>
+                          </div>
+                      </li>
                   `;
-                  archiveContainer.appendChild(archiveElement);
+                  expertContainer.appendChild(expertElement);
+              });
+          } else {
+              console.error('Error: Expected an array of experts');
+          }
+      })
+      .catch(error => console.error('Error fetching experts:', error));
+}
+
+document.addEventListener('DOMContentLoaded', fetchExpert);
+
+
+
+function fetchVolumes() {
+    axios.get('https://elmofakir.test/api/volumes') // Assuming the API endpoint for volumes is different
+      .then(response => {
+          var volumes = response.data.volumes; // Access the data property
+          console.log('volumes:', volumes);
+
+          // Check if volumes is an array
+          if (Array.isArray(volumes)) {
+              const volumeContainer = document.querySelector('#list-archives');
+              volumeContainer.innerHTML = ''; // Clear existing volumes
+
+              volumes.forEach(volume => {
+                  const volumeElement = document.createElement('ul');
+                  volumeElement.classList.add('li');
+                  volumeElement.innerHTML = `
+                      <a href="#" class="volume-link" data-number="${volume.number}">
+                          Volume ${volume.number} (${volume.year})
+                      </a>
+                  `;
+                  volumeContainer.appendChild(volumeElement);
               });
 
-              // Add event listeners to archive links
-              document.querySelectorAll('.year').forEach(link => {
+              // Add event listeners to volume links
+              document.querySelectorAll('.volume-link').forEach(link => {
                   link.addEventListener('click', event => {
                       event.preventDefault();
-                      const date = event.target.getAttribute('data-date');
-                    // const date = '8-2020';
-                      console.log('Clicked on archive:', date);
-                      fetchPostsArchive(date);
+                      const volumeNumber = event.target.getAttribute('data-number');
+                      console.log('Clicked on volume:', volumeNumber);
+                      fetchVolumeNumbers(volumeNumber);
                   });
               });
           } else {
-              console.error('Error: Expected an array of archives');
+              console.error('Error: Expected an array of volumes');
           }
       })
-      .catch(error => console.error('Error fetching archives:', error));
+      .catch(error => console.error('Error fetching volumes:', error));
 }
 
 // Fetch Archives when the page loads
-document.addEventListener('DOMContentLoaded', fetchArchives);
+document.addEventListener('DOMContentLoaded', fetchVolumes);
 
 
 // Fetch Archives when the page loads
@@ -95,4 +124,3 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'; // استخدم اللغة المحفوظة
     fetchArchives(savedLanguage); // Pass the selected language
 });
-

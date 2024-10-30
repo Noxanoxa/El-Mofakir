@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/components/footer/footer.css">
+    <link rel="stylesheet" href="/components/navbar/navbar.css">
+
+</head>
+<body>
+    <header id="navbar">
+
+        <input type="checkbox" name="" id="chk1"> 
+        
+           <a href="/index.html" class="logo"  onclick="handleHomeClick(event)">El Mufakkir</a>
+      
+           <div class="navbar" id="navbar">
+           <ul>
+               <li>
+                   <a href="index.html" onclick="handleHomeClick(event)">
+                       Home <i class="fa-solid fa-house"></i>
+                   </a>
+   
+               </li>
+               <li>
+                   <a href="components/secend-page/contact.html#about-section">
+                       About Us <i class="fa-solid fa-users"></i>
+                   </a>
+               </li>
+               <li>
+                   <a href="components/secend-page/contact.html#announcements-section">
+                       Annonce <i class="fa-solid fa-bullhorn"></i>
+                   </a>
+               </li>
+               <li>
+                   <a  href="components/secend-page/contact.html#contact-section">Contact<i class="fa-regular fa-address-book"></i></a>
+                   
+               </li>
+           </ul></div>
+           <div class="buttons-container">
+           <button id="en-btn" class="lang-btn1 active" onclick="switchLanguage('en')">English</button>
+            <button id="ar-btn" class="lang-btn1" onclick="switchLanguage('ar')">Arabic</button>
+           </div>
+          
+           <div class="logout-icon">
+               <a href="logout.html" onclick="handleLogout(event)" title="Log Out">
+                   <i class="fa-solid fa-right-from-bracket"></i>
+               </a>
+           </div>
+               <div class="menu">
+                   <label for="chk1"><i class="fa fa-bars"></i></label>
+               </div>
+   
+      </header>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="blogin">Login</button>
+            <p><a href="#" id="forgotPasswordLink">Forgot Password?</a></p>
+        </form>
+    </div>
+    <!-- <footer id="footer"></footer> -->
+    <script src="/components/footer/footer.js"></script>
+   
+       <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadFooter();
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username && password) {
+            // طلب بيانات تسجيل الدخول من API
+            axios.get('https://elmofakir.test/api/login-info')
+                .then(response => {
+                    const userInfo = response.data;
+
+                    // التحقق من المطابقة
+                    if (username === userInfo.username && password === userInfo.password) {
+                        alert("Login successful!");
+                        window.location.href = "/components/secend-page/expert.html"; // نقل إلى صفحة الأكسبرت
+                    } else {
+                        alert("Incorrect username or password. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching login info:', error);
+                    alert("An error occurred. Please try again later.");
+                });
+        } else {
+            alert("Please enter both username and password.");
+        }
+    });
+
+    document.getElementById('forgotPasswordLink').addEventListener('click', function(event) {
+        event.preventDefault();
+        alert("Forgot Password? Check your email for reset instructions.");
+    });
+</script>
+
+</body>
+</html>

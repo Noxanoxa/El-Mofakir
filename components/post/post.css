@@ -1,3 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* General styles */
 .post {
     font-family: 'Arial', sans-serif;
@@ -207,6 +233,57 @@
     text-align: right;
 }
 
+/* Section for Tags */
+.post-tags {
+    display: flex;
+    flex-direction: column; /* Keep the title above the tags */
+    font-size: 16px;
+    color: #B17457;
+    font-weight: 600;
+    margin-top: 10px;
+    line-height: 1.8;
+}
+
+/* Title Style */
+.tags-title {
+    font-size: 18px;
+    color: #B17457;
+    font-weight: 700;
+    margin-bottom: 10px; /* Space below the title */
+}
+
+/* Container for tags */
+.tags-container {
+    display: flex; /* Use flex to align tags in a row */
+    gap: 10px; /* Small space between tags */
+}
+
+/* Each Tag Style */
+.tag {
+    display: inline-block;
+    background-color: #D9D9D9; /* Gray background color */
+    color: #4A4947;
+    border-radius: 25px; /* Half-circle edges */
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 15px; /* Padding for the tag */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* RTL Adjustments */
+[dir="rtl"] .post-tags {
+    text-align: right;
+}
+
+[dir="rtl"] .tags-title {
+    text-align: right;
+}
+
+[dir="rtl"] .tag {
+    text-align: right;
+}
+
+
 [dir="rtl"] .post, 
 [dir="rtl"] .container, 
 [dir="rtl"] .card {
@@ -291,4 +368,111 @@
     [dir="rtl"] .card-date {
         left: 0;
     }
+}
+
+
+.containerArticle {
+    width: 80%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 15px;
+}
+.Nheader {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #4a4a4a;
+    width: 100%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 15px;
+}
+
+/* Flex container for issue number and date */
+.issue-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.issue-number {
+    font-weight: bold;
+    margin-right: 10px; /* Adds some spacing from the date */
+}
+
+.issue-date {
+    font-weight: normal;
+    color: #888;
+}
+
+.pdf-download-link i {
+    margin-left: 5px;
+    color: #333;
+}
+
+/* Styles for individual posts within the expanded container */
+.posts-container {
+    margin-top: 10px;
+}
+
+.article {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.article-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #222;
+}
+
+.article-author, .article-date {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.article-date {
+    color: #888;
+    margin-top: 5px;
+}
+.Acard-link {
+    display: inline-block;
+    color: #B17450;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.Acard-link:hover {
+    text-decoration: underline;
+}
+
+/* Align 'Read More' to the left for English */
+[dir="ltr"] .Acard-link {
+    margin-right: auto;
+}
+
+/* Align 'Read More' to the right for Arabic */
+[dir="rtl"] .Acard-link {
+    margin-left: auto;
+}
+.pdf-download-link {
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    vertical-align: middle;
+    color: #B17450;
 }

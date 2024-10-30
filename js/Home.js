@@ -96,7 +96,7 @@ function setListMode() {
 function fetchPostDetails(postSlug, lang) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en';
     setSinglePostMode(postSlug);  // استخدام الدالة لتحديد وضع single
-    
+    console.log(post);
     localStorage.removeItem('currentArchiveDate');  // Remove archive date if any
    
     // Hide pagination
@@ -116,6 +116,7 @@ function fetchPostDetails(postSlug, lang) {
             }
 
             const postContainer = document.querySelector('#post-container');
+           
             postContainer.innerHTML = `
                 <div class="single-post">
                     <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
@@ -126,10 +127,7 @@ function fetchPostDetails(postSlug, lang) {
                         <span class="post-date">${post.created_date}</span>
                     </div>
 
-                    <label class="description-label">${lang === 'ar' ? 'الوصف' : 'Description'}</label>
-                    <p class="post-description">${lang === 'ar' ? post.description : post.description_en}</p>
-
-                    <div class="button-group">
+                      <div class="button-group">
                         <a href="https://elmofakir.test/api/posts/${post.slug_en}/download-all" class="download-button" download>
                         <i class="fa-solid fa-download"></i> 
                             ${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}
@@ -139,13 +137,26 @@ function fetchPostDetails(postSlug, lang) {
                             ${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
                         </a>
                     </div>
+
+                    <label class="description-label">${lang === 'ar' ? 'الوصف' : 'Description'}</label>
+                    <p class="post-description">${lang === 'ar' ? post.description : post.description_en}</p>
+                    <div class="post-tags">
+    <span class="tags-title">${lang === 'ar' ? 'الكلمات المفتاحية:' : 'Tags:'}</span>
+    <div class="tags-container">
+        ${post.tags && post.tags.length > 0 
+            ? post.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('') 
+            : (lang === 'ar' ? 'لم يتم اسناده بعد' : 'Not assigned yet')}
+    </div>
+</div>
+       
                 </div>
             `;
 
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
                 event.preventDefault();
                 console.log("Returning to post list");
-                exitArchiveMode();  
+                exitArchiveMode(); 
+                exitSearchMode(); 
                 fetchPosts(1, lang);  // Return to the list of posts
                 
                 setListMode();  // استخدام الدالة لتبديل الوضع إلى القائمة
@@ -201,6 +212,7 @@ function fetchRecentPosts(lang = 'en') {
                         const postSlug = event.target.getAttribute('data-post-slug');
                         console.log('Fetching post details for recent post slug:', postSlug);  // طباعة الـ slug
                         fetchPostDetails(postSlug, lang);  // استدعاء تفاصيل المنشور مع اللغة المحددة
+                        exitSearchMode(); 
                     });
                 });
             } else {
@@ -305,55 +317,7 @@ function exitSearchMode() {
    
 }
 
-function fetchPostsArchive(date, page = 1, lang = null) {
-    lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
-    console.log("Fetching posts for archive date:", date, "in language:", lang);
-    
-    // Store the archive date in localStorage
-    localStorage.setItem('currentArchiveDate', date);
-    
-    axios
-        .get(`https://elmofakir.test/api/archive/${date}?page=${page}&lang=${lang}`)
-        .then((response) => {
-            const { data, meta } = response.data; // Retrieve the data
-            if (Array.isArray(data)) {
-                const postContainer = document.querySelector("#post-container");
-                postContainer.innerHTML = ""; // Clear previous posts
-                document.getElementById('content-label').innerText =  `${lang === 'ar' ? 'الارشيف :' : 'Archive :'}`;
-               
 
-                data.forEach(post => {
-                    const postElement = document.createElement('div');
-                    postElement.classList.add('card');
-                    postElement.innerHTML = `
-                        <h4 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h4>
-                        <div class="card-author">by ${post.author.name}</div>
-                        <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-                        <div class="card-date">${post.created_date}</div>
-                    `;
-                
-                    postContainer.appendChild(postElement);
-                
-                    // تفعيل زر "Read More" والعنوان "card-title"
-                    const fetchDetails = (event) => {
-                        event.preventDefault();
-                        const postSlug = event.target.getAttribute('data-post-slug');
-                        console.log('Fetching details for slug:', postSlug);
-                        fetchPostDetails(postSlug, lang);  // تحديث تفاصيل المنشور
-                    };
-                
-                    postElement.querySelector('.card-title').addEventListener('click', fetchDetails);
-                    postElement.querySelector('.card-link').addEventListener('click', fetchDetails);
-                });
-                
-                renderPagination(meta, null, null, lang);
-                
-            } else {
-                console.error("Error: Expected an array of posts");
-            }
-        })
-        .catch((error) => console.error("Error fetching posts for archive:", error));
-}
 function handleHomeClick(event) {
     event.preventDefault();  // This prevents the default action of the link
     exitArchiveMode();  // Exit archive mode if applicable
@@ -408,6 +372,90 @@ function fetchsearch(search, page = 1, lang = null) {
             }
         })
         .catch((error) => console.error("Error fetching search results:", error));
+}
+
+// Fetch and display the numbers for a chosen volume
+function fetchVolumeNumbers(volumeNumber, lang = null) {
+    lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
+    console.log("Fetching numbers for volume Number:", volumeNumber, "in language:", lang);
+
+    axios
+        .get(`https://elmofakir.test/api/volume/${volumeNumber}?lang=${lang}`)
+        .then((response) => {
+            var issues = response.data.issues; // Retrieve the data for numbers
+            console.log('issues:', issues);
+            if (Array.isArray(issues)) {
+                const numberContainer = document.querySelector("#post-container");
+                numberContainer.innerHTML = ""; // Clear previous numbers or posts
+                document.getElementById('content-label').innerText = `${lang === 'ar' ? 'الأعداد :' : 'Numbers :'}`;
+
+                issues.forEach(issue => {
+                    const numberElement = document.createElement('div');
+                    numberElement.classList.add('Nheader');
+                    numberElement.innerHTML = `
+                    <div class="issue-info" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+                        <h4 class="issue-number">${lang === 'ar' ? 'العدد ' : 'Number '}${issue.issue_number}</h4>
+                        <div class="issue-date">
+                            ${issue.issue_date}
+                            <a class="pdf-download-link" href="https://elmofakir.test/api/issues/${issue.issue_date}/download-pdfs" download>
+                                <i class="fa-solid fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="posts-container" style="display: none;"></div>
+                `;
+                
+
+                
+                    // Set up click event to toggle posts for this issue
+                    numberElement.addEventListener('click', () => togglePostsForIssue(numberElement, issue, lang));
+                    
+                    numberContainer.appendChild(numberElement);
+                });
+            } else {
+                console.error("Error: Expected an array of issues");
+            }
+        })
+        .catch((error) => console.error("Error fetching numbers for volume:", error));
+}
+
+// Toggle the display of posts for a given issue
+function togglePostsForIssue(issueElement, issue, lang) {
+    const postsContainer = issueElement.querySelector('.posts-container');
+    if (postsContainer.style.display === 'none') {
+        // Fetch and display posts if not already displayed
+        if (postsContainer.innerHTML === '') {
+            issue.posts.forEach(post => {
+                const postElement = document.createElement('div');
+                // postElement.classList.add('containerArticle');
+                console.log('post:', post);
+                postElement.classList.add('article');
+                postElement.innerHTML = `
+                    <h2 class="article-title" data-post-slug="${post.post.slug_en}">${lang === 'ar' ? post.post.title : post.post.title_en}</h2>
+                    <div class="article-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '} ${post.post.author.name}</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;" dir="${lang === 'ar' ? 'rtl' : 'ltr'}">
+                    <a href="#" class="Acard-link" data-post-slug="${post.post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
+                    <div class="article-date">${post.post.created_date}</div>
+                </div>
+            `;
+
+                postsContainer.appendChild(postElement);
+                // تفعيل زر "Read More" والعنوان "card-title"
+                const fetchDetails = (event) => {
+                    event.preventDefault();
+                    const postSlug = event.target.getAttribute('data-post-slug');
+                    console.log('Fetching details for slug:', postSlug);
+                    fetchPostDetails(postSlug, lang);  // تحديث تفاصيل المنشور
+                };
+            
+                postElement.querySelector('.Acard-link').addEventListener('click', fetchDetails);
+            });
+        }
+        postsContainer.style.display = 'block';
+    } else {
+        // Hide posts if already displayed
+        postsContainer.style.display = 'none';
+    }
 }
 
 
@@ -475,7 +523,7 @@ function switchLanguage(lang) {
             } else if (searchQuery) {
                 // Fetch archive posts with the new language
                 fetchsearch(searchQuery, 1, lang);
-                exitSearchMode();
+                
                
             } else if (currentMode === 'single' && currentPostSlug) {
                 // Reload post details with the new language

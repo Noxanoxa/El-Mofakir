@@ -1,17 +1,21 @@
+/* تنسيق الفوتر الأساسي */
 footer {
-    font-family: 'Segoe UI';
-    padding: 20px 0; /* قلل padding إذا كان هناك مساحة كبيرة */
-    background-color: #B17457;
-    text-align: center; /* اجعل النص في المنتصف */
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px 0; /* مسافة داخلية */
+    background-color: #B17457; /* لون الخلفية */
+    text-align: center; /* توسيط النص */
+    width: 100%; /* لجعل الفوتر يمتد عبر كامل العرض */
+    position: relative; /* إعداد الموقع */
+    bottom: 0;
 }
 
 .footer-content {
     display: flex;
-    justify-content: space-between; /* توزيع العناصر بشكل متساوي */
+    justify-content: space-between; /* توزيع العناصر بالتساوي */
     align-items: center; /* محاذاة العناصر عمودياً */
-    max-width: 1200px; /* عرض أقصى للـ footer */
-    margin: 0 auto; /* مركز الـ footer */
-    padding: 0 20px; /* إضافة padding جانبي */
+    max-width: 1200px; /* عرض أقصى للفوتر */
+    margin: 0 auto; /* توسيط الفوتر في الصفحة */
+    padding: 0 20px; /* مسافة جانبية */
 }
 
 footer ul {
@@ -22,10 +26,11 @@ footer ul {
     line-height: 1.6;
     margin: 0;
 }
-.info-footer
-{
+
+.info-footer {
     color: #fff;
 }
+
 footer ul a {
     color: inherit;
     text-decoration: none;
@@ -46,5 +51,3 @@ footer .copyright {
     font-size: 13px;
     color: #aaa;
 }
-
-

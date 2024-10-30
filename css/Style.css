@@ -90,6 +90,11 @@ html, body {
     margin-bottom: 30px;
 }
 
+#expert{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
 /* Pagination Styles */
 .wn__pagination {
     list-style: none;

@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+    font-size: 1.2em; /* تكبير حجم النص في جميع الصفحة */
+}
+
+/* تنسيق login-container */
+.login-container {
+    background-color: #FAF7F0;
+    border: 2px solid #B4846C;
+    padding: 30px; /* زيادة التباعد الداخلي */
+    margin: 20px auto;
+    width: 90%; /* تمديد العرض */
+    max-width: 500px; /* زيادة أقصى عرض */
+    border-radius: 12px; /* تكبير زوايا الحواف */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* زيادة الظل */
+    text-align: center;
+    margin-bottom: 90px;
+}
+
+
+
+/* إعدادات النصوص */
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.8em;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    color: #555;
+    font-size: 1.1em;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* تنسيق زر login */
+.blogin {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #7D5A50;
+    color: #ffffff;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.blogin:hover {
+    background-color: #B4846C;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+/* تنسيق الروابط */
+a {
+    color: #7D5A50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

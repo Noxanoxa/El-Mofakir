@@ -1,0 +1,209 @@
+/* إعدادات CSS الأساسية */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column; /* لضبط اتجاه الصفحة عمودياً */
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+/* إعدادات الحاوية */
+.container {
+    display: flex;
+    width: 80%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+   
+    margin-top: 40px;
+    margin-bottom: 100px; 
+}
+.greeting {
+    margin-top: 100px;
+  text-align: end;
+    font-weight: 600;
+   
+    padding: 5px 10px;
+    border-radius: 5px;
+  
+    font-size: 30px;
+    font-weight: bold;
+    color: #121212;
+   
+    font-family: cursive, Helvetica, sans-serif;
+    text-align:start;
+}
+.greeting #username{
+    text-align: center;
+    color: #121212;
+}
+/* إعدادات الفوتر */
+footer {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px 0;
+    background-color: #B17457;
+    text-align: center;
+    width: 100%; /* الفوتر يمتد عبر كامل العرض */
+    margin-top: auto; /* يجعله دائمًا أسفل المحتوى */
+    padding-top: 40px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+
+.profile-display,
+.profile-edit {
+    flex: 1;
+    padding: 30px;
+}
+
+.profile-display {
+    border-right: 1px solid #ccc;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.info p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+    margin-top: 20px; /* أضف مسافة خارجية أعلى الفقرة */
+}
+.profile-edit h2 {
+    margin-bottom: 20px;
+}
+
+.profile-edit label {
+    display: block;
+    margin-top: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+.profile-edit input[type="text"],
+.profile-edit input[type="email"],
+.profile-edit input[type="tel"],
+.profile-edit input[type="file"],
+.profile-edit button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.profile-edit button {
+    background-color: #7D5A50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.profile-edit button:hover {
+    background-color: #B4846C;
+}
+/* تصميم وعرض الصورة مع الأيقونة */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 1.2em;
+    color: #007bff;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.image-edit-icon:hover {
+    color: #0056b3;
+}
+.profile-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: flex-start; /* يجعل العناصر تبدأ من الأعلى */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   
+   
+}
+
+.profile-display h2 {
+    margin: 0; /* تقليل المسافات حول العنوان */
+    padding-top: 10px;
+}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px; 
+}
+
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    margin-top: 10px; /* لتقليل المسافة من الأعلى */
+   
+}
+
+.profile-image2 {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    margin-top: 10px; /* لتقليل المسافة من الأعلى */
+   
+}
+
+.info {
+    margin: 10px 0; /* زيادة المسافة حول عنصر .info */
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.image-preview {
+    width: 150px; /* عرض الصورة */
+    height: 150px; /* ارتفاع الصورة */
+    object-fit: cover; /* لضبط الصورة في الأبعاد المحددة */
+    display: block; /* لجعل الصورة تظهر ككتلة */
+    margin-top: 10px; /* إضافة هامش بين الصور */
+}

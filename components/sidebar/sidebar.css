@@ -1,3 +1,5 @@
+
+
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -12,6 +14,7 @@ p, li {
     font-size: 16px;
     line-height: 1.5;
 }
+
 .sidebar {
     background: linear-gradient(135deg, #f8f9fa, #e8e9eb);
     padding: 20px;
@@ -19,7 +22,6 @@ p, li {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-left: 40px;
     margin-right: 40px;
-   
     width: 100%; 
     max-width: 400px; 
 }
@@ -86,13 +88,9 @@ p, li {
     padding-left: 15px;
 }
 
-
-
-/*////////////////////////////////////////////////////////////////////////////////////////////// recent-posts.css */
 /* General Box Styles for each section */
-.recent-posts, .pub-auth, .archives {
+.recent-posts, .pub-auth, .archives, .expert {
     width: 400px;
-    height: 400px;
     background-color: #FAF7F0;
     border: 1px solid #ddd;
     padding: 20px;
@@ -101,7 +99,8 @@ p, li {
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
 }
-.search-box ,.recent-posts:hover, .pub-auth:hover, .archives:hover {
+
+.search-box, .recent-posts:hover, .pub-auth:hover, .archives:hover, .expert:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -115,84 +114,98 @@ p, li {
 }
 
 /* Recent Posts Styles */
-.recent-posts h2, .pub-auth h2, .archives h2 {
+.recent-posts h2, .pub-auth h2, .archives h2, .expert h2 {
     font-size: 18px;
     margin-bottom: 15px;
     text-align: center;
 }
 
 /* List Styles */
-#posts-list, #auth-list, #list-archives {
-    max-height: 300px;
-    overflow-y: auto;
+#posts-list, #auth-list, #list-archives, #exprt-list {
+    max-height: 300px; /* تعديل الارتفاع حسب الحاجة */
+    overflow-y: auto; /* إضافة تمرير عمودي */
     padding: 0;
     margin: 0;
     scrollbar-width: thin;
     scrollbar-color: #B17457 #ccc;
 }
 
-#posts-list::-webkit-scrollbar, #auth-list::-webkit-scrollbar, #list-archives::-webkit-scrollbar {
+#posts-list::-webkit-scrollbar, #auth-list::-webkit-scrollbar, #exprt-list::-webkit-scrollbar, #list-archives::-webkit-scrollbar {
     width: 10px;
 }
 
-#posts-list::-webkit-scrollbar-track, #auth-list::-webkit-scrollbar-track, #list-archives::-webkit-scrollbar-track {
+#posts-list::-webkit-scrollbar-track, #auth-list::-webkit-scrollbar-track, #exprt-list::-webkit-scrollbar-track, #list-archives::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 }
 
-#posts-list::-webkit-scrollbar-thumb, #auth-list::-webkit-scrollbar-thumb, #list-archives::-webkit-scrollbar-thumb {
+#posts-list::-webkit-scrollbar-thumb, #auth-list::-webkit-scrollbar-thumb, #exprt-list::-webkit-scrollbar-thumb, #list-archives::-webkit-scrollbar-thumb {
     background-color: green;
     border-radius: 5px;
 }
 
-#posts-list::-webkit-scrollbar-thumb:hover, #auth-list::-webkit-scrollbar-thumb:hover, #list-archives::-webkit-scrollbar-thumb:hover {
+#posts-list::-webkit-scrollbar-thumb:hover, #auth-list::-webkit-scrollbar-thumb:hover, #exprt-list::-webkit-scrollbar-thumb:hover, #list-archives::-webkit-scrollbar-thumb:hover {
     background-color: darkgreen;
 }
 
 /* List Items */
-.recent-posts ul, .pub-auth ul, .archives ul {
+.recent-posts ul, .pub-auth ul, .archives ul, .expert ul {
     list-style: none;
     padding: 0;
     margin-bottom: 20px;
 }
 
-.recent-posts li, .pub-auth li, .archives li {
+.recent-posts li, .pub-auth li, .archives li, .expert li {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.recent-posts li a, .pub-auth li a, .archives li a {
+.recent-posts li a, .pub-auth li a, .archives li a, .expert li a {
     color: green;
     text-decoration: none;
     font-weight: bold;
 }
 
-.recent-posts li a:hover, .pub-auth li a:hover, .archives li a:hover {
+.recent-posts li a:hover, .pub-auth li a:hover, .archives li a:hover, .expert li a:hover {
     text-decoration: underline;
 }
-.archives .year{
+
+.archives .year {
     text-decoration: none;
 }
+.archives .volume-link {
+    display: block;
+    background-color: #D8D2C2; /* Adjust color to match your design */
+    color: #B17457;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    max-width: 200px; /* Adjust width as needed */
+    margin: 0 auto; /* Centers the block if smaller than container */
+}
 
-.pub-auth .auth-img {
+.pub-auth .auth-img, .expert .expert-img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
 }
 
-.pub-auth .auth-info {
+.pub-auth .auth-info, .expert .epert-info {
     display: flex;
     flex-direction: column;
 }
 
-.pub-auth .name-auth {
+.pub-auth .name-auth, .expert .name-expert {
     text-decoration: none;
     color: #B17457;
     font-weight: bold;
 }
 
-.pub-auth .name-auth:hover {
+.pub-auth .name-auth:hover, .expert .name-expert:hover {
     text-decoration: underline;
 }
 
@@ -204,6 +217,7 @@ p, li {
 .year {
     color: #0f0f0f;
 }
+
 #posts-list {
     list-style: none;
     padding: 0;
@@ -246,12 +260,11 @@ p, li {
         max-width: none; 
     }
     
-    .recent-posts, .pub-auth, .archives, .search-box {
+    .recent-posts, .pub-auth, .archives, .search-box, .expert {
         width: 100%; 
         margin: 20px 0; 
     }
 }
-
 
 @media (max-width: 768px) {
     .sidebar {
@@ -259,7 +272,7 @@ p, li {
         margin: 0; 
     }
 
-    .recent-posts, .pub-auth, .archives, .search-box {
+    .recent-posts, .pub-auth, .archives, .search-box,.expert  {
         width: 100%; 
     }
 }
@@ -269,7 +282,7 @@ p, li {
     margin-left: 0; 
 }
 
-[dir="rtl"] .search-box, [dir="rtl"] .recent-posts, [dir="rtl"] .pub-auth, [dir="rtl"] .archives {
+[dir="rtl"] .search-box, [dir="rtl"] .recent-posts, [dir="rtl"] .pub-auth, [dir="rtl"] .archives,[dir="rtl"] .expert  {
     text-align: right; 
 }
 
@@ -277,12 +290,16 @@ p, li {
     left: 16px; 
     right: auto; 
 }
-[dir="rtl"] .search-box input::placeholder{
+
+[dir="rtl"] .search-box input::placeholder {
     text-align:right; 
 }
+
 .no-results {
     text-align: center;
     font-size: 1.2em;
     color: #7D5A50; /* Use your desired color */
     margin: 20px 0;
 }
+
+

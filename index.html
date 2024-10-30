@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Mufakkir</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/Style.css">
-    <link rel="stylesheet" href="components/navbar/navbar.css">
+   
     <link rel="stylesheet" href="components/post/post.css">
    <link rel="stylesheet" href="components/sidebar/sidebar.css"|>
     <link rel="stylesheet" href="components/footer/footer.css">
- 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.à.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="expert.css">
+    <link rel="stylesheet" href="components/navbar/navbar.css">
+
 </head>
 <body>
     <div class="wrapper">
@@ -24,7 +27,9 @@
         <div class="navbar" id="navbar">
         <ul>
             <li>
-                <a href="index.html" onclick="handleHomeClick(event)">Home</a>
+                <a href="index.html" onclick="handleHomeClick(event)">
+                    Home <i class="fa-solid fa-house"></i>
+                </a>
 
             </li>
             <li>
@@ -34,7 +39,7 @@
                 <a href="components/secend-page/contact.html#announcements-section">Annonce</a>
             </li>
             <li>
-                <a  href="components/secend-page/contact.html#contact-section">Contact</a>
+                <a  href="components/secend-page/contact.html#contact-section">Contact<i class="fa-regular fa-address-book"></i></a>
                 
             </li>
         </ul></div>
@@ -61,7 +66,9 @@
      <div id="search-box"></div>
      <div id="recent-posts"></div>
      <div id="pub-auth"></div>
+     <div id="expert"></div>
      <div id="archives"></div>
+    
      
     </div>
 </div>
@@ -80,6 +87,7 @@
    
   
    <script src="js/lang.js"></script>
+   <script src="/components/footer/footer.js"></script>
    <script>
 
    </script>

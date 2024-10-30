@@ -35,12 +35,39 @@ header {
     border-bottom: none; 
     cursor: pointer;
 }
+
 [dir="rtl"] .logo {
     font-size: 40px; 
     font-family: "Thabit" ,serif;
 }
 
+.logout-icon {
+    font-size: 20px;
+    margin-left: 20px; /* إضافة مسافة بين أزرار اللغة وأيقونة تسجيل الخروج */
+}
 
+.logout-icon a {
+    color: #FCDEC0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.logout-icon i {
+    margin-right: 8px; /* مسافة بين الأيقونة والنص */
+}
+
+.logout-icon a:hover {
+    color: #B4846C; /* تغيير اللون عند المرور */
+}
+
+@media (max-width: 768px) {
+    .buttons-container, .logout-icon {
+        font-size: 16px;
+    }
+}
 @media (max-width: 1000px) {
     .logo {
         font-size: 30px; 
@@ -73,6 +100,12 @@ header {
     padding: 8px 16px;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex; /* استخدام flex لجعل النص والأيقونة بجانب بعضهما */
+    align-items: center; /* توسيط الأيقونة مع النص */
+}
+
+a i {
+    margin-left: 5px; /* إضافة مسافة صغيرة بين النص والأيقونة */
 }
 
 .navbar ul li a:hover {
