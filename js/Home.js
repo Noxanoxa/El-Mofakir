@@ -378,7 +378,11 @@ function fetchsearch(search, page = 1, lang = null) {
 function fetchVolumeNumbers(volumeNumber, lang = null) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
     console.log("Fetching numbers for volume Number:", volumeNumber, "in language:", lang);
-
+// Hide pagination
+const paginationContainer = document.querySelector(".wn__pagination");
+if (paginationContainer) {
+    paginationContainer.style.display = 'none';  // Hide pagination
+}
     axios
         .get(`https://elmofakir.test/api/volume/${volumeNumber}?lang=${lang}`)
         .then((response) => {
