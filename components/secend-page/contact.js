@@ -55,7 +55,9 @@ function switchLanguage(lang) {
     const langFile = `/locales/${lang}.json`;
     
     // حفظ اللغة المختارة في localStorage
-    localStorage.setItem('lang', lang);
+    if (localStorage.getItem('lang') !== lang) {
+        localStorage.setItem('lang', lang);
+    }
 
     // Fetch language file for updating other text elements
     fetch(langFile)
@@ -121,8 +123,17 @@ function switchLanguage(lang) {
         .catch(error => console.error('Error loading language file:', error));
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const selectedLanguage = localStorage.getItem('lang');
-    if (selectedLanguage) {
-        switchLanguage(selectedLanguage);
-    }
+    const savedLanguage = localStorage.getItem('lang') || 'en'; // افتراض اللغة الإنجليزية إن لم تكن محددة
+    switchLanguage(savedLanguage);
+});
+
+// التعامل مع أزرار اللغة
+document.getElementById('ar-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    switchLanguage('ar');
+});
+
+document.getElementById('en-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    switchLanguage('en');
 });

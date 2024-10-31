@@ -32,8 +32,6 @@ loadComponent('backToTop', 'components/scroll-button/scrollB.html');
 //loadComponent('detailes_post','components/post/detailes_post.html')
 // let currentMode = 'list'; 
 // let currentPostSlug = null;
-let currentMode = 'list'; // 'list' أو 'single'
-let currentPostSlug = null; // لحفظ slug المنشور الحالي في حالة "Read More"
 
 
 function fetchPosts(page = 1, lang = 'en') {
@@ -83,99 +81,76 @@ function fetchPosts(page = 1, lang = 'en') {
 
 
 
-// دالة لتحديد الوضع إلى "single" وحفظ الـ postSlug
+
 function setSinglePostMode(postSlug) {
-    currentMode = 'single';  // Set mode to single post
-    currentPostSlug = postSlug;  // Save the postSlug
-    localStorage.setItem('currentPostSlug', postSlug);  // Store postSlug in localStorage
+    currentMode = 'single';
+    currentPostSlug = postSlug;
+    localStorage.setItem('currentPostSlug', postSlug);
 }
+
+
 
 // دالة للتبديل إلى وضع القائمة "list" وإعادة تعيين postSlug
+
 function setListMode() {
-    currentMode = 'list';  // Switch back to list mode
-    currentPostSlug = null;  // Reset postSlug
-    localStorage.removeItem('currentPostSlug');  // Remove postSlug from localStorage
+    currentMode = 'list';
+    currentPostSlug = null;
+    localStorage.removeItem('currentPostSlug');
 }
-
-
 
 function fetchPostDetails(postSlug, lang) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en';
-    setSinglePostMode(postSlug);  // استخدام الدالة لتحديد وضع single
-    console.log(post);
-    localStorage.removeItem('currentArchiveDate');  // Remove archive date if any
-   
-    // Hide pagination
+    setSinglePostMode(postSlug);
+    exitArchiveMode();
     const paginationContainer = document.querySelector(".wn__pagination");
-    if (paginationContainer) {
-        paginationContainer.style.display = 'none';  // Hide pagination
-    }
+    if (paginationContainer) paginationContainer.style.display = 'none';
 
-    document.getElementById('content-label').innerText = '';  // Clear content label
+    document.getElementById('content-label').innerText = '';
 
     axios.get(`https://elmofakir.test/api/post/${postSlug}`)
         .then(response => {
             const post = response.data.post;
-            if (!post || Object.keys(post).length === 0) {
-                console.error('Error: No post details found for this slug.');
-                return;
-            }
+            if (!post) return console.error('No post details found for this slug.');
 
             const postContainer = document.querySelector('#post-container');
-            console.log('Post authers:', post.author);
             const authorNames = post.author.map(author => author.name).join(', ');
             postContainer.innerHTML = `
                 <div class="single-post">
                     <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
-
                     <div class="post-meta">
                         <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${authorNames}</span>
-                        <span class="post-number">${lang === 'ar' ? 'العدد والرقم: ' : 'Volume & Number: '}${post.volume == null ? lang === 'ar' ? 'لم يتم اسناده بعد' : 'not assigned yet' : post.volume.number} & ${post.issue == null ? lang === 'ar' ? 'لم يتم اسناده بعد' : 'not assigned yet' : post.issue.number}</span>
+                        <span class="post-number">${lang === 'ar' ? 'العدد والرقم: ' : 'Volume & Number: '}${post.volume?.number || 'Not assigned'} & ${post.issue?.number || 'Not assigned'}</span>
                         <span class="post-date">${post.created_date}</span>
                     </div>
-
-                      <div class="button-group">
+                    <div class="button-group">
                         <a href="https://elmofakir.test/api/posts/${post.slug_en}/download-all" class="download-button" download>
-                        <i class="fa-solid fa-download"></i> 
-                            ${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download the article in PDF format'}
+                            <i class="fa-solid fa-download"></i>${lang === 'ar' ? 'تحميل المقال بصيغة PDF' : 'Download PDF'}
                         </a>
                         <a href="#" id="back-to-posts" class="back-button">
-                        <i class="fa-solid fa-arrow-right"></i>
-                            ${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
+                            <i class="fa-solid fa-arrow-right"></i>${lang === 'ar' ? 'العودة إلى المنشورات' : 'Back to Posts'}
                         </a>
                     </div>
-
                     <label class="description-label">${lang === 'ar' ? 'الوصف' : 'Description'}</label>
                     <p class="post-description">${lang === 'ar' ? post.description : post.description_en}</p>
                     <div class="post-tags">
-    <span class="tags-title">${lang === 'ar' ? 'الكلمات المفتاحية:' : 'Tags:'}</span>
-    <div class="tags-container">
-        ${post.tags && post.tags.length > 0 
-            ? post.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('') 
-            : (lang === 'ar' ? 'لم يتم اسناده بعد' : 'Not assigned yet')}
-    </div>
-</div>
-       
+                        <span class="tags-title">${lang === 'ar' ? 'الكلمات المفتاحية:' : 'Tags:'}</span>
+                        <div class="tags-container">${post.tags?.map(tag => `<span class="tag">${tag.name}</span>`).join('') || 'Not assigned'}</div>
+                    </div>
                 </div>
             `;
 
             document.getElementById('back-to-posts').addEventListener('click', (event) => {
                 event.preventDefault();
-                console.log("Returning to post list");
-                exitArchiveMode(); 
-                exitSearchMode(); 
-                fetchPosts(1, lang);  // Return to the list of posts
-                
-                setListMode();  // استخدام الدالة لتبديل الوضع إلى القائمة
-
-                // Show pagination when back to posts
-                if (paginationContainer) {
-                    paginationContainer.style.display = 'flex';  // Show pagination
-                }
+               
+                exitSearchMode();
+                fetchPosts(1, lang);
+                setListMode();
+                if (paginationContainer) paginationContainer.style.display = 'flex';
             });
         })
         .catch(error => console.error('Error fetching post details:', error));
 }
+
 
 
 
@@ -307,37 +282,26 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
     });
 }
 function exitArchiveMode() {
-    
-    const lang = localStorage.getItem('selectedLanguage') || 'en'; // استخدام اللغة المحددة أو الافتراضية
-    fetchPosts(1, lang);  // أو استدعاء دالة أخرى لعرض المحتوى الافتراضي
-    localStorage.removeItem('currentArchiveDate');  
     const url = new URL(window.location.href);
-    url.searchParams.delete('search1');  
-    history.pushState({}, '', url);  // تحديث الـ URL بدون إعادة تحميل الصفحة
+    url.searchParams.delete('volume'); // Remove the 'volume' parameter
+    history.pushState({}, '', url.toString()); // Update the URL without reloading
 }
- 
+
 function exitSearchMode() {
     const urlParams = new URLSearchParams(window.location.search);
-
-    // Remove the 'search1' query parameter
     urlParams.delete('search1');
-
-    // Update the URL without reloading the page
     window.history.pushState({}, document.title, window.location.pathname + '?' + urlParams.toString());
-
-    // Optionally, you can also call a function to fetch the default posts or a specific mode after exiting search mode
-   
 }
 
 
 function handleHomeClick(event) {
-    event.preventDefault();  // This prevents the default action of the link
+    event.preventDefault();
     exitArchiveMode();  // Exit archive mode if applicable
-    setListMode();  // Switch back to the list mode
-    
-    // Optionally, if you want to manually redirect to the homepage after running the functions
-    window.location.href = 'index.html';
+    setListMode();  // Switch back to list mode
+    window.location.href = 'index.html';  // Optionally redirect to homepage
 }
+
+
 
 
 function fetchsearch(search, page = 1, lang = null) {
@@ -483,31 +447,35 @@ function togglePostsForIssue(issueElement, issue, lang) {
 
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const searchQuery = urlParams.get('search1');
 const archiveDate = localStorage.getItem('currentArchiveDate'); // استرجاع تاريخ الأرشيف
 let inArchiveMode = false; // متغير لتحديد إذا كنا في وضع الأرشيف
-const volumeNumber = localStorage.getItem('currentVolume');
-
+let currentMode = 'list'; // 'list' أو 'single'
+let currentPostSlug = null; // لحفظ slug المنشور الحالي في حالة "Read More"
+const volumeNumber = urlParams.get('volume'); // Get volume from URL if present
 // متغير لتحديد ما إذا كنا في وضع الأرشيف
-
 function updateContent(lang) {
-    console.log("Language switched to:", lang);
-    console.log("Volume Number:", volumeNumber); // تأكد من أن لديك volumeNumber
+    const urlParams = new URLSearchParams(window.location.search);
+    const volumeNumber = urlParams.get('volume');
+    const searchQuery = urlParams.get('search1');
+    const currentPostSlug = localStorage.getItem('currentPostSlug');
+    const currentVolume = localStorage.getItem('currentVolume');
+    const currentArchiveDate = localStorage.getItem('currentArchiveDate');
 
-    // if (volumeNumber) {
-    //     // Fetch volume numbers with the new language
-    //     fetchVolumeNumbers(volumeNumber, lang);
-    //    exitArchiveMode();
-    // } else
-     if (searchQuery) {
-        // Fetch search results with the new language
-        fetchsearch(searchQuery, 1, lang);
+    if (volumeNumber) {
+        // If volume is in the URL, fetch volume numbers
+        fetchVolumeNumbers(volumeNumber, lang);
+    } else if (currentMode === 'list') {
+        fetchPosts(1, lang);
     } else if (currentMode === 'single' && currentPostSlug) {
-        // Reload post details with the new language
         fetchPostDetails(currentPostSlug, lang);
+    } else if (volumeNumber) {
+        fetchVolumeNumbers(volumeNumber, lang);
+    } else if (window.location.search.includes('search1')) {
+        const searchQuery = urlParams.get('search1');
+        fetchsearch(searchQuery, 1, lang);
     } else {
-        // Fetch posts if no specific search, archive, or post is requested
-        console.log("Fetching all posts for language:", lang);
         fetchPosts(1, lang);
     }
 }
@@ -522,6 +490,9 @@ function switchLanguage(lang) {
     fetch(langFile)
         .then(response => response.json())
         .then(data => {
+            document.getElementById('en-btn').classList.remove('active');
+            document.getElementById('ar-btn').classList.remove('active');
+
             // Change navbar texts
             document.querySelector('a[href="index.html"]').textContent = data.home;
             document.querySelector('a[href="components/secend-page/contact.html#about-section"]').textContent = data.about_us;
@@ -555,9 +526,12 @@ function switchLanguage(lang) {
             if (lang === 'ar') {
                 document.documentElement.setAttribute('dir', 'rtl');
                 document.documentElement.setAttribute('lang', 'ar');
+                document.getElementById('ar-btn').classList.add('active');
             } else {
                 document.documentElement.setAttribute('dir', 'ltr');
                 document.documentElement.setAttribute('lang', 'en');
+                document.getElementById('en-btn').classList.add('active');
+               
             }
 
             
@@ -571,22 +545,25 @@ fetchRecentPosts(lang);
             document.querySelector('.post-number').textContent = data.valuenumber;
             document.querySelector('.download-button').textContent = data.downloadButton;
             document.querySelector('.back-button').textContent = data.backButton;
+           
         })
         .catch(error => console.error('Error loading language file:', error));
 }
 
 
+// التعامل مع أزرار اللغة
+document.getElementById('ar-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    switchLanguage('ar');
+});
 
-// التعامل مع تغيير اللغة عند الضغط على الأزرار
 document.getElementById('en-btn').addEventListener('click', (event) => {
-    event.preventDefault(); // منع إعادة تحميل الصفحة
+    event.preventDefault();
     switchLanguage('en');
 });
 
-document.getElementById('ar-btn').addEventListener('click', (event) => {
-    event.preventDefault(); // منع إعادة تحميل الصفحة
-    switchLanguage('ar');
-});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const selectedLanguage = localStorage.getItem('lang');
     if (selectedLanguage) {

@@ -76,14 +76,12 @@ function fetchExpert() {
 document.addEventListener('DOMContentLoaded', fetchExpert);
 
 
-
 function fetchVolumes() {
-    axios.get('https://elmofakir.test/api/volumes') // Assuming the API endpoint for volumes is different
+    axios.get('https://elmofakir.test/api/volumes')
       .then(response => {
-          var volumes = response.data.volumes; // Access the data property
+          var volumes = response.data.volumes; 
           console.log('volumes:', volumes);
 
-          // Check if volumes is an array
           if (Array.isArray(volumes)) {
               const volumeContainer = document.querySelector('#list-archives');
               volumeContainer.innerHTML = ''; // Clear existing volumes
@@ -92,20 +90,23 @@ function fetchVolumes() {
                   const volumeElement = document.createElement('ul');
                   volumeElement.classList.add('li');
                   volumeElement.innerHTML = `
-                      <a href="#" class="volume-link" data-number="${volume.number}">
+                      <a href="https://elmofakir.test/volumes/${volume.number}" class="volume-link" data-number="${volume.number}">
                           Volume ${volume.number} (${volume.year})
                       </a>
                   `;
                   volumeContainer.appendChild(volumeElement);
               });
 
-              // Add event listeners to volume links
+              // Optional: Add event listeners to handle additional logic
               document.querySelectorAll('.volume-link').forEach(link => {
                   link.addEventListener('click', event => {
-                      event.preventDefault();
+                      event.preventDefault(); // Prevent default navigation if you need additional handling
                       const volumeNumber = event.target.getAttribute('data-number');
                       console.log('Clicked on volume:', volumeNumber);
-                      fetchVolumeNumbers(volumeNumber);
+                      fetchVolumeNumbers(volumeNumber); // Fetch additional data if needed
+                      
+                      // Redirect to the URL
+                      history.pushState(null, '', `?volume=${volumeNumber}`);
                   });
               });
           } else {
@@ -114,6 +115,7 @@ function fetchVolumes() {
       })
       .catch(error => console.error('Error fetching volumes:', error));
 }
+
 
 // Fetch Archives when the page loads
 document.addEventListener('DOMContentLoaded', fetchVolumes);
