@@ -22,31 +22,31 @@ function AboutUs(lang) {
       .catch(error => console.error('Error fetching about us:', error));
 }
 
-function fetchJournalInfo() {
+function fetchJournalInfo(lang = 'en') {
     axios.get('https://elmofakir.test/api/journal-info') // Replace with your actual API URL
         .then(response => {
-            const journalInfo = response.data; // Access the data property
+            const journalInfo = response.data.journalInfo; // Access the data property
             console.log('Journal Info:', journalInfo);
-
+            
             // Update the journal info section with the fetched data
             const journalContainer = document.querySelector('.journal-info');
             journalContainer.innerHTML = `
-                <div><span class="EISSN">EISSN:</span> ${journalInfo.eissn}</div>
-                <div><span class="Frequency">Frequency:</span> ${journalInfo.frequency}</div>
-                <div><span class="Acceptance">Acceptance Rate:</span> ${journalInfo.acceptanceRate}</div>
-                <div><span class="Response_t">Average Response Time:</span> ${journalInfo.averageResponseTime} Days</div>
-                <div><span class="Publication_t">Publication Time After Acceptance:</span> ${journalInfo.publicationTime} Days</div>
-                <div><span class="Year_c">Year of Creation:</span> ${journalInfo.yearOfCreation}</div>
-                <div><span class="Country">Country:</span> ${journalInfo.country}</div>
-                <div><span class="Institution">Institution:</span> ${journalInfo.institution}</div>
-                <div><span class="Impact_f">Impact Factor (ASJP):</span> ${journalInfo.impactFactor}</div>
-            `;
+                <div><span class="EISSN">EISSN:</span> ${  journalInfo.eissn.value }</div>
+                <div><span class="Frequency">Frequency:</span> ${ lang == 'ar' || journalInfo.frequency.value_en == null ? journalInfo.frequency.value : journalInfo.frequency.value_en }</div>
+                <div><span class="Acceptance">Acceptance:</span> ${ journalInfo.acceptanceRate.value }</div>
+                <div><span class="Response_t">Response Time:</span> ${  journalInfo.averageResponseTime.value }</div>
+                <div><span class="Publication_t">Publication Time:</span> ${ journalInfo.averagePublicationTime.value }</div>
+                <div><span class="Year_c">Year of Commencement:</span> ${journalInfo.year_of_creation.value}</div>
+                <div><span class="Country">Country:</span> ${ lang == 'ar' || journalInfo.country.value_en == null ? journalInfo.country.value : journalInfo.country.value_en }</div>
+                <div><span class="Institution">Institution:</span> ${ lang == 'ar' || journalInfo.institution.value_en == null ? journalInfo.institution.value : journalInfo.institution.value_en }</div>
+                <div><span class="Impact_f">Impact Factor:</span> ${  journalInfo.impactFactor.value }</div>
+                            `;
         })
         .catch(error => console.error('Error fetching journal info:', error));
 }
 
 // Call the function to load journal info
-fetchJournalInfo();
+// fetchJournalInfo();
 
 
 
@@ -119,6 +119,7 @@ function switchLanguage(lang) {
               document.documentElement.setAttribute('lang', 'en');
           }
           AboutUs(lang);
+        fetchJournalInfo(lang);
         })
         .catch(error => console.error('Error loading language file:', error));
 }
