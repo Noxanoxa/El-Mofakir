@@ -81,3 +81,36 @@ function handleLogout(event) {
     event.preventDefault();
     window.location.href = '/index.html';
 }
+// function loadLanguage(lang) {
+//     fetch('/path/to/lang.json')
+//         .then(response => response.json())
+//         .then(data => {
+//             const texts = data[lang];
+
+//             document.querySelector('.logo').textContent = data.logo;
+//             document.querySelector('a[href="/index.html"]').textContent = texts.home;
+//             document.querySelector('a[href="/components/secend-page/contact.html#about-section"]').textContent = texts.about_us;
+//             document.querySelector('a[href="/components/secend-page/contact.html#announcements-section"]').textContent = texts.annonce;
+//             document.querySelector('a[href="/components/secend-page/contact.html#contact-section"]').textContent = texts.contact;
+//             document.querySelector('.logout-icon a').title = texts.logout;
+//             document.querySelector('h2').textContent = texts.expert_info;
+//             document.querySelector('label[for="firstName"]').textContent = texts.first_name;
+//             document.querySelector('label[for="lastName"]').textContent = texts.last_name;
+//             document.querySelector('label[for="email"]').textContent = texts.email;
+//             document.querySelector('label[for="phone"]').textContent = texts.phone_number;
+//             document.querySelector('label[for="document"]').textContent = texts.upload_document;
+//             document.querySelector('button[type="button"]').textContent = texts.save_changes;
+//             document.querySelector('.profile-display h2').textContent = texts.expert_info;
+//         })
+//         .catch(error => console.error('Error loading language file:', error));
+// }
+
+// function switchLanguage(lang) {
+//     loadLanguage(lang);
+//     localStorage.setItem('lang', lang);  // احفظ اللغة في localStorage
+// }
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const lang = localStorage.getItem('lang') || 'en';
+//     loadLanguage(lang);
+// });

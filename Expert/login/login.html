@@ -16,7 +16,7 @@
 
         <input type="checkbox" name="" id="chk1"> 
         
-           <a href="/index.html" class="logo"  onclick="handleHomeClick(event)">El Mufakkir</a>
+           <a href="#" class="logo"  onclick="handleHomeClick(event)">El Mufakkir</a>
       
            <div class="navbar" id="navbar">
            <ul>
@@ -74,6 +74,8 @@
     <script src="/components/footer/footer.js"></script>
    
     <script>
+        
+        
         document.addEventListener('DOMContentLoaded', function() {
             loadFooter();
         });
@@ -111,7 +113,52 @@
             event.preventDefault();
             alert("Forgot Password? Check your email for reset instructions.");
         });
-    </script>
+
+    //     function switchLanguage(lang) {
+    // const langFile = `/locales/${lang}.json`;
+    // localStorage.setItem('selectedLanguage', lang);
+
+    // fetch(langFile)
+    //     .then(response => response.json())
+    //     .then(data => {
+                   
+    //                 document.querySelector('a[href="/index.html"]').textContent = data.home;
+    //                 document.querySelector('a[href="/components/secend-page/contact.html#about-section"]').textContent = data.about_us;
+    //                 document.querySelector('a[href="/components/secend-page/contact.html#announcements-section"]').textContent = data.annonce;
+    //                 document.querySelector('a[href="/components/secend-page/contact.html#contact-section"]').textContent = data.contact;
+    //                 document.querySelector('a[href="/Expert/login/login.html"]').textContent = data.login;
+    //                 document.querySelector('.logo').textContent = data.logo;
+    //                 document.querySelector('h2').textContent = data.login;
+    //                 document.querySelector('.welcom').textContent = data.welcome;
+                   
+    //                 document.querySelector('label[for="username"]').textContent = data.username;
+    //                 document.querySelector('label[for="password"]').textContent = data.password;
+    //                 document.querySelector('.blogin').textContent = data.login;
+    //                 document.querySelector('#forgotPasswordLink').textContent = data.forgot_password;
+
+    //                 document.querySelectorAll('a[aria-label="Previous"]').forEach(button => {
+    //             button.setAttribute('aria-label', data.previous);
+    //             button.innerHTML = data.previous; // Change text
+    //         });
+
+    //         document.querySelectorAll('a[aria-label="Next"]').forEach(button => {
+    //             button.setAttribute('aria-label', data.next);
+    //             button.innerHTML = data.next; // Change text
+    //         });
+
+    //                 if (lang === 'ar') {
+    //                     document.documentElement.setAttribute('dir', 'rtl');
+    //                     document.documentElement.setAttribute('lang', 'ar');
+    //                 } else {
+    //                     document.documentElement.setAttribute('dir', 'ltr');
+    //                     document.documentElement.setAttribute('lang', 'en');
+    //                 }
+    //             })
+    //             .catch(error => console.error('Error loading language file:', error));
+    //     }
+
+    
+     </script>
     
 </body>
 </html>

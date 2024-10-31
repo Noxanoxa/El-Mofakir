@@ -54,6 +54,22 @@
       "year_c": "سنة الانشاء",
       "country": "الدولة",
       "institution": "المؤسسة",
-      "impact_f": "عامل التاثير (ASJP)"
+      "impact_f": "عامل التاثير (ASJP)",
+      
+      "Welcom": "مرحبا ايها الخبير",
+      "Username": "اسم المستخدم",
+      "Password:": "كلمة السر",
+      "Forgot_Password?": "نسيت كلمة السر ؟",
+      "Expert_Information": "المعلومات الشخصية للخبير ",
+      "First_Name:": ": الاسم",
+      "Last_Name:": " : اللقب",
+      "Email:": ": الايمايل",
+      "Phone_Number:": ": رقم الهاتف",
+      "Uploaded_Cv:": ": السيرة الذاتية",
+      "Edit_Information": "تعديل المعلومات ",
+      "Upload_PDF_Document:": ": pdf تحميل ملف  ",
+      "Save_Changes": "حفظ التغيرات "
+
+
     
   }

@@ -53,7 +53,7 @@ fetchJournalInfo();
 // Function to switch language and update the page
 function switchLanguage(lang) {
     const langFile = `/locales/${lang}.json`;
-
+    
     // حفظ اللغة المختارة في localStorage
     localStorage.setItem('lang', lang);
 
@@ -120,8 +120,9 @@ function switchLanguage(lang) {
         })
         .catch(error => console.error('Error loading language file:', error));
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('selectedLanguage') || 'en'; // الافتراضي الإنجليزية
-    switchLanguage(savedLang); // استدعاء الدالة لتطبيق اللغة المحفوظة
+document.addEventListener('DOMContentLoaded', () => {
+    const selectedLanguage = localStorage.getItem('lang');
+    if (selectedLanguage) {
+        switchLanguage(selectedLanguage);
+    }
 });

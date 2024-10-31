@@ -54,6 +54,22 @@
       "year_c": "Year of Creation",
       "country": "Country",
       "institution": "Institution",
-      "impact_f": "Impact Factor (ASJP)"
+      "impact_f": "Impact Factor (ASJP)",
+
+
+      "welcom": "Welcom Expert",
+      "username:": "Username:",
+      "password:": "Password:",
+      "forgot_Password?": "Forgot Password?",
+      "expert_Information": "Expert Information",
+      "first_Name:": "First Name:",
+      "last_Name:": "Last Name:",
+      "email:": "Email:",
+      "phone_Number:": "Phone Number:",
+      "uploaded_Cv:": "Uploaded Cv:",
+      "edit_Information": "Edit Information",
+      "upload_PDF_Document:": "Upload PDF Document:",
+       "save_Changes": "Save Changes"
+
     
   }

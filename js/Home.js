@@ -35,6 +35,7 @@ loadComponent('backToTop', 'components/scroll-button/scrollB.html');
 let currentMode = 'list'; // 'list' أو 'single'
 let currentPostSlug = null; // لحفظ slug المنشور الحالي في حالة "Read More"
 
+
 function fetchPosts(page = 1, lang = 'en') {
 
     axios.get(`https://elmofakir.test/api/all_posts?page=${page}`)
@@ -49,12 +50,13 @@ function fetchPosts(page = 1, lang = 'en') {
                 data.forEach(post => {
                     const postElement = document.createElement('div');
                     postElement.classList.add('card');
+                    const authorNames = post.author.map(author => author.name).join(', ');
                     postElement.innerHTML = `
-                        <h4 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h4>
-                        <div class="card-author">by ${post.author.name}</div>
-                        <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
-                        <div class="card-date">${post.created_date}</div>
-                    `;
+                    <h4 class="card-title" data-post-slug="${post.slug_en}">${lang === 'ar' ? post.title : post.title_en}</h4>
+                    <div class="card-author">by ${authorNames}</div>
+                    <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
+                    <div class="card-date">${post.created_date}</div>
+                `;
                 
                     postContainer.appendChild(postElement);
                 
@@ -79,6 +81,8 @@ function fetchPosts(page = 1, lang = 'en') {
         .catch(error => console.error('Error fetching posts:', error));
 }
 
+
+
 // دالة لتحديد الوضع إلى "single" وحفظ الـ postSlug
 function setSinglePostMode(postSlug) {
     currentMode = 'single';  // Set mode to single post
@@ -92,6 +96,8 @@ function setListMode() {
     currentPostSlug = null;  // Reset postSlug
     localStorage.removeItem('currentPostSlug');  // Remove postSlug from localStorage
 }
+
+
 
 function fetchPostDetails(postSlug, lang) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en';
@@ -116,13 +122,14 @@ function fetchPostDetails(postSlug, lang) {
             }
 
             const postContainer = document.querySelector('#post-container');
-           
+            console.log('Post authers:', post.author);
+            const authorNames = post.author.map(author => author.name).join(', ');
             postContainer.innerHTML = `
                 <div class="single-post">
                     <h2>${lang === 'ar' ? post.title : post.title_en}</h2>
 
                     <div class="post-meta">
-                        <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${post.author.name}</span>
+                        <span class="post-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '}${authorNames}</span>
                         <span class="post-number">${lang === 'ar' ? 'العدد والرقم: ' : 'Volume & Number: '}${post.volume == null ? lang === 'ar' ? 'لم يتم اسناده بعد' : 'not assigned yet' : post.volume.number} & ${post.issue == null ? lang === 'ar' ? 'لم يتم اسناده بعد' : 'not assigned yet' : post.issue.number}</span>
                         <span class="post-date">${post.created_date}</span>
                     </div>
@@ -169,6 +176,8 @@ function fetchPostDetails(postSlug, lang) {
         })
         .catch(error => console.error('Error fetching post details:', error));
 }
+
+
 
 
 // Check if there's a saved postSlug in localStorage when the page loads
@@ -298,6 +307,9 @@ function renderPagination(meta, search = null, archiveDate = null, lang = 'en') 
     });
 }
 function exitArchiveMode() {
+    
+    const lang = localStorage.getItem('selectedLanguage') || 'en'; // استخدام اللغة المحددة أو الافتراضية
+    fetchPosts(1, lang);  // أو استدعاء دالة أخرى لعرض المحتوى الافتراضي
     localStorage.removeItem('currentArchiveDate');  
     const url = new URL(window.location.href);
     url.searchParams.delete('search1');  
@@ -344,9 +356,10 @@ function fetchsearch(search, page = 1, lang = null) {
                 data.forEach((post) => {
                     const postElement = document.createElement("div");
                     postElement.classList.add("card");
+                    const authorNames = post.author.map(author => author.name).join(', ');
                     postElement.innerHTML = `
                         <h4 class="card-title">${lang === 'ar' ? post.title : post.title_en}</h4>
-                        <div class="card-author">by ${post.author.name}</div>
+                         <div class="card-author">by ${authorNames}</div>
                         <a href="#" class="card-link" data-post-slug="${post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
                         <div class="card-date">${post.created_date}</div>
                     `;
@@ -374,10 +387,13 @@ function fetchsearch(search, page = 1, lang = null) {
         .catch((error) => console.error("Error fetching search results:", error));
 }
 
+
+
 // Fetch and display the numbers for a chosen volume
 function fetchVolumeNumbers(volumeNumber, lang = null) {
     lang = lang || localStorage.getItem('selectedLanguage') || 'en'; // Use selected or default language
-    console.log("Fetching numbers for volume Number:", volumeNumber, "in language:", lang);
+    localStorage.setItem('currentVolume', volumeNumber); 
+    
 // Hide pagination
 const paginationContainer = document.querySelector(".wn__pagination");
 if (paginationContainer) {
@@ -424,6 +440,7 @@ if (paginationContainer) {
 }
 
 // Toggle the display of posts for a given issue
+// Toggle the display of posts for a given issue
 function togglePostsForIssue(issueElement, issue, lang) {
     const postsContainer = issueElement.querySelector('.posts-container');
     if (postsContainer.style.display === 'none') {
@@ -434,9 +451,10 @@ function togglePostsForIssue(issueElement, issue, lang) {
                 // postElement.classList.add('containerArticle');
                 console.log('post:', post);
                 postElement.classList.add('article');
+                const authorNames = post.post.author.map(author => author.name).join(', ');
                 postElement.innerHTML = `
                     <h2 class="article-title" data-post-slug="${post.post.slug_en}">${lang === 'ar' ? post.post.title : post.post.title_en}</h2>
-                    <div class="article-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '} ${post.post.author.name}</div>
+                    <div class="article-author">${lang === 'ar' ? 'الكاتب: ' : 'Author: '} ${authorNames}</div>
                     <div style="display: flex; justify-content: space-between; align-items: center;" dir="${lang === 'ar' ? 'rtl' : 'ltr'}">
                     <a href="#" class="Acard-link" data-post-slug="${post.post.slug_en}">${lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}</a>
                     <div class="article-date">${post.post.created_date}</div>
@@ -464,9 +482,42 @@ function togglePostsForIssue(issueElement, issue, lang) {
 
 
 
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get('search1');
+const archiveDate = localStorage.getItem('currentArchiveDate'); // استرجاع تاريخ الأرشيف
+let inArchiveMode = false; // متغير لتحديد إذا كنا في وضع الأرشيف
+const volumeNumber = localStorage.getItem('currentVolume');
+
+// متغير لتحديد ما إذا كنا في وضع الأرشيف
+
+function updateContent(lang) {
+    console.log("Language switched to:", lang);
+    console.log("Volume Number:", volumeNumber); // تأكد من أن لديك volumeNumber
+
+    // if (volumeNumber) {
+    //     // Fetch volume numbers with the new language
+    //     fetchVolumeNumbers(volumeNumber, lang);
+    //    exitArchiveMode();
+    // } else
+     if (searchQuery) {
+        // Fetch search results with the new language
+        fetchsearch(searchQuery, 1, lang);
+    } else if (currentMode === 'single' && currentPostSlug) {
+        // Reload post details with the new language
+        fetchPostDetails(currentPostSlug, lang);
+    } else {
+        // Fetch posts if no specific search, archive, or post is requested
+        console.log("Fetching all posts for language:", lang);
+        fetchPosts(1, lang);
+    }
+}
+
+
+
 function switchLanguage(lang) {
     const langFile = `/locales/${lang}.json`;
-    localStorage.setItem('selectedLanguage', lang);
+            localStorage.setItem('lang', lang);
+
 
     fetch(langFile)
         .then(response => response.json())
@@ -484,7 +535,8 @@ function switchLanguage(lang) {
             document.querySelector('.recent').textContent = data.recent_posts;
             document.querySelector('.publi').textContent = data.publishing_authority;
             document.querySelector('.archive').textContent = data.archives;
-            document.querySelector('.epr').textContent = data.expert;
+            // جلب وتحديث محتوى العنصر ذو المعرف 'expert'
+           
             document.querySelector('#en-btn').innerHTML = data.english;
             document.querySelector('#ar-btn').innerHTML = data.arabic;
 
@@ -498,7 +550,7 @@ function switchLanguage(lang) {
                 button.setAttribute('aria-label', data.next);
                 button.innerHTML = data.next; // Change text
             });
-
+            updateContent(lang);
             // Adjust text direction
             if (lang === 'ar') {
                 document.documentElement.setAttribute('dir', 'rtl');
@@ -508,38 +560,11 @@ function switchLanguage(lang) {
                 document.documentElement.setAttribute('lang', 'en');
             }
 
-            // if (currentMode === 'list') {
-            //     document.getElementById('content-label').innerText = data.posts;
-            // } else if (currentMode === 'archive') {
-            //     document.getElementById('content-label').innerText = data.archive;
-            // } else if (currentMode === 'search') {
-            //     document.getElementById('content-label').innerText = data.search_results;
-            // }
+            
 
-            // Check URL for search or archive queries
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchQuery = urlParams.get('search1');
-            const archiveDate = localStorage.getItem('currentArchiveDate'); // Fix logging
-            console.log('Archive Date:', archiveDate); // Log actual value
+// تحديث المنشورات الحديثة باللغة الجديدة
+fetchRecentPosts(lang);
 
-            if (archiveDate) {
-                // Fetch search results with the new language
-                fetchPostsArchive(archiveDate, 1, lang);
-            } else if (searchQuery) {
-                // Fetch archive posts with the new language
-                fetchsearch(searchQuery, 1, lang);
-                
-               
-            } else if (currentMode === 'single' && currentPostSlug) {
-                // Reload post details with the new language
-                fetchPostDetails(currentPostSlug, lang);
-            } else {
-                // Fetch posts if no specific search, archive, or post is requested
-                console.log("line 432");
-                fetchPosts(1, lang);
-            }
-
-            fetchRecentPosts(lang);
 
             // Update additional texts
             document.querySelector('.post-author').textContent = data.author;
@@ -552,28 +577,19 @@ function switchLanguage(lang) {
 
 
 
-
-document.getElementById('en-btn').addEventListener('click', () => {
-    console.log('here448');
+// التعامل مع تغيير اللغة عند الضغط على الأزرار
+document.getElementById('en-btn').addEventListener('click', (event) => {
+    event.preventDefault(); // منع إعادة تحميل الصفحة
     switchLanguage('en');
 });
 
-document.getElementById('ar-btn').addEventListener('click', () => {
-    console.log('here452');
+document.getElementById('ar-btn').addEventListener('click', (event) => {
+    event.preventDefault(); // منع إعادة تحميل الصفحة
     switchLanguage('ar');
 });
-
-
-  
 document.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('selectedLanguage')) {
-        localStorage.setItem('selectedLanguage', 'en'); // تعيين اللغة الافتراضية إلى الإنجليزية
+    const selectedLanguage = localStorage.getItem('lang');
+    if (selectedLanguage) {
+        switchLanguage(selectedLanguage);
     }
-
-    const savedLanguage = localStorage.getItem('selectedLanguage');
-    // console.log('here464');
-    switchLanguage(savedLanguage); // تحميل نصوص الـ Navbar باللغة المختارة
-    
-    
-     fetchRecentPosts(savedLanguage);
 });
